@@ -17,9 +17,6 @@ final class ExamplePutServiceImpl: ExamplePutService {
         self.networkClient = networkClient
     }
 
-
-
-    
     func sendExamplePutRequest(
         param1: String,
         param2: String,
