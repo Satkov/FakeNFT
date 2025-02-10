@@ -3,7 +3,6 @@ import UIKit
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
-    // test lint
     let servicesAssembly = ServicesAssembly(
         networkClient: DefaultNetworkClient(),
         nftStorage: NftStorageImpl()
