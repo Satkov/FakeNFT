@@ -41,6 +41,8 @@ extension UIColor {
     static let textSecondary = UIColor.gray
     static let textOnPrimary = UIColor.white
     static let textOnSecondary = UIColor.black
+    static let greenUniversal = UIColor(hexString: "#1C9F00")
+    static let lightGray = UIColor(hexString: "#F7F7F8")
 
     private static let yaBlackLight = UIColor(hexString: "1A1B22")
     private static let yaBlackDark = UIColor.white
