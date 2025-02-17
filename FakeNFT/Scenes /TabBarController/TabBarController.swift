@@ -13,12 +13,6 @@ final class TabBarController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let catalogTabBarItem = UITabBarItem(
-        title: NSLocalizedString("Tab.catalog", comment: ""),
-        image: UIImage(systemName: "square.stack.3d.up.fill"),
-        tag: 0
-    )
-    
     private let cartTabBarItem = UITabBarItem(
         title: NSLocalizedString("Tab.cart", comment: ""),
         image: UIImage(named: "cartTabBarIcon"),
@@ -29,9 +23,10 @@ final class TabBarController: UITabBarController {
         super.viewDidLoad()
 
         let cart = CartModuleBuilder.build(servicesAssembly: servicesAssembly)
-        cart.tabBarItem = cartTabBarItem
+        let cartNavController = UINavigationController(rootViewController: cart)
+        cartNavController.tabBarItem = cartTabBarItem
 
-        viewControllers = [cart]
+        viewControllers = [cartNavController]
 
         view.backgroundColor = .systemBackground
     }

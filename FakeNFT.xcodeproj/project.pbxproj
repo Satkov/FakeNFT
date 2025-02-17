@@ -351,6 +351,7 @@
 		91263F5A2D635F9C00C91AAC /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				9154473F2D63CFDA00CBED07 /* Protocols */,
 				91263F5B2D635FB000C91AAC /* CartInteractor.swift */,
 				91263F5C2D635FB000C91AAC /* CartModuleBuilder.swift */,
 				91263F5D2D635FB000C91AAC /* CartPresenter.swift */,
@@ -360,6 +361,13 @@
 				91263F6D2D63911400C91AAC /* CartTableViewCell.swift */,
 			);
 			path = Cart;
+			sourceTree = "<group>";
+		};
+		9154473F2D63CFDA00CBED07 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		E19CD5A92A98B55900CA39A5 /* Cell */ = {

@@ -13,6 +13,7 @@ class CartViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(CartTableViewCell.self)
         tableView.rowHeight = 140
+        tableView.separatorStyle = .none
         return tableView
     }()
     private let paymentBlockView: PaymentBlockView = {
@@ -40,8 +41,19 @@ class CartViewController: UIViewController {
 // MARK: - Private functions
 private extension CartViewController {
     func initialize() {
+        setupNavBar()
         setupTableView()
         setupConstraints()
+    }
+
+    func setupNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "filterIcon"),
+            style: .plain,
+            target: self,
+            action: #selector(filterButtonTapped)
+        )
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.projectBlack
     }
 
     func setupTableView() {
@@ -71,7 +83,10 @@ private extension CartViewController {
         ])
     }
 
-
+    @objc
+    func filterButtonTapped() {
+        print("pressed")
+    }
 }
 
 // MARK: - CartViewControllerViewProtocol
