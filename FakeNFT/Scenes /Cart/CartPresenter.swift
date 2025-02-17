@@ -24,11 +24,15 @@ extension CartPresenter: UITableViewDelegate {
 
 extension CartPresenter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("!2311")
         return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        print("!23")
+        let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.defaultReuseIdentifier, for: indexPath) as! CartTableViewCell
+        cell.configurate()
+        return cell
     }
     
 

@@ -11,6 +11,8 @@ class CartViewController: UIViewController {
     private let servicesAssembly: ServicesAssembly
     private let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.register(CartTableViewCell.self)
+        tableView.rowHeight = 140
         return tableView
     }()
     private let paymentBlockView: PaymentBlockView = {
@@ -39,14 +41,12 @@ class CartViewController: UIViewController {
 private extension CartViewController {
     func initialize() {
         setupTableView()
-
         setupConstraints()
     }
 
     func setupTableView() {
         tableView.delegate = presenter
         tableView.dataSource = presenter
-        tableView.backgroundColor = .blue
     }
 
     func setupConstraints() {
