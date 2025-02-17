@@ -63,22 +63,22 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         contentView.addSubview(deleteButton)
 
         NSLayoutConstraint.activate([
-            nftImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            nftImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nftImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            nftImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             nftImageView.widthAnchor.constraint(equalToConstant: 108),
             nftImageView.heightAnchor.constraint(equalToConstant: 108)
         ])
 
         NSLayoutConstraint.activate([
             deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             deleteButton.widthAnchor.constraint(equalToConstant: 40),
             deleteButton.heightAnchor.constraint(equalToConstant: 40)
         ])
 
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: nftImageView.trailingAnchor, constant: 20),
-            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             nameLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor)
         ])
 
