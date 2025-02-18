@@ -84,7 +84,14 @@ private extension CartViewController {
 
     @objc
     func filterButtonTapped() {
-        print("pressed")
+        let buttons = [
+            FilterMenuButtonModel(title: "По цене", action: { print("По цене") }),
+            FilterMenuButtonModel(title: "По рейтингу", action: { print("По рейтингу") }),
+            FilterMenuButtonModel(title: "По названию", action: { print("По названию") })
+        ]
+        let vc = FilterViewController(buttons: buttons)
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: false)
     }
 }
 
