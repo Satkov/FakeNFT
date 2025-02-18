@@ -114,8 +114,7 @@ final class FilterViewController: UIViewController {
         })
     }
 
-    @objc
-    private func exitButtonPressed() {
+    private func animateDismiss() {
         UIView.animate(withDuration: 0.3, animations: {
             self.backgroundView.backgroundColor = UIColor.projectBlack.withAlphaComponent(0)
             self.buttonsTableView.transform = CGAffineTransform(translationX: 0, y: 300)
@@ -125,6 +124,11 @@ final class FilterViewController: UIViewController {
         }) { _ in
             self.dismiss(animated: false)
         }
+    }
+
+    @objc
+    private func exitButtonPressed() {
+        animateDismiss()
     }
 
 }
@@ -141,6 +145,7 @@ extension FilterViewController: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         buttons[indexPath.row].action()
+        animateDismiss()
     }
 
     func tableView(
