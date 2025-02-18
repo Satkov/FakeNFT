@@ -1,7 +1,11 @@
 import UIKit
 
 extension UIView {
-
+    func addToSuperview(_ superview: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        superview.addSubview(self)
+    }
+    
     func constraintEdges(to view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
