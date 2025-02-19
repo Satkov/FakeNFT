@@ -42,7 +42,14 @@ extension UIColor {
     static let textOnPrimary = UIColor.white
     static let textOnSecondary = UIColor.black
 
-    private static let yaBlackLight = UIColor(hexString: "#1A1B22")
+    // Project Colors
+    static let greenUniversal = UIColor(hexString: "#1C9F00")
+    static let lightGray = UIColor(hexString: "#F7F7F8")
+    static let projectBlack = UIColor(hexString: "#1A1B22")
+    static let projectGray = UIColor(hexString: "#3C3C4399").withAlphaComponent(0.6)
+    static let projectWhite = UIColor(hexString: "#FFFFFF")
+
+    private static let yaBlackLight = UIColor(hexString: "1A1B22")
     private static let yaBlackDark = UIColor.white
     private static let yaLightGrayLight = UIColor(hexString: "#F7F7F8")
     private static let yaLightGrayDark = UIColor(hexString: "#2C2C2E")
