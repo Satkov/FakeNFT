@@ -66,10 +66,10 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
     @objc func sortButtonTapped() {
         
         let nameSortModel = FilterMenuButtonModel(title: "По названию", action: {
-            self.presenter?.sortNFTCollectionsByName()
+            self.presenter?.sortNftCollectionList(type: .name)
         })
         let nftCountSortModel = FilterMenuButtonModel(title: "По количеству NFT", action: {
-            self.presenter?.sortNFTCollectionsByNftCount()
+            self.presenter?.sortNftCollectionList(type: .nftCount)
         })
         let buttons = [nameSortModel, nftCountSortModel]
         let filterViewController = FilterViewController(buttons: buttons)

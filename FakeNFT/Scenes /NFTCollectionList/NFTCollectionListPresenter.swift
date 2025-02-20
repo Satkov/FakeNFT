@@ -6,12 +6,18 @@
 //
 import UIKit
 
+enum SortType: Int {
+    case none = 0
+    case name = 1
+    case nftCount = 2
+}
+
 protocol NFTCollectionListPresenterProtocol: AnyObject {
     func numberOfNFTCollections() -> Int
     func cellModelForIndex(_ indexPath: IndexPath) -> NFTCollectionCellModel?
     func loadNFTCollectionList()
-    func sortNFTCollectionsByName()
-    func sortNFTCollectionsByNftCount()
+    func sortNftCollectionList(type: SortType)
+    
 }
 
 class NFTCollectionListPresenter {
@@ -51,6 +57,7 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
             switch(result) {
             case .success(let nftCollectionList):
                 self.nftCollectionList = nftCollectionList
+                self.sortNftCollectionList(type: .none)
                 self.view?.updateForNewData()
             case .failure(let error):
                 self.view?.showError(error: error)
@@ -58,13 +65,29 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         }
     }
     
-    func sortNFTCollectionsByName() {
-        nftCollectionList = nftCollectionList?.sorted(by: { return $0.name < $1.name })
-        view?.updateForNewData()
-    }
-    
-    func sortNFTCollectionsByNftCount() {
-        nftCollectionList = nftCollectionList?.sorted(by: { return $0.nfts.count < $1.nfts.count })
+    func sortNftCollectionList(type: SortType) {
+        
+        var currentType = type
+        if type == .none {
+            let savedSortType = SortType(rawValue: UserDefaults.standard.integer(forKey: "sortType"))
+            if savedSortType == SortType.none {
+                currentType = .nftCount
+            } else if let savedSortType = savedSortType {
+                currentType = savedSortType
+            }
+        }
+        
+        UserDefaults.standard.set(currentType.rawValue, forKey: "sortType")
+        
+        switch(currentType) {
+        case .name:
+            nftCollectionList = nftCollectionList?.sorted(by: { return $0.name < $1.name })
+        case .nftCount:
+            nftCollectionList = nftCollectionList?.sorted(by: { return $0.nfts.count < $1.nfts.count })
+        default:
+            break
+        }
+        
         view?.updateForNewData()
     }
 }
