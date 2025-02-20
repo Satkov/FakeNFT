@@ -56,6 +56,11 @@
 		F3C495F42D67429B00B58C41 /* NFTCollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495EF2D67429B00B58C41 /* NFTCollectionDetailViewController.swift */; };
 		F3C495F52D67429B00B58C41 /* NFTCollectionDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495F02D67429B00B58C41 /* NFTCollectionDetailInteractor.swift */; };
 		F3C495F72D674BDB00B58C41 /* NFTCollectionDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495F62D674BDB00B58C41 /* NFTCollectionDetailRequest.swift */; };
+		F3C495FE2D6759A300B58C41 /* NFTDetailModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495F92D6759A300B58C41 /* NFTDetailModuleBuilder.swift */; };
+		F3C495FF2D6759A300B58C41 /* NFTDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495FA2D6759A300B58C41 /* NFTDetailPresenter.swift */; };
+		F3C496002D6759A300B58C41 /* NFTDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495FB2D6759A300B58C41 /* NFTDetailRouter.swift */; };
+		F3C496012D6759A300B58C41 /* NFTDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495FC2D6759A300B58C41 /* NFTDetailViewController.swift */; };
+		F3C496022D6759A300B58C41 /* NFTDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495FD2D6759A300B58C41 /* NFTDetailInteractor.swift */; };
 		F3C696392D6457F600D67D34 /* NFTCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C696382D6457F600D67D34 /* NFTCollectionCellModel.swift */; };
 		F3CF616B2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF616A2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift */; };
 		F3CF616D2D632500002D1B56 /* NFTCollectionListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF616C2D632500002D1B56 /* NFTCollectionListRequest.swift */; };
@@ -139,6 +144,11 @@
 		F3C495EF2D67429B00B58C41 /* NFTCollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailViewController.swift; sourceTree = "<group>"; };
 		F3C495F02D67429B00B58C41 /* NFTCollectionDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailInteractor.swift; sourceTree = "<group>"; };
 		F3C495F62D674BDB00B58C41 /* NFTCollectionDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailRequest.swift; sourceTree = "<group>"; };
+		F3C495F92D6759A300B58C41 /* NFTDetailModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailModuleBuilder.swift; sourceTree = "<group>"; };
+		F3C495FA2D6759A300B58C41 /* NFTDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailPresenter.swift; sourceTree = "<group>"; };
+		F3C495FB2D6759A300B58C41 /* NFTDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailRouter.swift; sourceTree = "<group>"; };
+		F3C495FC2D6759A300B58C41 /* NFTDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailViewController.swift; sourceTree = "<group>"; };
+		F3C495FD2D6759A300B58C41 /* NFTDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailInteractor.swift; sourceTree = "<group>"; };
 		F3C696382D6457F600D67D34 /* NFTCollectionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionCellModel.swift; sourceTree = "<group>"; };
 		F3CF616A2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F3CF616C2D632500002D1B56 /* NFTCollectionListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionListRequest.swift; sourceTree = "<group>"; };
@@ -301,6 +311,7 @@
 				0C79EE6B2A76DE2E00EE90EA /* ServicesAssemly.swift */,
 				558E39E62C68CE0900FB86AC /* NftService.swift */,
 				0CFCB73F2A78002A0009A829 /* ExamplePutService.swift */,
+				F3C495FD2D6759A300B58C41 /* NFTDetailInteractor.swift */,
 				F3C495F02D67429B00B58C41 /* NFTCollectionDetailInteractor.swift */,
 				F3FC1A7C2D61FAA8002DBE23 /* NFTCollectionListInteractor.swift */,
 			);
@@ -310,6 +321,7 @@
 		3F6806C729CBBC5B00B4F915 /* Scenes  */ = {
 			isa = PBXGroup;
 			children = (
+				F3C495F82D67598800B58C41 /* NFTDetail */,
 				F3C495EB2D67427C00B58C41 /* NFTCollectionDetail */,
 				F3FC1A822D61FAB5002DBE23 /* NFTCollectionList */,
 				E1A1B9D82AA01C9700C3AFBC /* TabBarController */,
@@ -429,6 +441,17 @@
 				F3C495EF2D67429B00B58C41 /* NFTCollectionDetailViewController.swift */,
 			);
 			path = NFTCollectionDetail;
+			sourceTree = "<group>";
+		};
+		F3C495F82D67598800B58C41 /* NFTDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F3C495F92D6759A300B58C41 /* NFTDetailModuleBuilder.swift */,
+				F3C495FA2D6759A300B58C41 /* NFTDetailPresenter.swift */,
+				F3C495FB2D6759A300B58C41 /* NFTDetailRouter.swift */,
+				F3C495FC2D6759A300B58C41 /* NFTDetailViewController.swift */,
+			);
+			path = NFTDetail;
 			sourceTree = "<group>";
 		};
 		F3CF61692D631C2C002D1B56 /* Cell */ = {
@@ -619,11 +642,16 @@
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				0C79EE6C2A76DE2E00EE90EA /* ServicesAssemly.swift in Sources */,
 				0CFCB74E2A7817DC0009A829 /* NftStorage.swift in Sources */,
+				F3C496012D6759A300B58C41 /* NFTDetailViewController.swift in Sources */,
 				F3C495F22D67429B00B58C41 /* NFTCollectionDetailPresenter.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExamplePutRequest.swift in Sources */,
+				F3C496022D6759A300B58C41 /* NFTDetailInteractor.swift in Sources */,
+				F3C495FF2D6759A300B58C41 /* NFTDetailPresenter.swift in Sources */,
 				915447422D64948500CBED07 /* FilterViewController.swift in Sources */,
 				F3C495EA2D673CDB00B58C41 /* NftCollectionDetailInput.swift in Sources */,
 				0CFCB7462A78064B0009A829 /* NftDetailCellModel.swift in Sources */,
+				F3C495FE2D6759A300B58C41 /* NFTDetailModuleBuilder.swift in Sources */,
+				F3C496002D6759A300B58C41 /* NFTDetailRouter.swift in Sources */,
 				0CFCB74B2A780EA80009A829 /* UIView+Constraints.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				0C79EE612A76DCD600EE90EA /* NftByIdRequest.swift in Sources */,
