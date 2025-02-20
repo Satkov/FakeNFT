@@ -3,16 +3,16 @@ import UIKit
 final class TableHeaderTitleView: UIView {
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        titleLabel.font = UIFont(name: "SF Pro Regular", size: 13)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = .black
+        titleLabel.textColor = UIColor.projectGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         return titleLabel
     }()
 
     private let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "#545458A6").withAlphaComponent(0.4)
+        view.backgroundColor = UIColor.filterMenuBorder
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
