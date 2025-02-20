@@ -114,17 +114,25 @@ final class FilterViewController: UIViewController {
         })
     }
 
+    private func animateDismiss() {
+        UIView.animate(
+            withDuration: 0.3,
+            animations: {
+                self.backgroundView.backgroundColor = UIColor.projectBlack.withAlphaComponent(0)
+                self.buttonsTableView.transform = CGAffineTransform(translationX: 0, y: 300)
+                self.exitButton.transform = CGAffineTransform(translationX: 0, y: 300)
+                self.buttonsTableView.alpha = 0
+                self.exitButton.alpha = 0
+            },
+            completion: { _ in
+                self.dismiss(animated: false)
+            }
+        )
+    }
+
     @objc
     private func exitButtonPressed() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.backgroundView.backgroundColor = UIColor.projectBlack.withAlphaComponent(0)
-            self.buttonsTableView.transform = CGAffineTransform(translationX: 0, y: 300)
-            self.exitButton.transform = CGAffineTransform(translationX: 0, y: 300)
-            self.buttonsTableView.alpha = 0
-            self.exitButton.alpha = 0
-        }) { _ in
-            self.dismiss(animated: false)
-        }
+        animateDismiss()
     }
 
 }
@@ -141,6 +149,7 @@ extension FilterViewController: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         buttons[indexPath.row].action()
+        animateDismiss()
     }
 
     func tableView(
@@ -165,7 +174,7 @@ extension FilterViewController: UITableViewDataSource {
     ) -> Int {
         return buttons.count
     }
-    
+
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath

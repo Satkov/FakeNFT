@@ -1,6 +1,5 @@
 import UIKit
 
-
 final class TableHeaderTitleView: UIView {
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
