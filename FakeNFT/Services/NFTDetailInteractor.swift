@@ -6,6 +6,7 @@
 //
 
 typealias NftDetailCompletion = (Result<Nft, Error>) -> Void
+typealias CurrenciesCompletion = (Result<[Currency], Error>) -> Void
 
 protocol NFTDetailInteractorProtocol: AnyObject {
 }
@@ -31,6 +32,18 @@ class NFTDetailInteractor: NFTDetailInteractorProtocol {
             switch result {
             case .success(let nft):
                 completion(.success(nft))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func loadCurrencies(completion: @escaping CurrenciesCompletion) {
+        let request = CurrenciesRequest()
+        networkClient.send(request: request, type: [Currency].self) { result in
+            switch result {
+            case .success(let currencies):
+                completion(.success(currencies))
             case .failure(let error):
                 completion(.failure(error))
             }
