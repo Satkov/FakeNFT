@@ -103,7 +103,7 @@ extension NFTCollectionListViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        presenter?.showNftCollectionDetailForIndexPath(indexPath)
     }
 }
 

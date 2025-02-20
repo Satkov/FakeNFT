@@ -24,4 +24,11 @@ final class ServicesAssembly {
             nftStorage: nftStorage
         )
     }
+    
+    var nftCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
+        NFTCollectionDetailInteractor(
+            networkClient: networkClient,
+            nftStorage: nftStorage
+        )
+    }
 }

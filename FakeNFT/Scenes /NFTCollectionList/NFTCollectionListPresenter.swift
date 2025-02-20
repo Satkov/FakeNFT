@@ -17,22 +17,27 @@ protocol NFTCollectionListPresenterProtocol: AnyObject {
     func cellModelForIndex(_ indexPath: IndexPath) -> NFTCollectionCellModel?
     func loadNFTCollectionList()
     func sortNftCollectionList(type: SortType)
-    
+    func showNftCollectionDetailForIndexPath(_ indexPath: IndexPath)
 }
 
 class NFTCollectionListPresenter {
+    
+    // MARK: - Public Properties
     weak var view: NFTCollectionListViewProtocol?
     var router: NFTCollectionListRouterProtocol
     var interactor: NFTCollectionListInteractorProtocol
     
+    // MARK: - Private Properties
     private var nftCollectionList: [NftCollection]?
 
+    // MARK: - Initializers
     init(interactor: NFTCollectionListInteractorProtocol, router: NFTCollectionListRouterProtocol) {
         self.interactor = interactor
         self.router = router
     }
 }
 
+// MARK: - NFTCollectionListPresenterProtocol
 extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
     func numberOfNFTCollections() -> Int {
         return nftCollectionList?.count ?? 0
@@ -89,5 +94,12 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         }
         
         view?.updateForNewData()
+    }
+    
+    func showNftCollectionDetailForIndexPath(_ indexPath: IndexPath) {
+        if let nftCollection = nftCollectionList?[indexPath.row] {
+            let nftCollectionDetailInput = NftCollectionDetailInput(id: nftCollection.id)
+            router.showNftCollectionDetail(nftCollectionDetailInput: nftCollectionDetailInput)
+        }
     }
 }
