@@ -55,6 +55,7 @@
 		F3C495F32D67429B00B58C41 /* NFTCollectionDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495EE2D67429B00B58C41 /* NFTCollectionDetailRouter.swift */; };
 		F3C495F42D67429B00B58C41 /* NFTCollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495EF2D67429B00B58C41 /* NFTCollectionDetailViewController.swift */; };
 		F3C495F52D67429B00B58C41 /* NFTCollectionDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495F02D67429B00B58C41 /* NFTCollectionDetailInteractor.swift */; };
+		F3C495F72D674BDB00B58C41 /* NFTCollectionDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C495F62D674BDB00B58C41 /* NFTCollectionDetailRequest.swift */; };
 		F3C696392D6457F600D67D34 /* NFTCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C696382D6457F600D67D34 /* NFTCollectionCellModel.swift */; };
 		F3CF616B2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF616A2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift */; };
 		F3CF616D2D632500002D1B56 /* NFTCollectionListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF616C2D632500002D1B56 /* NFTCollectionListRequest.swift */; };
@@ -137,6 +138,7 @@
 		F3C495EE2D67429B00B58C41 /* NFTCollectionDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailRouter.swift; sourceTree = "<group>"; };
 		F3C495EF2D67429B00B58C41 /* NFTCollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailViewController.swift; sourceTree = "<group>"; };
 		F3C495F02D67429B00B58C41 /* NFTCollectionDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailInteractor.swift; sourceTree = "<group>"; };
+		F3C495F62D674BDB00B58C41 /* NFTCollectionDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailRequest.swift; sourceTree = "<group>"; };
 		F3C696382D6457F600D67D34 /* NFTCollectionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionCellModel.swift; sourceTree = "<group>"; };
 		F3CF616A2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F3CF616C2D632500002D1B56 /* NFTCollectionListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionListRequest.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 				3FC8C39029D2453B0081F015 /* ExamplePutRequest.swift */,
 				0C79EE602A76DCD600EE90EA /* NftByIdRequest.swift */,
 				F3CF616C2D632500002D1B56 /* NFTCollectionListRequest.swift */,
+				F3C495F62D674BDB00B58C41 /* NFTCollectionDetailRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				0CFCB7402A78002A0009A829 /* ExamplePutService.swift in Sources */,
 				915447472D64F31900CBED07 /* TableHeaderTitleView.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
+				F3C495F72D674BDB00B58C41 /* NFTCollectionDetailRequest.swift in Sources */,
 				0CF2C2DB2A783C1B00FDC837 /* LoadingView.swift in Sources */,
 				558E39E72C68CE0A00FB86AC /* NftService.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
