@@ -39,7 +39,7 @@ final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIden
     
     // MARK: - Public Methods
     func configure(model: NFTCollectionCellModel) {
-        nameAndNftCountLabel.text = "\(model.name) (\(model.nftCount))"
+        nameAndNftCountLabel.text = "\(model.name.capitalized) (\(model.nftCount))"
         ntfCollectionImageView.kf.setImage(with: model.imageURL)
     }
     

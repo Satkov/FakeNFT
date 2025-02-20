@@ -8,11 +8,18 @@
 import UIKit
 
 protocol NFTCollectionListViewProtocol: AnyObject {
-    func nftCollectionListDidLoad()
-    func nftCollectionListLoadError(error: Error)
+    func updateForNewData()
+    func showError(error: Error)
 }
 
-final class NFTCollectionListViewController: UIViewController {
+final class NFTCollectionListViewController: UIViewController, ErrorView, LoadingView {
+    
+    var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     // MARK: - IB Outlets
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -40,11 +47,14 @@ final class NFTCollectionListViewController: UIViewController {
     
     private func setupLayout() {
         view.addSubview(collectionView)
+        view.addSubview(activityIndicator)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
@@ -80,11 +90,14 @@ extension NFTCollectionListViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - NFTCollectionListViewProtocol
 extension NFTCollectionListViewController: NFTCollectionListViewProtocol {
-    func nftCollectionListDidLoad() {
+    func updateForNewData() {
+        hideLoading()
         collectionView.reloadData()
     }
     
-    func nftCollectionListLoadError(error: Error) {
-        print(error)
+    func showError(error: Error) {
+        hideLoading()
+        let errorModel = ErrorModel(message: error.localizedDescription, actionText: "OK", action: {})
+        showError(errorModel)
     }
 }

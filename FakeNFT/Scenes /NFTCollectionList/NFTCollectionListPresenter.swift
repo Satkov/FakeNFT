@@ -54,9 +54,10 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
             switch(result) {
             case .success(let nftCollectionList):
                 self.nftCollectionList = nftCollectionList
-                self.view?.nftCollectionListDidLoad()
+                self.view?.updateForNewData()
             case .failure(let error):
-                self.view?.nftCollectionListLoadError(error: error)
+                self.view?.showError(error: error)
+            }
             }
         }
     }
