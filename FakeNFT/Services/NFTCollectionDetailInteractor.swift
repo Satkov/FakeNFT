@@ -23,7 +23,7 @@ class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
         self.nftStorage = nftStorage
     }
     
-    func loadNftCollectionList(id: String, completion: @escaping NftCollectionDetailCompletion) {
+    func loadNftCollection(id: String, completion: @escaping NftCollectionDetailCompletion) {
         let request = NFTCollectionDetailRequest(id: id)
         networkClient.send(request: request, type: NftCollection.self) { result in
             switch result {
