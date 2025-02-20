@@ -10,6 +10,8 @@ protocol NFTCollectionListPresenterProtocol: AnyObject {
     func numberOfNFTCollections() -> Int
     func cellModelForIndex(_ indexPath: IndexPath) -> NFTCollectionCellModel?
     func loadNFTCollectionList()
+    func sortNFTCollectionsByName()
+    func sortNFTCollectionsByNftCount()
 }
 
 class NFTCollectionListPresenter {
@@ -40,11 +42,6 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         let model = NFTCollectionCellModel(imageURL: imageURL,
                                            name: nftCollection?.name ?? "",
                                            nftCount: nftCollection?.nfts.count ?? 0)
-        
-//        guard let url = URL(string: "https://code.s3.yandex.net/Mobile/iOS/NFT/Beige/Finn/1.png") else {
-//            return nil
-//        }
-        //let model = NFTCollectionCellModel(imageURL: url, name: "Peach", nftCount: 5)
         return model
     }
     
@@ -58,7 +55,16 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
             case .failure(let error):
                 self.view?.showError(error: error)
             }
-            }
         }
+    }
+    
+    func sortNFTCollectionsByName() {
+        nftCollectionList = nftCollectionList?.sorted(by: { return $0.name < $1.name })
+        view?.updateForNewData()
+    }
+    
+    func sortNFTCollectionsByNftCount() {
+        nftCollectionList = nftCollectionList?.sorted(by: { return $0.nfts.count < $1.nfts.count })
+        view?.updateForNewData()
     }
 }

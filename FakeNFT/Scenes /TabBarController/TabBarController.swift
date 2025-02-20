@@ -16,10 +16,9 @@ final class TabBarController: UITabBarController {
             return
         }
         let catalogController = NFTCollectionListModuleBuilder.build(serviceAssembly: servicesAssembly)
+        let navigationViewController = UINavigationController(rootViewController: catalogController)
         catalogController.tabBarItem = catalogTabBarItem
-       // let vc = TestCatalogViewController(servicesAssembly: servicesAssembly)
-        viewControllers = [catalogController]
-        //viewControllers = [vc]
+        viewControllers = [navigationViewController]
         view.backgroundColor = .systemBackground
     }
 }

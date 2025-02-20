@@ -41,6 +41,7 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoading()
         presenter?.loadNFTCollectionList()
         setupLayout()
     }
@@ -56,6 +57,24 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "CatalogSortButtonImage"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.navigationBarButton
+    }
+    
+    @objc func sortButtonTapped() {
+        
+        let nameSortModel = FilterMenuButtonModel(title: "По названию", action: {
+            self.presenter?.sortNFTCollectionsByName()
+        })
+        let nftCountSortModel = FilterMenuButtonModel(title: "По количеству NFT", action: {
+            self.presenter?.sortNFTCollectionsByNftCount()
+        })
+        let buttons = [nameSortModel, nftCountSortModel]
+        let filterViewController = FilterViewController(buttons: buttons)
+        filterViewController.modalPresentationStyle = .overFullScreen
+        present(filterViewController, animated: false)
     }
 }
 
