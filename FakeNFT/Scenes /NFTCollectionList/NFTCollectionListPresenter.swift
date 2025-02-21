@@ -74,7 +74,7 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         
         var currentType = type
         if type == .none {
-            let savedSortType = SortType(rawValue: UserDefaults.standard.integer(forKey: "sortType"))
+            let savedSortType = SortType(rawValue: LocalStorage.shared.getValue(key: "sortType"))
             if savedSortType == SortType.none {
                 currentType = .nftCount
             } else if let savedSortType = savedSortType {
@@ -82,7 +82,7 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
             }
         }
         
-        UserDefaults.standard.set(currentType.rawValue, forKey: "sortType")
+        LocalStorage.shared.saveValue(key: "sortType", value: currentType.rawValue)
         
         switch(currentType) {
         case .name:
