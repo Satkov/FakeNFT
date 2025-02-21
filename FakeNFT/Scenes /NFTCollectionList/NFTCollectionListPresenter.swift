@@ -7,9 +7,9 @@
 import UIKit
 
 enum SortType: Int {
-    case none = 0
-    case name = 1
-    case nftCount = 2
+    case none
+    case name
+    case nftCount
 }
 
 protocol NFTCollectionListPresenterProtocol: AnyObject {
@@ -59,7 +59,7 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
     func loadNFTCollectionList() {
         interactor.loadNftCollectionList { [weak self] result in
             guard let self = self else { return }
-            switch(result) {
+            switch result {
             case .success(let nftCollectionList):
                 self.nftCollectionList = nftCollectionList
                 self.sortNftCollectionList(type: .none)
