@@ -9,13 +9,15 @@ import Foundation
 
 final class LocalStorage {
     
+    private init() {}
+    
     static let shared = LocalStorage()
     
-    func saveValue(key: String, value: Int) {
+    func saveValue(_ value: Any, for key: String) {
         UserDefaults.standard.set(value, forKey: key)
     }
     
-    func getValue(key: String) -> Int {
+    func getValue(for key: String) -> Int {
         UserDefaults.standard.integer(forKey: key)
     }
 }

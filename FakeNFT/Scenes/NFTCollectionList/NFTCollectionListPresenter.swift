@@ -12,6 +12,10 @@ enum SortType: Int {
     case nftCount
 }
 
+enum Key: String {
+   case sortType = "sortType"
+}
+
 protocol NFTCollectionListPresenterProtocol: AnyObject {
     func numberOfNFTCollections() -> Int
     func cellModelForIndex(_ indexPath: IndexPath) -> NFTCollectionCellModel?
@@ -74,7 +78,7 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         
         var currentType = type
         if type == .none {
-            let savedSortType = SortType(rawValue: LocalStorage.shared.getValue(key: "sortType"))
+            let savedSortType = SortType(rawValue: LocalStorage.shared.getValue(for: Key.sortType.rawValue))
             if savedSortType == SortType.none {
                 currentType = .nftCount
             } else if let savedSortType = savedSortType {
@@ -82,7 +86,7 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
             }
         }
         
-        LocalStorage.shared.saveValue(key: "sortType", value: currentType.rawValue)
+        LocalStorage.shared.saveValue(currentType.rawValue, for: Key.sortType.rawValue)
         
         switch(currentType) {
         case .name:
