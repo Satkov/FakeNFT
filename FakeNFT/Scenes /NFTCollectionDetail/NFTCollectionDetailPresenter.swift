@@ -8,7 +8,7 @@
 protocol NFTCollectionDetailPresenterProtocol: AnyObject {
 }
 
-class NFTCollectionDetailPresenter {
+final class NFTCollectionDetailPresenter {
     weak var view: NFTCollectionDetailViewProtocol?
     var router: NFTCollectionDetailRouterProtocol
     var interactor: NFTCollectionDetailInteractorProtocol

@@ -20,7 +20,7 @@ protocol NFTCollectionListPresenterProtocol: AnyObject {
     func showNftCollectionDetailForIndexPath(_ indexPath: IndexPath)
 }
 
-class NFTCollectionListPresenter {
+final class NFTCollectionListPresenter {
     
     // MARK: - Public Properties
     weak var view: NFTCollectionListViewProtocol?

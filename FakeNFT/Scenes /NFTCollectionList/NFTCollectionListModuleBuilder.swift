@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NFTCollectionListModuleBuilder {
+final class NFTCollectionListModuleBuilder {
     static func build(serviceAssembly: ServicesAssembly) -> NFTCollectionListViewController {
         let interactor = serviceAssembly.nftCollectionListInteractor
         let router = NFTCollectionListRouter(serviceAssemby: serviceAssembly)

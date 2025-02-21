@@ -11,7 +11,7 @@ protocol NFTCollectionListRouterProtocol {
     func showNftCollectionDetail(nftCollectionDetailInput: NftCollectionDetailInput)
 }
 
-class NFTCollectionListRouter: NFTCollectionListRouterProtocol {
+final class NFTCollectionListRouter: NFTCollectionListRouterProtocol {
     weak var viewController: NFTCollectionListViewController?
     
     private let serviceAssemby: ServicesAssembly

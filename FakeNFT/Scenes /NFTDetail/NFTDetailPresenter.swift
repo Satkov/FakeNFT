@@ -8,7 +8,7 @@
 protocol NFTDetailPresenterProtocol: AnyObject {
 }
 
-class NFTDetailPresenter {
+final class NFTDetailPresenter {
     weak var view: NFTDetailViewProtocol?
     var router: NFTDetailRouterProtocol
     var interactor: NFTDetailInteractorProtocol

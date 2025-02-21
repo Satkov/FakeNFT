@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NFTCollectionDetailModuleBuilder {
+final class NFTCollectionDetailModuleBuilder {
     static func build(input: NftCollectionDetailInput, serviceAssembly: ServicesAssembly) -> NFTCollectionDetailViewController {
         let interactor = serviceAssembly.nftCollectionDetailInteractor
         let router = NFTCollectionDetailRouter()

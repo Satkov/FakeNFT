@@ -8,6 +8,6 @@
 protocol NFTCollectionDetailRouterProtocol {
 }
 
-class NFTCollectionDetailRouter: NFTCollectionDetailRouterProtocol {
+final class NFTCollectionDetailRouter: NFTCollectionDetailRouterProtocol {
     weak var viewController: NFTCollectionDetailViewController?
 }

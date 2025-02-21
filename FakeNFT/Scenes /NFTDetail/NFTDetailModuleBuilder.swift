@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NFTDetailModuleBuilder {
+final class NFTDetailModuleBuilder {
     static func build(serviceAssembly: ServicesAssembly) -> NFTDetailViewController {
         let interactor = serviceAssembly.nftDetailInteractor
         let router = NFTDetailRouter()

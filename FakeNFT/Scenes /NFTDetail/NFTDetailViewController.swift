@@ -10,7 +10,7 @@ import UIKit
 protocol NFTDetailViewProtocol: AnyObject {
 }
 
-class NFTDetailViewController: UIViewController {
+final class NFTDetailViewController: UIViewController {
     // MARK: - Public
     var presenter: NFTDetailPresenterProtocol?
 

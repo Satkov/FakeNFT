@@ -8,6 +8,6 @@
 protocol NFTDetailRouterProtocol {
 }
 
-class NFTDetailRouter: NFTDetailRouterProtocol {
+final class NFTDetailRouter: NFTDetailRouterProtocol {
     weak var viewController: NFTDetailViewController?
 }

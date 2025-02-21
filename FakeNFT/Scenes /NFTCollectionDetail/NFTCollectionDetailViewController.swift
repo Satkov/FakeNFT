@@ -10,7 +10,7 @@ import UIKit
 protocol NFTCollectionDetailViewProtocol: AnyObject {
 }
 
-class NFTCollectionDetailViewController: UIViewController {
+final class NFTCollectionDetailViewController: UIViewController {
     // MARK: - Public
     var presenter: NFTCollectionDetailPresenterProtocol?
 
