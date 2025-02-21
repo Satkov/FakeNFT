@@ -124,8 +124,8 @@ final class FilterViewController: UIViewController {
                 self.buttonsTableView.alpha = 0
                 self.exitButton.alpha = 0
             },
-            completion: { _ in
-                self.dismiss(animated: false)
+            completion: { [weak self] _ in
+                self?.dismiss(animated: false)
             }
         )
     }
