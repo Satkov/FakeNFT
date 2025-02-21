@@ -1,7 +1,7 @@
 import UIKit
 
 final class TableHeaderTitleView: UIView {
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.font = UIFont(name: "SF Pro Regular", size: 13)
         titleLabel.textAlignment = .center
@@ -10,7 +10,7 @@ final class TableHeaderTitleView: UIView {
         return titleLabel
     }()
 
-    private let separatorView: UIView = {
+    private lazy var separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.filterMenuBorder
         view.translatesAutoresizingMaskIntoConstraints = false
