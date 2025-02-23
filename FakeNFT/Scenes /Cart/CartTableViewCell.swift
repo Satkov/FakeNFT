@@ -1,9 +1,12 @@
 import UIKit
+import Kingfisher
 
 final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     private let nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
+        imageView.layer.masksToBounds = true
+            imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -38,12 +41,26 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     }()
 
 
-    func configurate() {
-        nftImageView.image = UIImage(named: "mockImage")
-        nameLabel.text = "mock name"
-        ratingView.rating = 4
+    func configurate(
+        imageURL: String,
+        name: String,
+        rating: Int,
+        price: Float
+    ) {
+        ImageFetcher.shared.fetchImage(from: imageURL) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let image):
+                nftImageView.image = image
+            case .failure(let error):
+                print("Ошибка загрузки: \(error.localizedDescription)")
+            }
+
+        }
+        nameLabel.text = name
+        ratingView.rating = rating
         priceTitleLabel.text = "Цена"
-        priceLabel.text = "50 рублей"
+        priceLabel.text = "\(price) ETH"
         setupUI()
     }
 

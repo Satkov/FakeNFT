@@ -34,9 +34,9 @@ final class PaymentBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configurate() {
-        nftCounterLabel.text = "3 NFT"
-        totalPriceLabel.text = "5,34 ETH"
+    func configurate(totalPrice: String, numberOfItems: String) {
+        nftCounterLabel.text = "\(numberOfItems) NFT"
+        totalPriceLabel.text = "\(totalPrice) ETH"
     }
 
     private func setupConstraints() {

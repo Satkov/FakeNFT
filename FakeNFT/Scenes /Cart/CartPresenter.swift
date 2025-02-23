@@ -12,12 +12,11 @@ class CartPresenter: NSObject {
     var router: CartRouterProtocol
     var interactor: CartInteractorProtocol
 
-    private let dispatchGroup = DispatchGroup()
     private var orderItems: Order?
     private var nftsInCart: [Nft] = []
     private var state: CartState = CartState.initial {
         didSet {
-            stateChanged()
+            stateDidChanged()
         }
     }
 
@@ -25,10 +24,10 @@ class CartPresenter: NSObject {
         self.interactor = interactor
         self.router = router
         super.init()
-        loadCartItems()
+        getOrder()
     }
 
-    private func stateChanged() {
+    private func stateDidChanged() {
         switch state {
         case .initial:
             assertionFailure("can't move to initial state")
@@ -39,33 +38,28 @@ class CartPresenter: NSObject {
             print(error)
             // показать алерт об ошибке
         case .data(let nft):
-            print(nft)
+            print("data")
+            getTotalInfo()
+            view?.displayTable()
+            
             // отфильтровать
             // перезагрузить таблицу
             // сказать контроллеру отрисовать таблицу
-        }
-    }
-
-    private func loadCartItems() {
-        state = .loading
-        getOrder()
-        dispatchGroup.notify(queue: DispatchQueue.global()) { [weak self] in
-            guard let self else { return }
-            self.getNfts()
+            // посчитать общую стоимость нфт в корзине
         }
     }
 
     private func getOrder() {
-        dispatchGroup.enter()
+        state = .loading
         interactor.getNFTInsideCart() { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let order):
-                self.orderItems = order
+                orderItems = order
+                getNfts()
             case .failure(let error):
                 state = .failed(error)
             }
-            dispatchGroup.leave()
         }
     }
 
@@ -84,6 +78,19 @@ class CartPresenter: NSObject {
                 }
             }
         }
+    }
+
+    private func getTotalInfo() {
+        var totalPrice: Float = 0
+        var numberOfItems = 0
+        nftsInCart.forEach() { item in
+            numberOfItems += 1
+            totalPrice += item.price
+        }
+        view?.fillPaymentBlockView(
+            totalPrice: totalPrice.toString(),
+            numberOfItems: numberOfItems.toString()
+        )
     }
 }
 
@@ -105,7 +112,7 @@ extension CartPresenter: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 3
+        nftsInCart.count
     }
     
     func tableView(
@@ -117,9 +124,13 @@ extension CartPresenter: UITableViewDataSource {
             for: indexPath
         ) as! CartTableViewCell
 
-        cell.configurate()
+        let nft = nftsInCart[indexPath.row]
+        cell.configurate(
+            imageURL: nft.images[0],
+            name: nft.name,
+            rating: nft.rating,
+            price: nft.price
+        )
         return cell
     }
-    
-
 }

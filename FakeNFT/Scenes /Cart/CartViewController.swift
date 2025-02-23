@@ -1,6 +1,8 @@
 import UIKit
 
 protocol CartViewProtocol: AnyObject {
+    func fillPaymentBlockView(totalPrice: String, numberOfItems: String)
+    func displayTable()
 }
 
 class CartViewController: UIViewController {
@@ -16,11 +18,7 @@ class CartViewController: UIViewController {
         return tableView
     }()
 
-    private let paymentBlockView: PaymentBlockView = {
-        let view = PaymentBlockView()
-        view.configurate()
-        return view
-    }()
+    private let paymentBlockView = PaymentBlockView()
 
     init(servicesAssembly: ServicesAssembly) {
         self.servicesAssembly = servicesAssembly
@@ -36,16 +34,18 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         initialize()
     }
+
+    private func initialize() {
+        setupNavBar()
+        setupTableView()
+        setupConstraints()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        tableView.isHidden = true
+    }
 }
 
 // MARK: - Private functions
 private extension CartViewController {
-    func initialize() {
-        setupNavBar()
-        setupTableView()
-        setupConstraints()
-    }
-
     func setupNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "filterIcon"),
@@ -98,4 +98,19 @@ private extension CartViewController {
 
 // MARK: - CartViewControllerViewProtocol
 extension CartViewController: CartViewProtocol {
+    func fillPaymentBlockView(
+        totalPrice: String,
+        numberOfItems: String) {
+        paymentBlockView.configurate(
+            totalPrice: totalPrice,
+            numberOfItems: numberOfItems
+        )
+    }
+
+    func displayTable() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        tableView.isHidden = false
+        tableView.reloadData()
+    }
+
 }
