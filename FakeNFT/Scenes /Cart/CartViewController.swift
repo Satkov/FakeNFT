@@ -15,6 +15,7 @@ class CartViewController: UIViewController {
         tableView.separatorStyle = .none
         return tableView
     }()
+
     private let paymentBlockView: PaymentBlockView = {
         let view = PaymentBlockView()
         view.configurate()
