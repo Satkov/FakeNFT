@@ -4,7 +4,7 @@ protocol CartPresenterProtocol: AnyObject, UITableViewDelegate, UITableViewDataS
 }
 
 enum CartState {
-    case initial, loading, failed(Error), data([Nft])
+    case initial, loading, failed(Error), data
 }
 
 class CartPresenter: NSObject {
@@ -37,7 +37,7 @@ class CartPresenter: NSObject {
         case .failed(let error):
             print(error)
             // показать алерт об ошибке
-        case .data(let nft):
+        case .data:
             print("data")
             getTotalInfo()
             view?.displayTable()
@@ -65,18 +65,24 @@ class CartPresenter: NSObject {
 
     private func getNfts() {
         guard let orderItems else { return }
+        let dispatchGroup = DispatchGroup()
         nftsInCart = []
         for id in orderItems.nfts {
+            dispatchGroup.enter()
             interactor.getNFTByID(id: id) { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case .success(let nft):
                     nftsInCart.append(nft)
-                    state = .data(nftsInCart)
                 case .failure(let error):
                     state = .failed(error)
                 }
+                dispatchGroup.leave()
             }
+        }
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self else { return }
+            state = .data
         }
     }
 
