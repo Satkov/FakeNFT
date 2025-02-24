@@ -546,6 +546,7 @@
 				0CFCB7402A78002A0009A829 /* ExamplePutService.swift in Sources */,
 				915447472D64F31900CBED07 /* TableHeaderTitleView.swift in Sources */,
 				91A05D432D6C8AF200247FEA /* Localization.swift in Sources */,
+				F3DE947D2D6606D3009C36AE /* RatingView.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				91263F6E2D63911400C91AAC /* CartTableViewCell.swift in Sources */,
 				0CF2C2DB2A783C1B00FDC837 /* LoadingView.swift in Sources */,
