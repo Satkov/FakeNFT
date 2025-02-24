@@ -14,7 +14,7 @@ class CartInteractor: CartInteractorProtocol {
     }
 
     func getNFTInsideCart(completion: @escaping OrderCompletion) {
-        serviceAssemply.nftService.loadCart() { result in
+        serviceAssemply.nftService.loadCart { result in
             switch result {
             case .success(let order):
                 completion(.success(order))

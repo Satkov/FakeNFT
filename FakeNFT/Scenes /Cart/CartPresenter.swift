@@ -1,9 +1,11 @@
 import UIKit
 
+// MARK: - Protocol
 protocol CartPresenterProtocol: AnyObject, UITableViewDelegate, UITableViewDataSource {
     func showFilters()
 }
 
+// MARK: - Enums
 enum CartState {
     case initial, loading, failed(Error), data
 }
@@ -12,62 +14,61 @@ enum CartFilterChoice: String {
     case price, name, rating, none
 }
 
+// MARK: - Presenter
 final class CartPresenter: NSObject {
-    weak var view: CartViewProtocol? {
-        didSet {
-            getOrder()
-        }
-    }
+
+    // MARK: - Properties
+    weak var view: CartViewProtocol?
     var router: CartRouterProtocol
     var interactor: CartInteractorProtocol
 
     private var orderItems: Order?
     private var nftsInCart: [Nft] = []
-    private var state: CartState = CartState.initial {
-        didSet {
-            stateDidChanged()
-        }
+    private var state: CartState = .initial {
+        didSet { stateDidChanged() }
     }
 
-    init(
-        interactor: CartInteractorProtocol,
-        router: CartRouterProtocol
-    ) {
+    // MARK: - Init
+    init(interactor: CartInteractorProtocol, router: CartRouterProtocol) {
         self.interactor = interactor
         self.router = router
     }
 
+    func attachView(_ view: CartViewProtocol) {
+        self.view = view
+        getOrder()
+    }
+
+    // MARK: - State Management
     private func stateDidChanged() {
         switch state {
         case .initial:
             assertionFailure("can't move to initial state")
         case .loading:
-            print("loading")
             view?.showLoader()
         case .failed(let error):
             print(error)
-            // показать алерт об ошибке
             view?.hideLoader()
+            // TODO: show alert
         case .data:
-            print("data")
             view?.hideLoader()
             let choice = loadLastFilterChoice()
             filterNftBy(filterChoice: choice)
-            getTotalInfo()
-            view?.displayTable()
+            showNfts()
         }
     }
 
+    // MARK: - Fetching Data
     private func getOrder() {
         state = .loading
-        interactor.getNFTInsideCart() { [weak self] result in
+        interactor.getNFTInsideCart { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let order):
-                orderItems = order
-                getNfts()
+                self.orderItems = order
+                self.getNfts()
             case .failure(let error):
-                state = .failed(error)
+                self.state = .failed(error)
             }
         }
     }
@@ -76,40 +77,42 @@ final class CartPresenter: NSObject {
         guard let orderItems else { return }
         let dispatchGroup = DispatchGroup()
         nftsInCart = []
+
         for id in orderItems.nfts {
             dispatchGroup.enter()
             interactor.getNFTByID(id: id) { [weak self] result in
+                defer { dispatchGroup.leave() } // ✅ Гарантируем вызов leave()
                 guard let self else { return }
+
                 switch result {
                 case .success(let nft):
-                    nftsInCart.append(nft)
+                    self.nftsInCart.append(nft)
                 case .failure(let error):
-                    state = .failed(error)
+                    self.state = .failed(error)
                 }
-                dispatchGroup.leave()
             }
         }
+
         dispatchGroup.notify(queue: .main) { [weak self] in
-            guard let self else { return }
-            state = .data
+            self?.state = .data
         }
     }
 
-    private func getTotalInfo() {
-        var totalPrice: Float = 0
-        var numberOfItems = 0
-        nftsInCart.forEach() { item in
-            numberOfItems += 1
-            totalPrice += item.price
-        }
-        view?.fillPaymentBlockView(
+    // MARK: - UI Updates
+    private func showNfts() {
+        let totalPrice = nftsInCart.reduce(0) { $0 + $1.price }
+        let numberOfItems = nftsInCart.count
+
+        view?.showNfts(
             totalPrice: totalPrice.toString(),
             numberOfItems: numberOfItems.toString()
         )
     }
 
+    // MARK: - Filtering
     private func filterNftBy(filterChoice: CartFilterChoice) {
         saveFilterChoice(filterChoice)
+
         switch filterChoice {
         case .price:
             NftFilters.filterByPrice(nft: &nftsInCart)
@@ -118,11 +121,13 @@ final class CartPresenter: NSObject {
         case .rating:
             NftFilters.filterByRating(nft: &nftsInCart)
         case .none:
-            return
+            break
         }
+
         view?.reloadTable()
     }
 
+    // MARK: - Saving/Loading Filters
     private func saveFilterChoice(_ choice: CartFilterChoice) {
         UserDefaults.standard.set(choice.rawValue, forKey: "CartFilter")
     }
@@ -136,53 +141,44 @@ final class CartPresenter: NSObject {
     }
 }
 
+// MARK: - CartPresenterProtocol
 extension CartPresenter: CartPresenterProtocol {
     func showFilters() {
         let buttons = [
             FilterMenuButtonModel(title: Localization.filterChoicePrice) { [weak self] in
-                guard let self else { return }
-                filterNftBy(filterChoice: .price)
+                self?.filterNftBy(filterChoice: .price)
             },
             FilterMenuButtonModel(title: Localization.filterChoiceRating) { [weak self] in
-                guard let self else { return }
-                filterNftBy(filterChoice: .rating)
+                self?.filterNftBy(filterChoice: .rating)
             },
             FilterMenuButtonModel(title: Localization.filterChoiceName) { [weak self] in
-                guard let self else { return }
-                filterNftBy(filterChoice: .name)
-            },
+                self?.filterNftBy(filterChoice: .name)
+            }
         ]
         let filterVC = FilterViewController(buttons: buttons)
         router.showCartFilters(filterVC: filterVC)
     }
 }
 
-
+// MARK: - UITableViewDelegate
 extension CartPresenter: UITableViewDelegate {
-    func tableView(
-        _ tableView: UITableView,
-        heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
     }
 }
 
+// MARK: - UITableViewDataSource
 extension CartPresenter: UITableViewDataSource {
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        nftsInCart.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return nftsInCart.count
     }
-    
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: CartTableViewCell.defaultReuseIdentifier,
             for: indexPath
-        ) as! CartTableViewCell
+        ) as? CartTableViewCell
+        guard let cell else { return UITableViewCell() }
 
         let nft = nftsInCart[indexPath.row]
         cell.configurate(

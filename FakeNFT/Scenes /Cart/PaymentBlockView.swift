@@ -1,6 +1,5 @@
 import UIKit
 
-
 final class PaymentBlockView: UIView {
     let payButton: UIButton = {
         let button = UIButton()
@@ -29,11 +28,11 @@ final class PaymentBlockView: UIView {
         setupConstraints()
         backgroundColor = UIColor.lightGray
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configurate(totalPrice: String, numberOfItems: String) {
         nftCounterLabel.text = "\(numberOfItems) NFT"
         totalPriceLabel.text = "\(totalPrice) ETH"

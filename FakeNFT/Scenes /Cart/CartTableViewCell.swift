@@ -40,7 +40,6 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return button
     }()
 
-
     func configurate(
         imageURL: String,
         name: String,
@@ -119,4 +118,3 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         ])
     }
 }
-

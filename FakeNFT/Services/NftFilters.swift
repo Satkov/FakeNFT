@@ -18,6 +18,4 @@ final class NftFilters: NftFiltersProtocol {
     static func filterByName(nft: inout [Nft]) {
         nft.sort { $0.name > $1.name}
     }
-
-
 }

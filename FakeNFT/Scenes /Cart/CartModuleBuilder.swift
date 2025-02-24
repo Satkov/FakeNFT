@@ -6,7 +6,7 @@ class CartModuleBuilder {
         let router = CartRouter()
         let presenter = CartPresenter(interactor: interactor, router: router)
         let viewController = CartViewController()
-        presenter.view  = viewController
+        presenter.attachView(viewController)
         viewController.presenter = presenter
         interactor.presenter = presenter
         router.viewController = viewController

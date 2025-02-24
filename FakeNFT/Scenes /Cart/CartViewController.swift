@@ -1,19 +1,21 @@
 import UIKit
 
+// MARK: - Protocol
 protocol CartViewProtocol: AnyObject {
-    func fillPaymentBlockView(totalPrice: String, numberOfItems: String)
-    func displayTable()
+    func showNfts(totalPrice: String, numberOfItems: String)
     func reloadTable()
     func showLoader()
     func hideLoader()
 }
 
+// MARK: - CartViewController
 class CartViewController: UIViewController {
-    // MARK: - Public
+
+    // MARK: - Public Properties
     var presenter: CartPresenterProtocol?
 
-    // MARK: - Private
-    private let tableView: UITableView = {
+    // MARK: - UI Elements
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CartTableViewCell.self)
         tableView.separatorStyle = .none
@@ -21,7 +23,7 @@ class CartViewController: UIViewController {
         return tableView
     }()
 
-    private let activityIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.hidesWhenStopped = true
         return indicator
@@ -29,41 +31,33 @@ class CartViewController: UIViewController {
 
     private let paymentBlockView = PaymentBlockView()
 
-    // MARK: - View lifecycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        setupUI()
     }
+}
 
-    private func initialize() {
-        setupActivityIndicator()
+// MARK: - Private Methods
+private extension CartViewController {
+    func setupUI() {
         setupNavBar()
         setupTableView()
+        setupActivityIndicator()
         setupConstraints()
         navigationController?.setNavigationBarHidden(true, animated: false)
         paymentBlockView.isHidden = true
     }
-}
-
-// MARK: - Private functions
-private extension CartViewController {
-    func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
 
     func setupNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        let filterButton = UIBarButtonItem(
             image: UIImage(named: "filterIcon"),
             style: .plain,
             target: self,
             action: #selector(filterButtonTapped)
         )
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.projectBlack
+        filterButton.tintColor = UIColor.projectBlack
+        navigationItem.rightBarButtonItem = filterButton
     }
 
     func setupTableView() {
@@ -71,21 +65,26 @@ private extension CartViewController {
         tableView.dataSource = presenter
     }
 
-    func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        paymentBlockView.translatesAutoresizingMaskIntoConstraints = false
+    func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    }
 
-        view.addSubview(tableView)
-        view.addSubview(paymentBlockView)
+    func setupConstraints() {
+        [tableView, paymentBlockView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
 
         NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -76)
-        ])
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -76),
 
-        NSLayoutConstraint.activate([
             paymentBlockView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
             paymentBlockView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             paymentBlockView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -99,22 +98,17 @@ private extension CartViewController {
     }
 }
 
-// MARK: - CartViewControllerViewProtocol
+// MARK: - CartViewProtocol
 extension CartViewController: CartViewProtocol {
-    func fillPaymentBlockView(
-        totalPrice: String,
-        numberOfItems: String) {
+
+    func showNfts(totalPrice: String, numberOfItems: String) {
         paymentBlockView.configurate(
             totalPrice: totalPrice,
             numberOfItems: numberOfItems
         )
-    }
-
-    func displayTable() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         tableView.isHidden = false
         paymentBlockView.isHidden = false
-        tableView.reloadData()
     }
 
     func reloadTable() {
@@ -122,17 +116,15 @@ extension CartViewController: CartViewProtocol {
     }
 
     func showLoader() {
-        print(1)
         DispatchQueue.main.async {
             self.activityIndicator.startAnimating()
-            self.activityIndicator.isHidden = false
+            self.view.bringSubviewToFront(self.activityIndicator)
         }
     }
 
     func hideLoader() {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
         }
     }
 }
