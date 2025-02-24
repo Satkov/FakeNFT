@@ -18,7 +18,7 @@ enum CartFilterChoice: String {
 final class CartPresenter: NSObject {
 
     // MARK: - Properties
-    weak var view: CartViewProtocol?
+    private weak var view: CartViewProtocol?
     var router: CartRouterProtocol
     var interactor: CartInteractorProtocol
 

@@ -2,7 +2,7 @@ protocol CartRouterProtocol {
     func showCartFilters(filterVC: FilterViewController)
 }
 
-class CartRouter: CartRouterProtocol {
+final class CartRouter: CartRouterProtocol {
     weak var viewController: CartViewController?
 
     func showCartFilters(filterVC: FilterViewController) {

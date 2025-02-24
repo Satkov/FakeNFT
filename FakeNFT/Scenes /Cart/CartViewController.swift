@@ -9,7 +9,7 @@ protocol CartViewProtocol: AnyObject {
 }
 
 // MARK: - CartViewController
-class CartViewController: UIViewController {
+final class CartViewController: UIViewController {
 
     // MARK: - Public Properties
     var presenter: CartPresenterProtocol?

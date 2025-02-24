@@ -1,6 +1,6 @@
 import UIKit
 
-class CartModuleBuilder {
+final class CartModuleBuilder {
     static func build(servicesAssembly: ServicesAssembly) -> CartViewController {
         let interactor = CartInteractor(serviceAssemply: servicesAssembly)
         let router = CartRouter()

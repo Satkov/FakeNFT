@@ -3,7 +3,7 @@ protocol CartInteractorProtocol: AnyObject {
     func getNFTByID(id: String, completion: @escaping NftCompletion)
 }
 
-class CartInteractor: CartInteractorProtocol {
+final class CartInteractor: CartInteractorProtocol {
     weak var presenter: CartPresenterProtocol?
     private let serviceAssemply: ServicesAssembly
 
