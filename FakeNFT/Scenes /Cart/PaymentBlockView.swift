@@ -1,7 +1,7 @@
 import UIKit
 
 final class PaymentBlockView: UIView {
-    let payButton: UIButton = {
+    private let payButton: UIButton = {
         let button = UIButton()
         button.setTitle("К оплате", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
@@ -10,13 +10,13 @@ final class PaymentBlockView: UIView {
         return button
     }()
 
-    let nftCounterLabel: UILabel = {
+    private let nftCounterLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         return label
     }()
 
-    let totalPriceLabel: UILabel = {
+    private let totalPriceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.textColor = UIColor.greenUniversal
