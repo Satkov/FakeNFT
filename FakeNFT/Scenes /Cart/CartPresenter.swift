@@ -8,12 +8,16 @@ enum CartState {
     case initial, loading, failed(Error), data
 }
 
-enum CartFilterChoice {
-    case price, name, rating
+enum CartFilterChoice: String {
+    case price, name, rating, none
 }
 
-class CartPresenter: NSObject {
-    weak var view: CartViewProtocol?
+final class CartPresenter: NSObject {
+    weak var view: CartViewProtocol? {
+        didSet {
+            getOrder()
+        }
+    }
     var router: CartRouterProtocol
     var interactor: CartInteractorProtocol
 
@@ -31,8 +35,6 @@ class CartPresenter: NSObject {
     ) {
         self.interactor = interactor
         self.router = router
-        super.init()
-        getOrder()
     }
 
     private func stateDidChanged() {
@@ -41,19 +43,18 @@ class CartPresenter: NSObject {
             assertionFailure("can't move to initial state")
         case .loading:
             print("loading")
-            // показать лоудер
+            view?.showLoader()
         case .failed(let error):
             print(error)
             // показать алерт об ошибке
+            view?.hideLoader()
         case .data:
             print("data")
+            view?.hideLoader()
+            let choice = loadLastFilterChoice()
+            filterNftBy(filterChoice: choice)
             getTotalInfo()
             view?.displayTable()
-            
-            // отфильтровать
-            // перезагрузить таблицу
-            // сказать контроллеру отрисовать таблицу
-            // посчитать общую стоимость нфт в корзине
         }
     }
 
@@ -107,7 +108,8 @@ class CartPresenter: NSObject {
         )
     }
 
-    func filterNftBy(filterChoice: CartFilterChoice) {
+    private func filterNftBy(filterChoice: CartFilterChoice) {
+        saveFilterChoice(filterChoice)
         switch filterChoice {
         case .price:
             NftFilters.filterByPrice(nft: &nftsInCart)
@@ -115,26 +117,40 @@ class CartPresenter: NSObject {
             NftFilters.filterByName(nft: &nftsInCart)
         case .rating:
             NftFilters.filterByRating(nft: &nftsInCart)
+        case .none:
+            return
         }
         view?.reloadTable()
+    }
+
+    private func saveFilterChoice(_ choice: CartFilterChoice) {
+        UserDefaults.standard.set(choice.rawValue, forKey: "CartFilter")
+    }
+
+    private func loadLastFilterChoice() -> CartFilterChoice {
+        guard let rawValue = UserDefaults.standard.string(forKey: "CartFilter"),
+              let choice = CartFilterChoice(rawValue: rawValue) else {
+            return .none
+        }
+        return choice
     }
 }
 
 extension CartPresenter: CartPresenterProtocol {
     func showFilters() {
         let buttons = [
-            FilterMenuButtonModel(title: Localization.filterChoicePrice, action: { [weak self] in
+            FilterMenuButtonModel(title: Localization.filterChoicePrice) { [weak self] in
                 guard let self else { return }
                 filterNftBy(filterChoice: .price)
-            }),
-            FilterMenuButtonModel(title: Localization.filterChoiceRating, action: { [weak self] in
+            },
+            FilterMenuButtonModel(title: Localization.filterChoiceRating) { [weak self] in
                 guard let self else { return }
                 filterNftBy(filterChoice: .rating)
-            }),
-            FilterMenuButtonModel(title: Localization.filterChoiceName, action: { [weak self] in
+            },
+            FilterMenuButtonModel(title: Localization.filterChoiceName) { [weak self] in
                 guard let self else { return }
                 filterNftBy(filterChoice: .name)
-            }),
+            },
         ]
         let filterVC = FilterViewController(buttons: buttons)
         router.showCartFilters(filterVC: filterVC)

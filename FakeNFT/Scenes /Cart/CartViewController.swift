@@ -4,6 +4,8 @@ protocol CartViewProtocol: AnyObject {
     func fillPaymentBlockView(totalPrice: String, numberOfItems: String)
     func displayTable()
     func reloadTable()
+    func showLoader()
+    func hideLoader()
 }
 
 class CartViewController: UIViewController {
@@ -15,7 +17,14 @@ class CartViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(CartTableViewCell.self)
         tableView.separatorStyle = .none
+        tableView.isHidden = true
         return tableView
+    }()
+
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
 
     private let paymentBlockView = PaymentBlockView()
@@ -27,17 +36,26 @@ class CartViewController: UIViewController {
     }
 
     private func initialize() {
+        setupActivityIndicator()
         setupNavBar()
         setupTableView()
         setupConstraints()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        tableView.isHidden = true
         paymentBlockView.isHidden = true
     }
 }
 
 // MARK: - Private functions
 private extension CartViewController {
+    func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+
     func setupNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "filterIcon"),
@@ -101,5 +119,20 @@ extension CartViewController: CartViewProtocol {
 
     func reloadTable() {
         tableView.reloadData()
+    }
+
+    func showLoader() {
+        print(1)
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+            self.activityIndicator.isHidden = false
+        }
+    }
+
+    func hideLoader() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+        }
     }
 }
