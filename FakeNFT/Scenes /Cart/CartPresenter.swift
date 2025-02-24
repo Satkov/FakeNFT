@@ -1,10 +1,15 @@
 import UIKit
 
 protocol CartPresenterProtocol: AnyObject, UITableViewDelegate, UITableViewDataSource {
+    func showFilters()
 }
 
 enum CartState {
     case initial, loading, failed(Error), data
+}
+
+enum CartFilterChoice {
+    case price, name, rating
 }
 
 class CartPresenter: NSObject {
@@ -20,7 +25,10 @@ class CartPresenter: NSObject {
         }
     }
 
-    init(interactor: CartInteractorProtocol, router: CartRouterProtocol) {
+    init(
+        interactor: CartInteractorProtocol,
+        router: CartRouterProtocol
+    ) {
         self.interactor = interactor
         self.router = router
         super.init()
@@ -98,9 +106,39 @@ class CartPresenter: NSObject {
             numberOfItems: numberOfItems.toString()
         )
     }
+
+    func filterNftBy(filterChoice: CartFilterChoice) {
+        switch filterChoice {
+        case .price:
+            NftFilters.filterByPrice(nft: &nftsInCart)
+        case .name:
+            NftFilters.filterByName(nft: &nftsInCart)
+        case .rating:
+            NftFilters.filterByRating(nft: &nftsInCart)
+        }
+        view?.reloadTable()
+    }
 }
 
 extension CartPresenter: CartPresenterProtocol {
+    func showFilters() {
+        let buttons = [
+            FilterMenuButtonModel(title: "По цене", action: { [weak self] in
+                guard let self else { return }
+                filterNftBy(filterChoice: .price)
+            }),
+            FilterMenuButtonModel(title: "По рейтингу", action: { [weak self] in
+                guard let self else { return }
+                filterNftBy(filterChoice: .rating)
+            }),
+            FilterMenuButtonModel(title: "По названию", action: { [weak self] in
+                guard let self else { return }
+                filterNftBy(filterChoice: .name)
+            }),
+        ]
+        let filterVC = FilterViewController(buttons: buttons)
+        router.showCartFilters(filterVC: filterVC)
+    }
 }
 
 

@@ -3,6 +3,7 @@ import UIKit
 protocol CartViewProtocol: AnyObject {
     func fillPaymentBlockView(totalPrice: String, numberOfItems: String)
     func displayTable()
+    func reloadTable()
 }
 
 class CartViewController: UIViewController {
@@ -10,7 +11,6 @@ class CartViewController: UIViewController {
     var presenter: CartPresenterProtocol?
 
     // MARK: - Private
-    private let servicesAssembly: ServicesAssembly
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CartTableViewCell.self)
@@ -19,15 +19,6 @@ class CartViewController: UIViewController {
     }()
 
     private let paymentBlockView = PaymentBlockView()
-
-    init(servicesAssembly: ServicesAssembly) {
-        self.servicesAssembly = servicesAssembly
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -41,6 +32,7 @@ class CartViewController: UIViewController {
         setupConstraints()
         navigationController?.setNavigationBarHidden(true, animated: false)
         tableView.isHidden = true
+        paymentBlockView.isHidden = true
     }
 }
 
@@ -85,14 +77,7 @@ private extension CartViewController {
 
     @objc
     func filterButtonTapped() {
-        let buttons = [
-            FilterMenuButtonModel(title: "По цене", action: { print("По цене") }),
-            FilterMenuButtonModel(title: "По рейтингу", action: { print("По рейтингу") }),
-            FilterMenuButtonModel(title: "По названию", action: { print("По названию") })
-        ]
-        let vc = FilterViewController(buttons: buttons)
-        vc.modalPresentationStyle = .overFullScreen
-        present(vc, animated: false)
+        presenter?.showFilters()
     }
 }
 
@@ -110,7 +95,11 @@ extension CartViewController: CartViewProtocol {
     func displayTable() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         tableView.isHidden = false
+        paymentBlockView.isHidden = false
         tableView.reloadData()
     }
 
+    func reloadTable() {
+        tableView.reloadData()
+    }
 }
