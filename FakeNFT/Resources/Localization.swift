@@ -7,7 +7,6 @@ enum Localization {
 
     // MARK: - Tab Bar
     static let catalogTab = localized("Tab.catalog")
-    static let cartTab = localized("Tab.cart")
 
     // MARK: - Catalog
     static let openNft = localized("Catalog.openNft")
