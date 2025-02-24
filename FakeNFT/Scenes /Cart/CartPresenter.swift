@@ -123,15 +123,15 @@ class CartPresenter: NSObject {
 extension CartPresenter: CartPresenterProtocol {
     func showFilters() {
         let buttons = [
-            FilterMenuButtonModel(title: "По цене", action: { [weak self] in
+            FilterMenuButtonModel(title: Localization.filterChoicePrice, action: { [weak self] in
                 guard let self else { return }
                 filterNftBy(filterChoice: .price)
             }),
-            FilterMenuButtonModel(title: "По рейтингу", action: { [weak self] in
+            FilterMenuButtonModel(title: Localization.filterChoiceRating, action: { [weak self] in
                 guard let self else { return }
                 filterNftBy(filterChoice: .rating)
             }),
-            FilterMenuButtonModel(title: "По названию", action: { [weak self] in
+            FilterMenuButtonModel(title: Localization.filterChoiceName, action: { [weak self] in
                 guard let self else { return }
                 filterNftBy(filterChoice: .name)
             }),
