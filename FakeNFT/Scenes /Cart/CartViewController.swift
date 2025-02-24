@@ -34,6 +34,7 @@ final class CartViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+//        presenter?.showPayment()
         setupUI()
     }
 }
@@ -56,6 +57,8 @@ private extension CartViewController {
             target: self,
             action: #selector(filterButtonTapped)
         )
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = UIColor.projectBlack
         filterButton.tintColor = UIColor.projectBlack
         navigationItem.rightBarButtonItem = filterButton
     }

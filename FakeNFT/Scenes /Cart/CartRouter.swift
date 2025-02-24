@@ -13,6 +13,7 @@ final class CartRouter: CartRouterProtocol {
 
     func showPaymentPage() {
         let paymentVC = PaymentPageModuleBuilder.build()
+        paymentVC.hidesBottomBarWhenPushed = true
         viewController?.navigationController?.pushViewController(paymentVC, animated: true)
     }
 }

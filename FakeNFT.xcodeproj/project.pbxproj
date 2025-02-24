@@ -56,6 +56,7 @@
 		91A05D4D2D6D001B00247FEA /* PaymentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */; };
 		91A05D4E2D6D001B00247FEA /* PaymentPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D462D6D001B00247FEA /* PaymentPageInteractor.swift */; };
 		91A05D4F2D6D001B00247FEA /* PaymentPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D482D6D001B00247FEA /* PaymentPagePresenter.swift */; };
+		91A05D512D6D090F00247FEA /* PayBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D502D6D090F00247FEA /* PayBlockView.swift */; };
 		E1A1B9DA2AA01CE400C3AFBC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A1B9D92AA01CE400C3AFBC /* TabBarController.swift */; };
 		E1CD40DC2A96BECC00BE7FE8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1CD40DB2A96BECC00BE7FE8 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -130,6 +131,7 @@
 		91A05D482D6D001B00247FEA /* PaymentPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPagePresenter.swift; sourceTree = "<group>"; };
 		91A05D492D6D001B00247FEA /* PaymentPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPageRouter.swift; sourceTree = "<group>"; };
 		91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPageViewController.swift; sourceTree = "<group>"; };
+		91A05D502D6D090F00247FEA /* PayBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBlockView.swift; sourceTree = "<group>"; };
 		E1A1B9D92AA01CE400C3AFBC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E1CD40D92A96BE7D00BE7FE8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E1CD40DB2A96BECC00BE7FE8 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				91A05D482D6D001B00247FEA /* PaymentPagePresenter.swift */,
 				91A05D492D6D001B00247FEA /* PaymentPageRouter.swift */,
 				91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */,
+				91A05D502D6D090F00247FEA /* PayBlockView.swift */,
 			);
 			path = PaymentPage;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				0CFCB7422A78013E0009A829 /* Nft.swift in Sources */,
 				0CF2C2DD2A783CE600FDC837 /* ErrorView.swift in Sources */,
 				91513F422D6B38D10093A10E /* Order.swift in Sources */,
+				91A05D512D6D090F00247FEA /* PayBlockView.swift in Sources */,
 				0CFCB7402A78002A0009A829 /* ExamplePutService.swift in Sources */,
 				915447472D64F31900CBED07 /* TableHeaderTitleView.swift in Sources */,
 				91A05D432D6C8AF200247FEA /* Localization.swift in Sources */,
