@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Protocol
 protocol CartPresenterProtocol: AnyObject, UITableViewDelegate, UITableViewDataSource {
     func showFilters()
+    func showPayment()
 }
 
 // MARK: - Enums
@@ -157,6 +158,10 @@ extension CartPresenter: CartPresenterProtocol {
         ]
         let filterVC = FilterViewController(buttons: buttons)
         router.showCartFilters(filterVC: filterVC)
+    }
+
+    func showPayment() {
+        router.showPaymentPage()
     }
 }
 

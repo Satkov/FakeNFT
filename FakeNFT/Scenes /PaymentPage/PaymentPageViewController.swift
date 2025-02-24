@@ -17,6 +17,7 @@ class PaymentPageViewController: UIViewController {
 // MARK: - Private functions
 private extension PaymentPageViewController {
     func initialize() {
+        view.backgroundColor = .blue
     }
 }
 

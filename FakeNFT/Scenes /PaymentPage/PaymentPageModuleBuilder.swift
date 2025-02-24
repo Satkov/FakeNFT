@@ -5,8 +5,7 @@ class PaymentPageModuleBuilder {
         let interactor = PaymentPageInteractor()
         let router = PaymentPageRouter()
         let presenter = PaymentPagePresenter(interactor: interactor, router: router)
-        let storyboard = UIStoryboard(name: "PaymentPage", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PaymentPage") as! PaymentPageViewController
+        let viewController = PaymentPageViewController()
         presenter.view  = viewController
         viewController.presenter = presenter
         interactor.presenter = presenter

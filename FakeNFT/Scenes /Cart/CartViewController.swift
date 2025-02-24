@@ -105,7 +105,9 @@ extension CartViewController: CartViewProtocol {
         paymentBlockView.configurate(
             totalPrice: totalPrice,
             numberOfItems: numberOfItems
-        )
+        ) { [weak self] in
+            self?.presenter?.showPayment()
+        }
         navigationController?.setNavigationBarHidden(false, animated: false)
         tableView.isHidden = false
         paymentBlockView.isHidden = false
