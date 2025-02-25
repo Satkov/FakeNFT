@@ -22,7 +22,7 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let cart = CartModuleBuilder.build(servicesAssembly: servicesAssembly)
+        let cart = CartModuleFactory.build(servicesAssembly: servicesAssembly)
         let cartNavController = UINavigationController(rootViewController: cart)
         cartNavController.tabBarItem = cartTabBarItem
 

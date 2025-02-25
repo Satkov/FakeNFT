@@ -102,7 +102,7 @@ private extension CartViewController {
 extension CartViewController: CartViewProtocol {
 
     func showNfts(totalPrice: String, numberOfItems: String) {
-        paymentBlockView.configurate(
+        paymentBlockView.configure(
             totalPrice: totalPrice,
             numberOfItems: numberOfItems
         )

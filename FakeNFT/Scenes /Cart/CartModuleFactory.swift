@@ -1,11 +1,12 @@
 import UIKit
 
-final class CartModuleBuilder {
+struct CartModuleFactory {
     static func build(servicesAssembly: ServicesAssembly) -> CartViewController {
-        let interactor = CartInteractor(serviceAssemply: servicesAssembly)
+        let interactor = CartInteractor(serviceAssembly: servicesAssembly)
         let router = CartRouter()
         let presenter = CartPresenter(interactor: interactor, router: router)
         let viewController = CartViewController()
+
         presenter.attachView(viewController)
         viewController.presenter = presenter
         interactor.presenter = presenter
