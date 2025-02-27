@@ -1,23 +1,23 @@
 import UIKit
 
 final class FilterViewController: UIViewController {
-    private lazy var buttonsTableView: UITableView = {
+    private let buttonsTableView: UITableView = {
         let tableView = UITableView()
         tableView.layer.cornerRadius = 13
         return tableView
     }()
 
-    private lazy var exitButton: UIButton = {
+    private let exitButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "SF Pro Semibold", size: 20)
-        button.setTitleColor(UIColor.filterMenuText, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.layer.cornerRadius = 13
         return button
     }()
 
-    private lazy var backgroundView: UIView = {
+    private let backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.projectBlack.withAlphaComponent(0)
         return view
@@ -43,7 +43,7 @@ final class FilterViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        animateAppearance()
+        animateAppearence()
     }
 
     private func setupTableView() {
@@ -73,19 +73,22 @@ final class FilterViewController: UIViewController {
         prepareForAnimation()
     }
 
+    // MARK: - Установка ограничений (Constraints)
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-
+            // Фон
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
+            // Кнопка "Закрыть"
             exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32),
             exitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             exitButton.heightAnchor.constraint(equalToConstant: 60),
 
+            // Таблица
             buttonsTableView.bottomAnchor.constraint(equalTo: exitButton.topAnchor, constant: -8),
             buttonsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             buttonsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
@@ -93,6 +96,7 @@ final class FilterViewController: UIViewController {
         ])
     }
 
+    // MARK: - Подготовка к анимации появления
     private func prepareForAnimation() {
         buttonsTableView.transform = CGAffineTransform(translationX: 0, y: 300)
         exitButton.transform = CGAffineTransform(translationX: 0, y: 300)
@@ -100,7 +104,7 @@ final class FilterViewController: UIViewController {
         exitButton.alpha = 0
     }
 
-    private func animateAppearance() {
+    private func animateAppearence() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.backgroundView.backgroundColor = UIColor.projectBlack.withAlphaComponent(0.5)
             self.buttonsTableView.transform = .identity
@@ -120,8 +124,8 @@ final class FilterViewController: UIViewController {
                 self.buttonsTableView.alpha = 0
                 self.exitButton.alpha = 0
             },
-            completion: { [weak self] _ in
-                self?.dismiss(animated: false)
+            completion: { _ in
+                self.dismiss(animated: false)
             }
         )
     }
@@ -168,7 +172,7 @@ extension FilterViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        buttons.count
+        return buttons.count
     }
 
     func tableView(
@@ -179,8 +183,8 @@ extension FilterViewController: UITableViewDataSource {
         let buttonModel = buttons[indexPath.row]
         cell.textLabel?.text = buttonModel.title
         cell.textLabel?.textAlignment = .center
-        cell.textLabel?.font = UIFont(name: "SF Pro Regular", size: 20)
-        cell.textLabel?.textColor = UIColor.filterMenuText
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        cell.textLabel?.textColor = .systemBlue
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         cell.selectionStyle = .none
         cell.backgroundColor = .clear

@@ -1,18 +1,18 @@
 import UIKit
 
 final class TableHeaderTitleView: UIView {
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = UIFont(name: "SF Pro Regular", size: 13)
+        titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = UIColor.projectGray
+        titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         return titleLabel
     }()
 
-    private lazy var separatorView: UIView = {
+    private let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.filterMenuBorder
+        view.backgroundColor = UIColor(hexString: "#545458A6").withAlphaComponent(0.4)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
