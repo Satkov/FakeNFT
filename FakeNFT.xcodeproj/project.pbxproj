@@ -34,7 +34,7 @@
 		3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */; };
 		558E39E72C68CE0A00FB86AC /* NftService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558E39E62C68CE0900FB86AC /* NftService.swift */; };
 		91263F602D635FB000C91AAC /* CartInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F5B2D635FB000C91AAC /* CartInteractor.swift */; };
-		91263F612D635FB000C91AAC /* CartModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F5C2D635FB000C91AAC /* CartModuleBuilder.swift */; };
+		91263F612D635FB000C91AAC /* CartModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F5C2D635FB000C91AAC /* CartModuleFactory.swift */; };
 		91263F622D635FB000C91AAC /* CartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F5D2D635FB000C91AAC /* CartPresenter.swift */; };
 		91263F632D635FB000C91AAC /* CartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F5E2D635FB000C91AAC /* CartRouter.swift */; };
 		91263F642D635FB000C91AAC /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F5F2D635FB000C91AAC /* CartViewController.swift */; };
@@ -108,7 +108,7 @@
 		3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatters+Presets.swift"; sourceTree = "<group>"; };
 		558E39E62C68CE0900FB86AC /* NftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftService.swift; sourceTree = "<group>"; };
 		91263F5B2D635FB000C91AAC /* CartInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartInteractor.swift; sourceTree = "<group>"; };
-		91263F5C2D635FB000C91AAC /* CartModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModuleBuilder.swift; sourceTree = "<group>"; };
+		91263F5C2D635FB000C91AAC /* CartModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModuleFactory.swift; sourceTree = "<group>"; };
 		91263F5D2D635FB000C91AAC /* CartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenter.swift; sourceTree = "<group>"; };
 		91263F5E2D635FB000C91AAC /* CartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRouter.swift; sourceTree = "<group>"; };
 		91263F5F2D635FB000C91AAC /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				91263F5B2D635FB000C91AAC /* CartInteractor.swift */,
-				91263F5C2D635FB000C91AAC /* CartModuleBuilder.swift */,
+				91263F5C2D635FB000C91AAC /* CartModuleFactory.swift */,
 				91263F5D2D635FB000C91AAC /* CartPresenter.swift */,
 				91263F5E2D635FB000C91AAC /* CartRouter.swift */,
 				91263F5F2D635FB000C91AAC /* CartViewController.swift */,
@@ -574,7 +574,7 @@
 				915447452D64F2E500CBED07 /* FilterMenuButtonModel.swift in Sources */,
 				91263F602D635FB000C91AAC /* CartInteractor.swift in Sources */,
 				91263F702D63928D00C91AAC /* RatingView.swift in Sources */,
-				91263F612D635FB000C91AAC /* CartModuleBuilder.swift in Sources */,
+				91263F612D635FB000C91AAC /* CartModuleFactory.swift in Sources */,
 				91263F622D635FB000C91AAC /* CartPresenter.swift in Sources */,
 				91263F632D635FB000C91AAC /* CartRouter.swift in Sources */,
 				91263F642D635FB000C91AAC /* CartViewController.swift in Sources */,

@@ -29,6 +29,9 @@ final class PaymentBlockView: UIView {
         super.init(frame: frame)
         setupConstraints()
         backgroundColor = UIColor.lightGray
+        layer.cornerRadius = 12
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] 
+        clipsToBounds = true
     }
 
     required init?(coder: NSCoder) {

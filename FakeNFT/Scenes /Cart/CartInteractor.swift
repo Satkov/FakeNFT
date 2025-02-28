@@ -5,16 +5,16 @@ protocol CartInteractorProtocol: AnyObject {
 
 final class CartInteractor: CartInteractorProtocol {
     weak var presenter: CartPresenterProtocol?
-    private let serviceAssemply: ServicesAssembly
+    private let servicesAssembly: ServicesAssembly
 
     init(
-        serviceAssemply: ServicesAssembly
+        serviceAssembly: ServicesAssembly
     ) {
-        self.serviceAssemply = serviceAssemply
+        self.servicesAssembly = serviceAssembly
     }
 
     func getNFTInsideCart(completion: @escaping OrderCompletion) {
-        serviceAssemply.nftService.loadCart { result in
+        servicesAssembly.nftService.loadCart { result in
             switch result {
             case .success(let order):
                 completion(.success(order))
@@ -25,7 +25,7 @@ final class CartInteractor: CartInteractorProtocol {
     }
 
     func getNFTByID(id: String, completion: @escaping NftCompletion) {
-        serviceAssemply.nftService.getNFTById(id: id) { result in
+        servicesAssembly.nftService.getNFTById(id: id) { result in
             switch result {
             case .success(let nft):
                 completion(.success(nft))

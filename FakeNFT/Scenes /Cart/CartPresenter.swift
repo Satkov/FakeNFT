@@ -82,7 +82,7 @@ final class CartPresenter: NSObject {
         for id in orderItems.nfts {
             dispatchGroup.enter()
             interactor.getNFTByID(id: id) { [weak self] result in
-                defer { dispatchGroup.leave() } // ✅ Гарантируем вызов leave()
+                defer { dispatchGroup.leave() }
                 guard let self else { return }
 
                 switch result {
@@ -186,7 +186,7 @@ extension CartPresenter: UITableViewDataSource {
         guard let cell else { return UITableViewCell() }
 
         let nft = nftsInCart[indexPath.row]
-        cell.configurate(
+        cell.configure(
             imageURL: nft.images[0],
             name: nft.name,
             rating: nft.rating,
