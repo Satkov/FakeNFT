@@ -1,5 +1,6 @@
 protocol CartRouterProtocol {
     func showCartFilters(filterVC: FilterViewController)
+    func showPaymentPage()
 }
 
 final class CartRouter: CartRouterProtocol {
@@ -8,5 +9,11 @@ final class CartRouter: CartRouterProtocol {
     func showCartFilters(filterVC: FilterViewController) {
         filterVC.modalPresentationStyle = .overFullScreen
         viewController?.present(filterVC, animated: false)
+    }
+
+    func showPaymentPage() {
+        let paymentVC = PaymentPageModuleBuilder.build()
+        paymentVC.hidesBottomBarWhenPushed = true
+        viewController?.navigationController?.pushViewController(paymentVC, animated: true)
     }
 }

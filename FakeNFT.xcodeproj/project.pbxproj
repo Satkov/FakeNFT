@@ -51,6 +51,12 @@
 		915447472D64F31900CBED07 /* TableHeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915447462D64F31900CBED07 /* TableHeaderTitleView.swift */; };
 		91A05D3B2D6C820B00247FEA /* NftFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D3A2D6C820B00247FEA /* NftFilters.swift */; };
 		91A05D432D6C8AF200247FEA /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D422D6C8AF200247FEA /* Localization.swift */; };
+		91A05D4B2D6D001B00247FEA /* PaymentPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D492D6D001B00247FEA /* PaymentPageRouter.swift */; };
+		91A05D4C2D6D001B00247FEA /* PaymentPageModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D472D6D001B00247FEA /* PaymentPageModuleBuilder.swift */; };
+		91A05D4D2D6D001B00247FEA /* PaymentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */; };
+		91A05D4E2D6D001B00247FEA /* PaymentPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D462D6D001B00247FEA /* PaymentPageInteractor.swift */; };
+		91A05D4F2D6D001B00247FEA /* PaymentPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D482D6D001B00247FEA /* PaymentPagePresenter.swift */; };
+		91A05D512D6D090F00247FEA /* PayBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A05D502D6D090F00247FEA /* PayBlockView.swift */; };
 		E1A1B9DA2AA01CE400C3AFBC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A1B9D92AA01CE400C3AFBC /* TabBarController.swift */; };
 		E1CD40DC2A96BECC00BE7FE8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1CD40DB2A96BECC00BE7FE8 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -120,6 +126,12 @@
 		91A05D3A2D6C820B00247FEA /* NftFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftFilters.swift; sourceTree = "<group>"; };
 		91A05D422D6C8AF200247FEA /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		91A05D442D6C9FF300247FEA /* Satkov.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Satkov.md; sourceTree = "<group>"; };
+		91A05D462D6D001B00247FEA /* PaymentPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPageInteractor.swift; sourceTree = "<group>"; };
+		91A05D472D6D001B00247FEA /* PaymentPageModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPageModuleBuilder.swift; sourceTree = "<group>"; };
+		91A05D482D6D001B00247FEA /* PaymentPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPagePresenter.swift; sourceTree = "<group>"; };
+		91A05D492D6D001B00247FEA /* PaymentPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPageRouter.swift; sourceTree = "<group>"; };
+		91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPageViewController.swift; sourceTree = "<group>"; };
+		91A05D502D6D090F00247FEA /* PayBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBlockView.swift; sourceTree = "<group>"; };
 		E1A1B9D92AA01CE400C3AFBC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E1CD40D92A96BE7D00BE7FE8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E1CD40DB2A96BECC00BE7FE8 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -267,6 +279,7 @@
 		3F6806C729CBBC5B00B4F915 /* Scenes  */ = {
 			isa = PBXGroup;
 			children = (
+				91A05D452D6CFFBF00247FEA /* PaymentPage */,
 				91263F5A2D635F9C00C91AAC /* Cart */,
 				E1A1B9D82AA01C9700C3AFBC /* TabBarController */,
 				0CF2C2D92A783C1600FDC837 /* Common */,
@@ -346,6 +359,19 @@
 				915447462D64F31900CBED07 /* TableHeaderTitleView.swift */,
 			);
 			path = Filter;
+			sourceTree = "<group>";
+		};
+		91A05D452D6CFFBF00247FEA /* PaymentPage */ = {
+			isa = PBXGroup;
+			children = (
+				91A05D462D6D001B00247FEA /* PaymentPageInteractor.swift */,
+				91A05D472D6D001B00247FEA /* PaymentPageModuleBuilder.swift */,
+				91A05D482D6D001B00247FEA /* PaymentPagePresenter.swift */,
+				91A05D492D6D001B00247FEA /* PaymentPageRouter.swift */,
+				91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */,
+				91A05D502D6D090F00247FEA /* PayBlockView.swift */,
+			);
+			path = PaymentPage;
 			sourceTree = "<group>";
 		};
 		E1A1B9D82AA01C9700C3AFBC /* TabBarController */ = {
@@ -516,9 +542,11 @@
 				0CFCB7422A78013E0009A829 /* Nft.swift in Sources */,
 				0CF2C2DD2A783CE600FDC837 /* ErrorView.swift in Sources */,
 				91513F422D6B38D10093A10E /* Order.swift in Sources */,
+				91A05D512D6D090F00247FEA /* PayBlockView.swift in Sources */,
 				0CFCB7402A78002A0009A829 /* ExamplePutService.swift in Sources */,
 				915447472D64F31900CBED07 /* TableHeaderTitleView.swift in Sources */,
 				91A05D432D6C8AF200247FEA /* Localization.swift in Sources */,
+				F3DE947D2D6606D3009C36AE /* RatingView.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				91263F6E2D63911400C91AAC /* CartTableViewCell.swift in Sources */,
 				0CF2C2DB2A783C1B00FDC837 /* LoadingView.swift in Sources */,
@@ -530,6 +558,11 @@
 				0CFCB74E2A7817DC0009A829 /* NftStorage.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExamplePutRequest.swift in Sources */,
 				915447422D64948500CBED07 /* FilterViewController.swift in Sources */,
+				91A05D4B2D6D001B00247FEA /* PaymentPageRouter.swift in Sources */,
+				91A05D4C2D6D001B00247FEA /* PaymentPageModuleBuilder.swift in Sources */,
+				91A05D4D2D6D001B00247FEA /* PaymentPageViewController.swift in Sources */,
+				91A05D4E2D6D001B00247FEA /* PaymentPageInteractor.swift in Sources */,
+				91A05D4F2D6D001B00247FEA /* PaymentPagePresenter.swift in Sources */,
 				91263F6C2D63865100C91AAC /* PaymentBlockView.swift in Sources */,
 				0CFCB74B2A780EA80009A829 /* UIView+Constraints.swift in Sources */,
 				91513F442D6B42A50093A10E /* NetworkRequests.swift in Sources */,

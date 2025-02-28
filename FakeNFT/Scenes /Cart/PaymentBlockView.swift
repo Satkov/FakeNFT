@@ -23,6 +23,8 @@ final class PaymentBlockView: UIView {
         return label
     }()
 
+    private var buttonAction: (() -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -36,9 +38,20 @@ final class PaymentBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(totalPrice: String, numberOfItems: String) {
+    func configurate(
+        totalPrice: String,
+        numberOfItems: String,
+        buttonAction: @escaping () -> Void
+    ) {
         nftCounterLabel.text = "\(numberOfItems) NFT"
         totalPriceLabel.text = "\(totalPrice) ETH"
+
+        self.buttonAction = buttonAction
+        payButton.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func payButtonTapped() {
+        buttonAction?()
     }
 
     private func setupConstraints() {
