@@ -7,6 +7,6 @@ struct User: Decodable {
     let id: String
     
     var nftCount: Int {
-        return nfts.count
+        nfts.count
     }
 }

@@ -10,12 +10,6 @@ class StatisticViewController: UIViewController, StatisticViewProtocol {
     
     var presenter: StatisticPresenterProtocol?
 
-    private let sortButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "sortButton"), for: .normal)
-        return button
-    }()
-
     private let tableView: UITableView = {
         let tableView = UITableView()
         return tableView
@@ -41,13 +35,28 @@ class StatisticViewController: UIViewController, StatisticViewProtocol {
 
         initialize()
         presenter?.viewDidLoad()
-        sortButton.addTarget(self, action: #selector(sortButtonTapped), for: .touchUpInside)
     }
 
     private func initialize() {
+        setupNavigationBar()
         setupTableView()
         setupConstraints()
     }
+    
+    private func setupNavigationBar() {
+        // Настройка Navigation Bar
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = .white // Устанавливаем белый цвет
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black] // Цвет текста заголовка
+        navigationController?.navigationBar.tintColor = .black // Цвет кнопок (например, кнопки сортировки)
+
+        navigationController?.navigationBar.frame.size.height = 42
+        
+        // Кнопка сортировки в Navigation Bar
+        let sortButton = UIBarButtonItem(image: UIImage(named: "sortButton"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        navigationItem.rightBarButtonItem = sortButton
+    }
+
 
     private func setupTableView() {
         tableView.delegate = presenter
@@ -58,29 +67,25 @@ class StatisticViewController: UIViewController, StatisticViewProtocol {
     }
 
     private func setupConstraints() {
-        sortButton.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(sortButton)
         view.addSubview(tableView)
         view.addSubview(loadingIndicator)
 
         NSLayoutConstraint.activate([
-            sortButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 2),
-            sortButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -9),
-            sortButton.widthAnchor.constraint(equalToConstant: 42),
-            sortButton.heightAnchor.constraint(equalToConstant: 42),
-
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64),
+            // Constraints для таблицы
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20), // 20 между Navigation Bar и таблицей
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 
+            // Constraints для индикатора загрузки
             loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
+
 
     func showLoadingIndicator() {
         loadingIndicator.startAnimating()

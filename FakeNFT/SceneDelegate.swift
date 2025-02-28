@@ -13,10 +13,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         let tabBarController = TabBarController(servicesAssembly: servicesAssembly)
-        let navigationController = UINavigationController(rootViewController: tabBarController) 
-        window.rootViewController = navigationController
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         self.window = window
     }
-
 }
+

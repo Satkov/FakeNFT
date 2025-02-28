@@ -1,6 +1,6 @@
-import UIKit
+import Foundation
 
-class StatisticBuilder {
+final class StatisticBuilder {
     static func build() -> StatisticViewController {
         let networkClient = DefaultNetworkClient()
         let interactor = StatisticInteractor(networkClient: networkClient)

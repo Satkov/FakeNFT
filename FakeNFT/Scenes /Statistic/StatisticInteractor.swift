@@ -12,7 +12,7 @@ protocol StatisticInteractorOutputProtocol: AnyObject {
 
 }
 
-class StatisticInteractor: StatisticInteractorProtocol {
+final class StatisticInteractor: StatisticInteractorProtocol {
     weak var presenter: StatisticInteractorOutputProtocol?
     private let networkClient: NetworkClient
     private var users: [User] = []

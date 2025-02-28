@@ -84,23 +84,14 @@ class StatisticCell: UITableViewCell {
     }
 
     func configure(rank: Int, name: String, avatarURL: String, nftCount: Int) {
-        
         rankLabel.text = "\(rank)"
         nameLabel.text = name
         scoreLabel.text = "\(nftCount)"
-            
+        avatarImageView.image = nil
         if let url = URL(string: avatarURL) {
-            loadImage(from: url)
-        }
-    }
-
-    private func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.avatarImageView.image = image
-                }
+            ImageLoader.shared.loadImage(from: url) { [weak self] image in
+                self?.avatarImageView.image = image
             }
-        }.resume()
+        }
     }
 }

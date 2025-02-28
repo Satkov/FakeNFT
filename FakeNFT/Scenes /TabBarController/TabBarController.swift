@@ -36,8 +36,13 @@ final class TabBarController: UITabBarController {
         let statisticController = StatisticBuilder.build()
         statisticController.tabBarItem = statisticTabBarItem
 
-        viewControllers = [catalogController, statisticController]
-
+        let navigationController = UINavigationController(rootViewController: statisticController)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.barTintColor = .white
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.frame.size.height = 42
+        
+        viewControllers = [catalogController, navigationController]
         view.backgroundColor = .systemBackground
     }
 }
