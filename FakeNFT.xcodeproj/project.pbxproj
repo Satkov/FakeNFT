@@ -42,7 +42,6 @@
 		91263F6E2D63911400C91AAC /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F6D2D63911400C91AAC /* CartTableViewCell.swift */; };
 		91263F702D63928D00C91AAC /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91263F6F2D63928D00C91AAC /* RatingView.swift */; };
 		914311292D730F450010F6E0 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914311282D730F3B0010F6E0 /* WebViewViewController.swift */; };
-		9143112B2D7313F30010F6E0 /* PaymentMethodsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9143112A2D7313F30010F6E0 /* PaymentMethodsCollectionView.swift */; };
 		9143112D2D7314200010F6E0 /* PaymentMethodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9143112C2D7314200010F6E0 /* PaymentMethodCollectionViewCell.swift */; };
 		91513F402D6B35040093A10E /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91513F3F2D6B35040093A10E /* RequestBuilder.swift */; };
 		91513F422D6B38D10093A10E /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91513F412D6B38D10093A10E /* Order.swift */; };
@@ -119,7 +118,6 @@
 		91263F6D2D63911400C91AAC /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		91263F6F2D63928D00C91AAC /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		914311282D730F3B0010F6E0 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
-		9143112A2D7313F30010F6E0 /* PaymentMethodsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodsCollectionView.swift; sourceTree = "<group>"; };
 		9143112C2D7314200010F6E0 /* PaymentMethodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCollectionViewCell.swift; sourceTree = "<group>"; };
 		91513F3F2D6B35040093A10E /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		91513F412D6B38D10093A10E /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 				91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */,
 				91A05D502D6D090F00247FEA /* AgreementAndPayView.swift */,
 				914311282D730F3B0010F6E0 /* WebViewViewController.swift */,
-				9143112A2D7313F30010F6E0 /* PaymentMethodsCollectionView.swift */,
 				9143112C2D7314200010F6E0 /* PaymentMethodCollectionViewCell.swift */,
 			);
 			path = PaymentPage;
@@ -542,7 +539,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9143112B2D7313F30010F6E0 /* PaymentMethodsCollectionView.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				E1A1B9DA2AA01CE400C3AFBC /* TabBarController.swift in Sources */,
 				914311292D730F450010F6E0 /* WebViewViewController.swift in Sources */,

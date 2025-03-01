@@ -6,7 +6,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
         imageView.layer.masksToBounds = true
-            imageView.clipsToBounds = true
+        imageView.clipsToBounds = true
         return imageView
     }()
 
