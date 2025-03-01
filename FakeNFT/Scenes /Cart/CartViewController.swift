@@ -34,8 +34,8 @@ final class CartViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.showPayment()
         setupUI()
+//        presenter?.showPayment()
     }
 }
 
