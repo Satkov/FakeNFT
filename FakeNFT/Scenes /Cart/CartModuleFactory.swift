@@ -3,7 +3,7 @@ import UIKit
 struct CartModuleFactory {
     static func build(servicesAssembly: ServicesAssembly) -> CartViewController {
         let interactor = CartInteractor(serviceAssembly: servicesAssembly)
-        let router = CartRouter()
+        let router = CartRouter(serviceAssembly: servicesAssembly)
         let presenter = CartPresenter(interactor: interactor, router: router)
         let viewController = CartViewController()
 

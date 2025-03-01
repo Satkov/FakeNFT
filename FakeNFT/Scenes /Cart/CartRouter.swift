@@ -5,6 +5,13 @@ protocol CartRouterProtocol {
 
 final class CartRouter: CartRouterProtocol {
     weak var viewController: CartViewController?
+    private let servicesAssembly: ServicesAssembly
+
+    init(
+        serviceAssembly: ServicesAssembly
+    ) {
+        self.servicesAssembly = serviceAssembly
+    }
 
     func showCartFilters(filterVC: FilterViewController) {
         filterVC.modalPresentationStyle = .overFullScreen
@@ -12,7 +19,7 @@ final class CartRouter: CartRouterProtocol {
     }
 
     func showPaymentPage() {
-        let paymentVC = PaymentPageModuleBuilder.build()
+        let paymentVC = PaymentPageModuleFactory.build(servicesAssembly: servicesAssembly)
         paymentVC.hidesBottomBarWhenPushed = true
         viewController?.navigationController?.pushViewController(paymentVC, animated: true)
     }

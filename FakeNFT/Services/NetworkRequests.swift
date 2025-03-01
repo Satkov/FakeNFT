@@ -14,4 +14,11 @@ struct NetworkRequests {
             httpMethod: .get
         )
     }
+
+    static func getCurrencies() -> NetworkRequest {
+        RequestBuilder(
+            endpoint: URL(string: "\(RequestConstants.baseURL)/api/v1/currencies"),
+            httpMethod: .get
+        )
+    }
 }

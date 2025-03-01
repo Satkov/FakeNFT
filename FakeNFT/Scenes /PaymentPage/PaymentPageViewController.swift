@@ -1,6 +1,7 @@
 import UIKit
 
 protocol PaymentPageViewProtocol: AnyObject {
+    func reloadCollection()
 }
 
 class PaymentPageViewController: UIViewController {
@@ -31,23 +32,12 @@ class PaymentPageViewController: UIViewController {
 private extension PaymentPageViewController {
     func initialize() {
         view.backgroundColor = UIColor.segmentInactive
+        navigationItem.title = "Выберите способ оплаты"
         agreementAndPayView.presenter = presenter
-        setupNavBar()
         setupConstraints()
         setupCurrencyCollectionView()
     }
 
-    func setupNavBar() {
-        let filterButton = UIBarButtonItem(
-            image: UIImage(named: "filterIcon"),
-            style: .plain,
-            target: self,
-            action: #selector(filterButtonTapped)
-        )
-        filterButton.tintColor = UIColor.projectBlack
-        navigationItem.rightBarButtonItem = filterButton
-        navigationItem.title = "Выберите способ оплаты"
-    }
 
     func setupCurrencyCollectionView() {
         currencyCollectionView.register(PaymentMethodCollectionViewCell.self)
@@ -89,4 +79,7 @@ private extension PaymentPageViewController {
 
 // MARK: - PaymentPageViewProtocol
 extension PaymentPageViewController: PaymentPageViewProtocol {
+    func reloadCollection() {
+        currencyCollectionView.reloadData()
+    }
 }
