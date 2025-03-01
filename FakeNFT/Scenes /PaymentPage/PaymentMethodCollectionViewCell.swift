@@ -32,7 +32,12 @@ final class PaymentMethodCollectionViewCell: UICollectionViewCell, ReuseIdentify
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        deselectCell()
+    }
+
     func configure(
         imageUrlString: String,
         currencyName: String,
@@ -52,9 +57,21 @@ final class PaymentMethodCollectionViewCell: UICollectionViewCell, ReuseIdentify
         currencyShortNameLabel.text = currencyShortName
     }
 
+    func selectCell() {
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.projectBlack.cgColor
+    }
+
+    func deselectCell() {
+        layer.borderWidth = 0
+    }
+
     private func setupUI() {
         setupConstraints()
         backgroundColor = UIColor.lightGray
+        layer.cornerRadius = 12
+        layer.masksToBounds = true
+        clipsToBounds = true
     }
 
     private func setupConstraints() {

@@ -1,6 +1,9 @@
 import UIKit
 
 protocol PaymentPageViewProtocol: AnyObject {
+    func showCollection()
+    func showLoader()
+    func hideLoader()
     func reloadCollection()
 }
 
@@ -8,8 +11,8 @@ class PaymentPageViewController: UIViewController {
     // MARK: - Public
     var presenter: PaymentPagePresenterProtocol?
 
-    private let agreementAndPayView = AgreementAndPayView()
-    private let currencyCollectionView: UICollectionView = {
+    private lazy var agreementAndPayView = AgreementAndPayView()
+    private lazy var currencyCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 7
         layout.minimumInteritemSpacing = 7
@@ -17,8 +20,14 @@ class PaymentPageViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.projectWhite
         collectionView.layer.cornerRadius = 12
+        collectionView.isHidden = true
 
         return collectionView
+    }()
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
 
     // MARK: - View lifecycle
@@ -31,7 +40,7 @@ class PaymentPageViewController: UIViewController {
 // MARK: - Private functions
 private extension PaymentPageViewController {
     func initialize() {
-        view.backgroundColor = UIColor.segmentInactive
+        view.backgroundColor = UIColor.projectWhite
         navigationItem.title = "Выберите способ оплаты"
         agreementAndPayView.presenter = presenter
         setupConstraints()
@@ -46,10 +55,12 @@ private extension PaymentPageViewController {
     }
 
     func setupConstraints() {
-        agreementAndPayView.translatesAutoresizingMaskIntoConstraints = false
-        currencyCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(agreementAndPayView)
-        view.addSubview(currencyCollectionView)
+        [agreementAndPayView,
+         activityIndicator,
+         currencyCollectionView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
 
         NSLayoutConstraint.activate([
             agreementAndPayView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -60,7 +71,10 @@ private extension PaymentPageViewController {
             currencyCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             currencyCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             currencyCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            currencyCollectionView.bottomAnchor.constraint(equalTo: agreementAndPayView.topAnchor)
+            currencyCollectionView.bottomAnchor.constraint(equalTo: agreementAndPayView.topAnchor),
+
+            activityIndicator.centerXAnchor.constraint(equalTo: currencyCollectionView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: currencyCollectionView.centerYAnchor)
         ])
 
         if let layout = currencyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -79,6 +93,24 @@ private extension PaymentPageViewController {
 
 // MARK: - PaymentPageViewProtocol
 extension PaymentPageViewController: PaymentPageViewProtocol {
+    func showCollection() {
+        currencyCollectionView.isHidden = false
+        currencyCollectionView.reloadData()
+    }
+
+    func showLoader() {
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+            self.view.bringSubviewToFront(self.activityIndicator)
+        }
+    }
+
+    func hideLoader() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
+    }
+
     func reloadCollection() {
         currencyCollectionView.reloadData()
     }

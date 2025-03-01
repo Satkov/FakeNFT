@@ -29,7 +29,11 @@ final class CartViewController: UIViewController {
         return indicator
     }()
 
-    private let paymentBlockView = PaymentBlockView()
+    private lazy var paymentBlockView: PaymentBlockView = {
+        let view = PaymentBlockView()
+        view.isHidden = true
+        return view
+    }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -44,10 +48,8 @@ private extension CartViewController {
     func setupUI() {
         setupNavBar()
         setupTableView()
-        setupActivityIndicator()
         setupConstraints()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        paymentBlockView.isHidden = true
     }
 
     func setupNavBar() {
@@ -68,13 +70,8 @@ private extension CartViewController {
         tableView.dataSource = presenter
     }
 
-    func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-    }
-
     func setupConstraints() {
-        [tableView, paymentBlockView].forEach {
+        [tableView, paymentBlockView, activityIndicator].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }

@@ -13,6 +13,8 @@ class PaymentPagePresenter: NSObject {
     weak var view: PaymentPageViewProtocol?
     var router: PaymentPageRouterProtocol
     var interactor: PaymentPageInteractorProtocol
+    private var selectedCurrency: Currency?
+
     private var state: PaymentViewState = .initial {
         didSet { stateDidChanged() }
     }
@@ -31,13 +33,14 @@ class PaymentPagePresenter: NSObject {
         case .initial:
             assertionFailure("can't move to initial state")
         case .loading:
-            print("loading")
+            view?.showLoader()
         case .failed(let error):
             print(error)
+            view?.hideLoader()
             // TODO: show alert
         case .data:
             print("data")
-            view?.reloadCollection()
+            view?.showCollection()
         }
     }
 
@@ -64,7 +67,10 @@ extension PaymentPagePresenter: PaymentPagePresenterProtocol {
 }
 
 extension PaymentPagePresenter: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCurrency = currencies[indexPath.row]
+        view?.reloadCollection()
+    }
 }
 
 extension PaymentPagePresenter: UICollectionViewDataSource {
@@ -87,6 +93,9 @@ extension PaymentPagePresenter: UICollectionViewDataSource {
             currencyName: currency.title,
             currencyShortName: currency.name
         )
+        if currency.id == selectedCurrency?.id {
+            cell.selectCell()
+        }
         return cell
     }
 }
