@@ -40,11 +40,14 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return button
     }()
 
+    private var deleteAction: (() -> Void)?
+
     func configure(
         imageURL: String,
         name: String,
         rating: Int,
-        price: Float
+        price: Float,
+        deleteAction: @escaping () -> Void
     ) {
         ImageFetcher.shared.fetchImage(from: imageURL) { [weak self] result in
             guard let self else { return }
@@ -60,6 +63,10 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         ratingView.rating = rating
         priceTitleLabel.text = "Цена"
         priceLabel.text = "\(price) ETH"
+        self.deleteAction = deleteAction
+        deleteButton.addTarget(self,
+                               action: #selector(deleteButtonTapped),
+                               for: .touchUpInside)
         setupUI()
     }
 
@@ -116,5 +123,10 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
             priceLabel.topAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor, constant: 4),
             priceLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor)
         ])
+    }
+
+    @objc
+    private func deleteButtonTapped() {
+        deleteAction?()
     }
 }

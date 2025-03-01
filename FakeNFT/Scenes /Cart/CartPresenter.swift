@@ -190,8 +190,12 @@ extension CartPresenter: UITableViewDataSource {
             imageURL: nft.images[0],
             name: nft.name,
             rating: nft.rating,
-            price: nft.price
-        )
+            price: nft.price) { [weak self] in
+                guard let self else { return }
+                self.router.showDeletePage(
+                    imageUrlString: nft.images[0],
+                    deleteAction: { print("delete pressed") })
+            }
         return cell
     }
 }

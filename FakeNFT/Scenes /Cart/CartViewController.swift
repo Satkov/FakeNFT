@@ -39,7 +39,6 @@ final class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-//        presenter?.showPayment()
     }
 }
 
