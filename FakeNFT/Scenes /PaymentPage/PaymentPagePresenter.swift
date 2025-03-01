@@ -1,4 +1,5 @@
 protocol PaymentPagePresenterProtocol: AnyObject {
+    func showWebView()
 }
 
 class PaymentPagePresenter {
@@ -13,4 +14,7 @@ class PaymentPagePresenter {
 }
 
 extension PaymentPagePresenter: PaymentPagePresenterProtocol {
+    func showWebView() {
+        router.showWebView()
+    }
 }

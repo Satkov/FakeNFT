@@ -38,7 +38,7 @@ final class PaymentBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configurate(
+    func configure(
         totalPrice: String,
         numberOfItems: String,
         buttonAction: @escaping () -> Void
