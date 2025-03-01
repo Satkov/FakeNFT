@@ -10,7 +10,11 @@ enum PaymentViewState {
 }
 
 class PaymentPagePresenter: NSObject {
-    weak var view: PaymentPageViewProtocol?
+    weak var view: PaymentPageViewProtocol? {
+        didSet {
+            loadCurrencies()
+        }
+    }
     var router: PaymentPageRouterProtocol
     var interactor: PaymentPageInteractorProtocol
     private var selectedCurrency: Currency?
@@ -25,8 +29,8 @@ class PaymentPagePresenter: NSObject {
         self.interactor = interactor
         self.router = router
         super.init()
-        loadCurrencies()
     }
+
 
     private func stateDidChanged() {
         switch state {
@@ -40,6 +44,7 @@ class PaymentPagePresenter: NSObject {
             // TODO: show alert
         case .data:
             print("data")
+            view?.hideLoader()
             view?.showCollection()
         }
     }
