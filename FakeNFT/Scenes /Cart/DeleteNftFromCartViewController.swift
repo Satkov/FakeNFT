@@ -14,7 +14,7 @@ final class DeleteNftFromCartViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = "Вы уверены, что хотите\nудалить объект из корзины?"
+        label.text = Localization.deleteNfcConfirmationLabel
         label.textColor = UIColor.projectBlack
         return label
     }()
@@ -23,7 +23,7 @@ final class DeleteNftFromCartViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 12
         button.backgroundColor = UIColor.projectBlack
-        button.setTitle("Удалить", for: .normal)
+        button.setTitle(Localization.delete, for: .normal)
         button.setTitleColor(UIColor.redUniversal, for: .normal)
         return button
     }()
@@ -32,7 +32,7 @@ final class DeleteNftFromCartViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 12
         button.backgroundColor = UIColor.projectBlack
-        button.setTitle("Вернуться", for: .normal)
+        button.setTitle(Localization.getBack, for: .normal)
         button.setTitleColor(UIColor.projectWhite, for: .normal)
         return button
     }()
@@ -65,7 +65,7 @@ final class DeleteNftFromCartViewController: UIViewController {
             case .success(let image):
                 imageView.image = image
             case .failure(let error):
-                print("Ошибка загрузки: \(error.localizedDescription)")
+                print(error.localizedDescription)
             }
         }
     }

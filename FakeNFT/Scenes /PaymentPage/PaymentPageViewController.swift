@@ -41,7 +41,7 @@ class PaymentPageViewController: UIViewController {
 private extension PaymentPageViewController {
     func initialize() {
         view.backgroundColor = UIColor.projectWhite
-        navigationItem.title = "Выберите способ оплаты"
+        navigationItem.title = Localization.paymentPageTitle
         agreementAndPayView.presenter = presenter
         setupConstraints()
         setupCurrencyCollectionView()

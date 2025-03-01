@@ -48,7 +48,7 @@ final class PaymentMethodCollectionViewCell: UICollectionViewCell, ReuseIdentify
             case .success(let image):
                 currencyImageView.image = image
             case .failure(let error):
-                print("Ошибка загрузки: \(error.localizedDescription)")
+                print(error.localizedDescription)
             }
         }
         currencyNameLabel.text = currencyName

@@ -55,13 +55,13 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
             case .success(let image):
                 nftImageView.image = image
             case .failure(let error):
-                print("Ошибка загрузки: \(error.localizedDescription)")
+                print(error.localizedDescription)
             }
 
         }
         nameLabel.text = name
         ratingView.rating = rating
-        priceTitleLabel.text = "Цена"
+        priceTitleLabel.text = Localization.price
         priceLabel.text = "\(price) ETH"
         self.deleteAction = deleteAction
         deleteButton.addTarget(self,

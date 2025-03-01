@@ -5,14 +5,14 @@ final class AgreementAndPayView: UIView {
 
     private let agreementTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Совершая покупку, вы соглашаетесь с условиями"
+        label.text = Localization.agreementTextLabel
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return label
     }()
 
     private let agreementLinkLabel: UILabel = {
         let label = UILabel()
-        label.text = "Пользовательского соглашения"
+        label.text = Localization.agreementLinkLabel
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = UIColor.blueUniversal
         label.isUserInteractionEnabled = true
@@ -21,7 +21,7 @@ final class AgreementAndPayView: UIView {
 
     private let payButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Оплатить", for: .normal)
+        button.setTitle(Localization.pay, for: .normal)
         button.setTitleColor(UIColor.projectWhite, for: .normal)
         button.backgroundColor = UIColor.projectBlack
         button.layer.cornerRadius = 16
