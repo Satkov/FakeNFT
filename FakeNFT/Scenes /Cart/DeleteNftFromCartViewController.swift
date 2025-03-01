@@ -1,6 +1,5 @@
 import UIKit
 
-
 final class DeleteNftFromCartViewController: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -113,7 +112,7 @@ final class DeleteNftFromCartViewController: UIViewController {
             cancelButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 4),
             cancelButton.topAnchor.constraint(equalTo: confirmationLabel.bottomAnchor, constant: 20),
             cancelButton.widthAnchor.constraint(equalToConstant: 127),
-            cancelButton.heightAnchor.constraint(equalToConstant: 44),
+            cancelButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
 

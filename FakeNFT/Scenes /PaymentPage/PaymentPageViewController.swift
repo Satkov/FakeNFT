@@ -47,7 +47,6 @@ private extension PaymentPageViewController {
         setupCurrencyCollectionView()
     }
 
-
     func setupCurrencyCollectionView() {
         currencyCollectionView.register(PaymentMethodCollectionViewCell.self)
         currencyCollectionView.dataSource = presenter

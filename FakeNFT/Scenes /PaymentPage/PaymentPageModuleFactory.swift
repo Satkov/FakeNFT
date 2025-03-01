@@ -6,7 +6,7 @@ struct PaymentPageModuleFactory {
         let router = PaymentPageRouter()
         let presenter = PaymentPagePresenter(interactor: interactor, router: router)
         let viewController = PaymentPageViewController()
-        
+
         presenter.attachView(viewController)
         viewController.presenter = presenter
         interactor.presenter = presenter

@@ -1,6 +1,5 @@
 import UIKit
 
-
 protocol PaymentPagePresenterProtocol: AnyObject, UICollectionViewDelegate, UICollectionViewDataSource {
     func showWebView()
 }
@@ -32,7 +31,6 @@ class PaymentPagePresenter: NSObject {
         loadCurrencies()
     }
 
-
     private func stateDidChanged() {
         switch state {
         case .initial:
@@ -40,11 +38,10 @@ class PaymentPagePresenter: NSObject {
         case .loading:
             view?.showLoader()
         case .failed(let error):
-            print(error)
+            assertionFailure(error.localizedDescription)
             view?.hideLoader()
             // TODO: show alert
         case .data:
-            print("data")
             view?.hideLoader()
             view?.showCollection()
         }
@@ -73,7 +70,10 @@ extension PaymentPagePresenter: PaymentPagePresenterProtocol {
 }
 
 extension PaymentPagePresenter: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         selectedCurrency = currencies[indexPath.row]
         view?.reloadCollection()
     }
@@ -83,11 +83,17 @@ extension PaymentPagePresenter: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         currencies.count
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: PaymentMethodCollectionViewCell.defaultReuseIdentifier,
             for: indexPath

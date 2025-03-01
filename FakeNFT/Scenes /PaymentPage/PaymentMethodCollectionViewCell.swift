@@ -1,6 +1,5 @@
 import UIKit
 
-
 final class PaymentMethodCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     private let currencyImageView: UIImageView = {
         let view = UIImageView()
@@ -28,7 +27,7 @@ final class PaymentMethodCollectionViewCell: UICollectionViewCell, ReuseIdentify
         super.init(frame: frame)
         setupUI()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -51,7 +50,6 @@ final class PaymentMethodCollectionViewCell: UICollectionViewCell, ReuseIdentify
             case .failure(let error):
                 print("Ошибка загрузки: \(error.localizedDescription)")
             }
-
         }
         currencyNameLabel.text = currencyName
         currencyShortNameLabel.text = currencyShortName

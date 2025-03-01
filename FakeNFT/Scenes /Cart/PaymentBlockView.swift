@@ -30,7 +30,7 @@ final class PaymentBlockView: UIView {
         setupConstraints()
         backgroundColor = UIColor.lightGray
         layer.cornerRadius = 12
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] 
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         clipsToBounds = true
     }
 

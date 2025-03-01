@@ -20,6 +20,7 @@ final class CartViewController: UIViewController {
         tableView.register(CartTableViewCell.self)
         tableView.separatorStyle = .none
         tableView.isHidden = true
+        tableView.allowsSelection = false
         return tableView
     }()
 

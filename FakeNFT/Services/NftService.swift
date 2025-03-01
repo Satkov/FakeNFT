@@ -7,7 +7,7 @@ typealias OrderCompletion = (Result<Order, Error>) -> Void
 protocol NftService {
     func loadCart(completion: @escaping OrderCompletion)
     func getNFTById(id: String, completion: @escaping NftCompletion)
-    func getCurrency(completion: @escaping CurrencyCompletion) 
+    func getCurrency(completion: @escaping CurrencyCompletion)
 }
 
 final class NftServiceImpl: NftService {
