@@ -25,4 +25,18 @@ enum Localization {
 
     // MARK: - Common
     static let close = localized("Close")
+
+    // MARK: - Delete NFC Confirmation
+    static let deleteNfcConfirmationLabel = localized("DeleteNfc.confirmation.label")
+    static let delete = localized("Delete")
+    static let getBack = localized("GetBack")
+    static let price = localized("Price")
+
+    // MARK: - Agreement
+    static let agreementTextLabel = localized("Agreement.textLabel")
+    static let agreementLinkLabel = localized("Agreement.linkLabel")
+
+    // MARK: - Payment
+    static let pay = localized("Pay")
+    static let paymentPageTitle = localized("PaymentPage.title")
 }

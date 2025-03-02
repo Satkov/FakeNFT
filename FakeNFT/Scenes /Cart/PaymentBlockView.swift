@@ -30,7 +30,7 @@ final class PaymentBlockView: UIView {
         setupConstraints()
         backgroundColor = UIColor.lightGray
         layer.cornerRadius = 12
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] 
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         clipsToBounds = true
     }
 
@@ -38,7 +38,7 @@ final class PaymentBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configurate(
+    func configure(
         totalPrice: String,
         numberOfItems: String,
         buttonAction: @escaping () -> Void

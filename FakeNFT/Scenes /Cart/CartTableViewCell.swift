@@ -6,7 +6,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
         imageView.layer.masksToBounds = true
-            imageView.clipsToBounds = true
+        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -40,11 +40,14 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return button
     }()
 
+    private var deleteAction: (() -> Void)?
+
     func configure(
         imageURL: String,
         name: String,
         rating: Int,
-        price: Float
+        price: Float,
+        deleteAction: @escaping () -> Void
     ) {
         ImageFetcher.shared.fetchImage(from: imageURL) { [weak self] result in
             guard let self else { return }
@@ -52,14 +55,18 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
             case .success(let image):
                 nftImageView.image = image
             case .failure(let error):
-                print("Ошибка загрузки: \(error.localizedDescription)")
+                print(error.localizedDescription)
             }
 
         }
         nameLabel.text = name
         ratingView.rating = rating
-        priceTitleLabel.text = "Цена"
+        priceTitleLabel.text = Localization.price
         priceLabel.text = "\(price) ETH"
+        self.deleteAction = deleteAction
+        deleteButton.addTarget(self,
+                               action: #selector(deleteButtonTapped),
+                               for: .touchUpInside)
         setupUI()
     }
 
@@ -116,5 +123,10 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
             priceLabel.topAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor, constant: 4),
             priceLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor)
         ])
+    }
+
+    @objc
+    private func deleteButtonTapped() {
+        deleteAction?()
     }
 }
