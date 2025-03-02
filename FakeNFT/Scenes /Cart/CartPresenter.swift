@@ -55,7 +55,11 @@ final class CartPresenter: NSObject {
             view?.hideLoader()
             let choice = loadLastFilterChoice()
             filterNftBy(filterChoice: choice)
-            showNfts()
+            if nftsInCart.isEmpty {
+                view?.showPlaceholder()
+            } else {
+                showNfts()
+            }
         }
     }
 

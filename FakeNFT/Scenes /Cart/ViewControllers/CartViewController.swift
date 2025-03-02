@@ -6,6 +6,7 @@ protocol CartViewProtocol: AnyObject {
     func reloadTable()
     func showLoader()
     func hideLoader()
+    func showPlaceholder()
 }
 
 // MARK: - CartViewController
@@ -40,6 +41,9 @@ final class CartViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.textColor = .projectBlack
+        label.isHidden = true
+        label.textAlignment = .center
+        label.text = "Корзина пуста"
         return label
     }()
 
@@ -83,7 +87,10 @@ private extension CartViewController {
     }
 
     func setupConstraints() {
-        [tableView, paymentBlockView, activityIndicator].forEach {
+        [tableView,
+         paymentBlockView,
+         activityIndicator,
+         emptyCartLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -100,7 +107,12 @@ private extension CartViewController {
             paymentBlockView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
             paymentBlockView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             paymentBlockView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            paymentBlockView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            paymentBlockView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
+            emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyCartLabel.widthAnchor.constraint(equalTo: view.widthAnchor),
+            emptyCartLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 22)
         ])
     }
 
@@ -112,6 +124,11 @@ private extension CartViewController {
 
 // MARK: - CartViewProtocol
 extension CartViewController: CartViewProtocol {
+    private func toggleVisibility(isTableViewVisible: Bool) {
+        tableView.isHidden = !isTableViewVisible
+        emptyCartLabel.isHidden = isTableViewVisible
+        paymentBlockView.isHidden = !isTableViewVisible
+    }
 
     func showNfts(totalPrice: String, numberOfItems: String) {
         paymentBlockView.configure(
@@ -121,8 +138,7 @@ extension CartViewController: CartViewProtocol {
             self?.presenter?.showPayment()
         }
         navigationController?.setNavigationBarHidden(false, animated: false)
-        tableView.isHidden = false
-        paymentBlockView.isHidden = false
+        toggleVisibility(isTableViewVisible: true)
     }
 
     func reloadTable() {
@@ -140,5 +156,10 @@ extension CartViewController: CartViewProtocol {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
         }
+    }
+
+    func showPlaceholder() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        toggleVisibility(isTableViewVisible: false)
     }
 }
