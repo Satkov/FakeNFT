@@ -19,12 +19,15 @@ final class AgreementAndPayView: UIView {
         return label
     }()
 
-    private let payButton: UIButton = {
+    private lazy var payButton: UIButton = {
         let button = UIButton()
         button.setTitle(Localization.pay, for: .normal)
         button.setTitleColor(UIColor.projectWhite, for: .normal)
         button.backgroundColor = UIColor.projectBlack
         button.layer.cornerRadius = 16
+        button.addTarget(self,
+                         action: #selector(payButtonTapped),
+                         for: .touchUpInside)
         return button
     }()
 
@@ -84,5 +87,10 @@ final class AgreementAndPayView: UIView {
     @objc
     func agreementLinkTapped() {
         presenter?.showWebView()
+    }
+
+    @objc
+    func payButtonTapped() {
+        presenter?.showSuccessPaymentView()
     }
 }

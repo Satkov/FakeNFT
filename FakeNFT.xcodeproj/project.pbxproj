@@ -351,16 +351,34 @@
 		91263F5A2D635F9C00C91AAC /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				9143113D2D7471200010F6E0 /* ViewControllers */,
 				91263F5B2D635FB000C91AAC /* CartInteractor.swift */,
 				91263F5C2D635FB000C91AAC /* CartModuleFactory.swift */,
 				91263F5D2D635FB000C91AAC /* CartPresenter.swift */,
 				91263F5E2D635FB000C91AAC /* CartRouter.swift */,
-				91263F5F2D635FB000C91AAC /* CartViewController.swift */,
 				91263F6B2D63865100C91AAC /* PaymentBlockView.swift */,
 				91263F6D2D63911400C91AAC /* CartTableViewCell.swift */,
-				914311382D73528C0010F6E0 /* DeleteNftFromCartViewController.swift */,
 			);
 			path = Cart;
+			sourceTree = "<group>";
+		};
+		9143113C2D74710F0010F6E0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */,
+				914311282D730F3B0010F6E0 /* WebViewViewController.swift */,
+				9143113A2D7467BB0010F6E0 /* SuccessPaymentViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9143113D2D7471200010F6E0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				91263F5F2D635FB000C91AAC /* CartViewController.swift */,
+				914311382D73528C0010F6E0 /* DeleteNftFromCartViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		915447432D64F2CE00CBED07 /* Filter */ = {
@@ -376,15 +394,13 @@
 		91A05D452D6CFFBF00247FEA /* PaymentPage */ = {
 			isa = PBXGroup;
 			children = (
+				9143113C2D74710F0010F6E0 /* ViewControllers */,
 				91A05D462D6D001B00247FEA /* PaymentPageInteractor.swift */,
 				91A05D472D6D001B00247FEA /* PaymentPageModuleFactory.swift */,
 				91A05D482D6D001B00247FEA /* PaymentPagePresenter.swift */,
 				91A05D492D6D001B00247FEA /* PaymentPageRouter.swift */,
-				91A05D4A2D6D001B00247FEA /* PaymentPageViewController.swift */,
 				91A05D502D6D090F00247FEA /* AgreementAndPayView.swift */,
-				914311282D730F3B0010F6E0 /* WebViewViewController.swift */,
 				9143112C2D7314200010F6E0 /* PaymentMethodCollectionViewCell.swift */,
-				9143113A2D7467BB0010F6E0 /* SuccessPaymentViewController.swift */,
 			);
 			path = PaymentPage;
 			sourceTree = "<group>";

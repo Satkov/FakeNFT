@@ -1,13 +1,13 @@
 import UIKit
 
 final class SuccessPaymentViewController: UIViewController {
-    private lazy var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "successPaymentLogo")
         return imageView
     }()
 
-    private lazy var successLabel: UILabel = {
+    private let successLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.text = "Успех! Оплата прошла,\nпоздравляем с покупкой!"
@@ -24,6 +24,9 @@ final class SuccessPaymentViewController: UIViewController {
         button.setTitleColor(.projectWhite, for: .normal)
         button.setTitle("Вернуться в каталог", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        button.addTarget(self,
+                         action: #selector(backToCatalogButtonPressed),
+                         for: .touchUpInside)
         return button
     }()
 
@@ -61,5 +64,10 @@ final class SuccessPaymentViewController: UIViewController {
             backToCatalogButton.widthAnchor.constraint(equalToConstant: 343),
             backToCatalogButton.heightAnchor.constraint(equalToConstant: 60)
         ])
+    }
+
+    @objc
+    private func backToCatalogButtonPressed() {
+        dismiss(animated: true)
     }
 }

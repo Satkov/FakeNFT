@@ -15,7 +15,7 @@ final class CartViewController: UIViewController {
     var presenter: CartPresenterProtocol?
 
     // MARK: - UI Elements
-    private lazy var tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CartTableViewCell.self)
         tableView.separatorStyle = .none
@@ -24,13 +24,13 @@ final class CartViewController: UIViewController {
         return tableView
     }()
 
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.hidesWhenStopped = true
         return indicator
     }()
 
-    private lazy var paymentBlockView: PaymentBlockView = {
+    private let paymentBlockView: PaymentBlockView = {
         let view = PaymentBlockView()
         view.isHidden = true
         return view

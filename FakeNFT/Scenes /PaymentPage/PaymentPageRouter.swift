@@ -1,5 +1,6 @@
 protocol PaymentPageRouterProtocol {
     func showWebView()
+    func showSuccessPaymentView()
 }
 
 class PaymentPageRouter: PaymentPageRouterProtocol {
@@ -9,5 +10,11 @@ class PaymentPageRouter: PaymentPageRouterProtocol {
         let webVC = WebViewViewController(url: "https://practicum.yandex.ru/")
         webVC.modalPresentationStyle = .pageSheet
         viewController?.present(webVC, animated: true)
+    }
+
+    func showSuccessPaymentView() {
+        let successVC = SuccessPaymentViewController()
+        successVC.modalPresentationStyle = .overFullScreen
+        viewController?.present(successVC, animated: true)
     }
 }

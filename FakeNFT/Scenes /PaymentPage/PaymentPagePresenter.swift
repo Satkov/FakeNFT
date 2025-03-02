@@ -2,6 +2,7 @@ import UIKit
 
 protocol PaymentPagePresenterProtocol: AnyObject, UICollectionViewDelegate, UICollectionViewDataSource {
     func showWebView()
+    func showSuccessPaymentView()
 }
 
 enum PaymentViewState {
@@ -66,6 +67,10 @@ class PaymentPagePresenter: NSObject {
 extension PaymentPagePresenter: PaymentPagePresenterProtocol {
     func showWebView() {
         router.showWebView()
+    }
+
+    func showSuccessPaymentView() {
+        router.showSuccessPaymentView()
     }
 }
 
