@@ -9,8 +9,4 @@ final class TabBarController: UITabBarController {
         image: UIImage(systemName: "square.stack.3d.up.fill"),
         tag: 0
     )
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }
