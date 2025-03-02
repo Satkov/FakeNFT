@@ -36,6 +36,13 @@ final class CartViewController: UIViewController {
         return view
     }()
 
+    private let emptyCartLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.textColor = .projectBlack
+        return label
+    }()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

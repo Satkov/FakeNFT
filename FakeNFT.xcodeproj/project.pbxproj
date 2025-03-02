@@ -330,11 +330,11 @@
 		3F6806D829CC979D00B4F915 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				914311402D7480570010F6E0 /* UpdateOrderResponse.swift */,
 				3FC8C39029D2453B0081F015 /* UpdateOrderDto.swift */,
 				91513F412D6B38D10093A10E /* Order.swift */,
 				0CFCB7412A78013E0009A829 /* Nft.swift */,
 				914311342D733A480010F6E0 /* Currency.swift */,
-				914311402D7480570010F6E0 /* UpdateOrderResponse.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
