@@ -3,11 +3,13 @@ import Foundation
 typealias NftCompletion = (Result<Nft, Error>) -> Void
 typealias CurrencyCompletion = (Result<[Currency], Error>) -> Void
 typealias OrderCompletion = (Result<Order, Error>) -> Void
+typealias UpdateOrderCompletion = (Result<UpdateOrderResponse, Error>) -> Void
 
 protocol NftService {
     func loadCart(completion: @escaping OrderCompletion)
     func getNFTById(id: String, completion: @escaping NftCompletion)
     func getCurrency(completion: @escaping CurrencyCompletion)
+    func sendUpdateOrderRequest(nfts: [String], completion: @escaping UpdateOrderCompletion)
 }
 
 final class NftServiceImpl: NftService {
@@ -56,6 +58,22 @@ final class NftServiceImpl: NftService {
             switch result {
             case .success(let currency):
                 completion(.success(currency))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func sendUpdateOrderRequest(
+        nfts: [String],
+        completion: @escaping UpdateOrderCompletion
+    ) {
+        let dto = UpdateOrderDto(nfts: nfts)
+        let request = NetworkRequests.putOrder1(dto: dto)
+        networkClient.send(request: request, type: UpdateOrderResponse.self) { result in
+            switch result {
+            case .success(let putResponse):
+                completion(.success(putResponse))
             case .failure(let error):
                 completion(.failure(error))
             }

@@ -21,4 +21,11 @@ struct NetworkRequests {
             httpMethod: .get
         )
     }
+
+    static func putOrder1(dto: Dto) -> NetworkRequest {
+        RequestBuilder(
+            endpoint: URL(string: "\(RequestConstants.baseURL)/api/v1/orders/1"),
+            httpMethod: .put,
+            dto: dto)
+    }
 }
