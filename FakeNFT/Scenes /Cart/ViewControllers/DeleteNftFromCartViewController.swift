@@ -119,6 +119,7 @@ final class DeleteNftFromCartViewController: UIViewController {
     @objc
     private func deleteButtonTapped() {
         deleteAction?()
+        dismiss(animated: true)
     }
 
     @objc

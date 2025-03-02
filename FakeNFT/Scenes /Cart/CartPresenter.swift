@@ -192,10 +192,26 @@ extension CartPresenter: UITableViewDataSource {
             rating: nft.rating,
             price: nft.price) { [weak self] in
                 guard let self else { return }
-                self.router.showDeletePage(
-                    imageUrlString: nft.images[0],
-                    deleteAction: { print("delete pressed") })
+                self.router.showDeletePage(imageUrlString: nft.images[0]) { [weak self] in
+                    guard let self else { return }
+                    deleteNftFromCartAction(indexPath: indexPath)
+                }
             }
         return cell
+    }
+
+    private func deleteNftFromCartAction(indexPath: IndexPath) {
+        nftsInCart.remove(at: indexPath.row)
+
+        let nftsAfterDeletion = nftsInCart.map { $0.id }
+        interactor.updateOrder(nfts: nftsAfterDeletion) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(_):
+                getOrder()
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 protocol CartInteractorProtocol: AnyObject {
     func getNFTInsideCart(completion: @escaping OrderCompletion)
     func getNFTByID(id: String, completion: @escaping NftCompletion)
+    func updateOrder(nfts: [String], completion: @escaping UpdateOrderCompletion)
 }
 
 final class CartInteractor: CartInteractorProtocol {
@@ -14,24 +15,25 @@ final class CartInteractor: CartInteractorProtocol {
     }
 
     func getNFTInsideCart(completion: @escaping OrderCompletion) {
-        servicesAssembly.nftService.loadCart { result in
-            switch result {
-            case .success(let order):
-                completion(.success(order))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        servicesAssembly.nftService.loadCart(completion: completion)
     }
 
-    func getNFTByID(id: String, completion: @escaping NftCompletion) {
-        servicesAssembly.nftService.getNFTById(id: id) { result in
-            switch result {
-            case .success(let nft):
-                completion(.success(nft))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    func getNFTByID(
+        id: String,
+        completion: @escaping NftCompletion
+    ) {
+        servicesAssembly.nftService.getNFTById(
+            id: id,
+            completion: completion
+        )
+    }
+
+    func updateOrder(
+        nfts: [String],
+        completion: @escaping UpdateOrderCompletion
+    ) {
+        servicesAssembly.nftService.sendUpdateOrderRequest(
+            nfts: nfts,
+            completion: completion)
     }
 }
