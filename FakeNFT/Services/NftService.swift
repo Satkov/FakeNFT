@@ -1,8 +1,10 @@
 import Foundation
 
 typealias NftCompletion = (Result<Nft, Error>) -> Void
+typealias UpdateOrderCompletion = (Result<UpdateOrderResponse, Error>) -> Void
 
 protocol NftService {
+    func sendUpdateOrderRequest(nfts: [String], completion: @escaping UpdateOrderCompletion)
     func loadNft(id: String, completion: @escaping NftCompletion)
 }
 
@@ -28,6 +30,22 @@ final class NftServiceImpl: NftService {
             case .success(let nft):
                 storage?.saveNft(nft)
                 completion(.success(nft))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func sendUpdateOrderRequest(
+        nfts: [String],
+        completion: @escaping UpdateOrderCompletion
+    ) {
+        let dto = UpdateOrderDto(nfts: nfts)
+        let request = NetworkRequests.putOrder1(dto: dto)
+        networkClient.send(request: request, type: UpdateOrderResponse.self) { result in
+            switch result {
+            case .success(let putResponse):
+                completion(.success(putResponse))
             case .failure(let error):
                 completion(.failure(error))
             }
