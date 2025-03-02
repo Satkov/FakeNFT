@@ -161,7 +161,19 @@ extension CartPresenter: CartPresenterProtocol {
     }
 
     func showPayment() {
-        router.showPaymentPage()
+        router.showPaymentPage { [weak self] in
+            guard let self else { return }
+            state = .loading
+            interactor.updateOrder(nfts: []) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(_):
+                    getOrder()
+                case .failure(let error):
+                    assertionFailure(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
@@ -203,8 +215,8 @@ extension CartPresenter: UITableViewDataSource {
     private func deleteNftFromCartAction(indexPath: IndexPath) {
         nftsInCart.remove(at: indexPath.row)
 
-        let nftsAfterDeletion = nftsInCart.map { $0.id }
-        interactor.updateOrder(nfts: nftsAfterDeletion) { [weak self] result in
+        let nftsIds = nftsInCart.map { $0.id }
+        interactor.updateOrder(nfts: nftsIds) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(_):

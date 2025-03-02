@@ -1,6 +1,6 @@
 protocol PaymentPageRouterProtocol {
     func showWebView()
-    func showSuccessPaymentView()
+    func showSuccessPaymentView(moveBackAction: @escaping () -> Void)
 }
 
 class PaymentPageRouter: PaymentPageRouterProtocol {
@@ -12,8 +12,9 @@ class PaymentPageRouter: PaymentPageRouterProtocol {
         viewController?.present(webVC, animated: true)
     }
 
-    func showSuccessPaymentView() {
+    func showSuccessPaymentView(moveBackAction: @escaping () -> Void) {
         let successVC = SuccessPaymentViewController()
+        successVC.moveBackAction = moveBackAction
         successVC.modalPresentationStyle = .overFullScreen
         viewController?.present(successVC, animated: true)
     }

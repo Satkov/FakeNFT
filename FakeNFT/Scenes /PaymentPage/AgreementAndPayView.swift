@@ -91,6 +91,6 @@ final class AgreementAndPayView: UIView {
 
     @objc
     func payButtonTapped() {
-        presenter?.showSuccessPaymentView()
+        presenter?.payButtonTapped()
     }
 }

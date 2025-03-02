@@ -1,6 +1,6 @@
 import UIKit
 
-protocol PaymentPageViewProtocol: AnyObject {
+protocol PaymentPageViewProtocol: UIViewController {
     func showCollection()
     func showLoader()
     func hideLoader()

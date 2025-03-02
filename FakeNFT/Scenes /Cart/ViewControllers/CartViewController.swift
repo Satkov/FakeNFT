@@ -48,6 +48,11 @@ final class CartViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 }
 
 // MARK: - Private Methods

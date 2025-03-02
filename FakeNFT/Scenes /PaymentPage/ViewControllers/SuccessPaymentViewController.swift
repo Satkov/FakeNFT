@@ -30,6 +30,8 @@ final class SuccessPaymentViewController: UIViewController {
         return button
     }()
 
+    var moveBackAction: (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -68,6 +70,9 @@ final class SuccessPaymentViewController: UIViewController {
 
     @objc
     private func backToCatalogButtonPressed() {
-        dismiss(animated: true)
+        dismiss(animated: false) { [weak self] in
+            guard let self else { return }
+            moveBackAction?()
+        }
     }
 }

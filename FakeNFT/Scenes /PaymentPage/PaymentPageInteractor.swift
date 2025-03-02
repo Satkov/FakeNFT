@@ -1,5 +1,6 @@
 protocol PaymentPageInteractorProtocol: AnyObject {
     func getCurrency(completion: @escaping CurrencyCompletion)
+    func setCurrencyIdAndPay(id: String, completion: @escaping payForOrderCompletion)
 }
 
 class PaymentPageInteractor: PaymentPageInteractorProtocol {
@@ -13,13 +14,16 @@ class PaymentPageInteractor: PaymentPageInteractorProtocol {
     }
 
     func getCurrency(completion: @escaping CurrencyCompletion) {
-        servicesAssembly.nftService.getCurrency { result in
-            switch result {
-            case .success(let currency):
-                completion(.success(currency))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        servicesAssembly.nftService.getCurrency(completion: completion)
+    }
+
+    func setCurrencyIdAndPay(
+        id: String,
+        completion: @escaping payForOrderCompletion
+    ) {
+        servicesAssembly.nftService.setCurrencyIdAndPay(
+            id: id,
+            completion: completion
+        )
     }
 }
