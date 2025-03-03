@@ -9,15 +9,15 @@ protocol NftService {
 }
 
 final class NftServiceImpl: NftService {
-    
+
     private let networkClient: NetworkClient
     private let storage: NftStorage
-    
+
     init(networkClient: NetworkClient, storage: NftStorage) {
         self.storage = storage
         self.networkClient = networkClient
     }
-    
+
     func loadCart(completion: @escaping OrderCompletion) {
         let request = NetworkRequests.getNFTInsideCart()
         networkClient.send(request: request, type: Order.self) { result in
@@ -29,7 +29,7 @@ final class NftServiceImpl: NftService {
             }
         }
     }
-    
+
     func sendUpdateOrderRequest(
         nfts: [String],
         completion: @escaping UpdateOrderCompletion
