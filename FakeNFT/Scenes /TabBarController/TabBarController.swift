@@ -12,14 +12,13 @@ final class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let catalogController = TestCatalogViewController(
-            servicesAssembly: servicesAssembly
-        )
-        catalogController.tabBarItem = catalogTabBarItem
-
-        viewControllers = [catalogController]
-
-        view.backgroundColor = .systemBackground
+        servicesAssembly.nftService.loadCart { result in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
+        }
     }
 }
