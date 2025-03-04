@@ -6,8 +6,15 @@
 //
 
 typealias NftCollectionDetailCompletion = (Result<NftCollection, Error>) -> Void
+typealias NftDetailCompletion = (Result<Nft, Error>) -> Void
+typealias UserCompletion = (Result<User, Error>) -> Void
+typealias UsersCompletion = (Result<[User], Error>) -> Void
 
 protocol NFTCollectionDetailInteractorProtocol: AnyObject {
+    func loadNftCollection(id: String, completion: @escaping NftCollectionDetailCompletion)
+    func loadUser(userId: String, completion: @escaping UserCompletion)
+    func loadAllUsers(completion: @escaping UsersCompletion)
+    func loadNft(id: String, completion: @escaping NftDetailCompletion)
 }
 
 class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
@@ -29,6 +36,42 @@ class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
             switch result {
             case .success(let nftCollection):
                 completion(.success(nftCollection))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func loadUser(userId: String, completion: @escaping UserCompletion) {
+        let request = UserRequest(id: userId)
+        networkClient.send(request: request, type: User.self) { result in
+            switch result {
+            case .success(let user):
+                completion(.success(user))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func loadAllUsers(completion: @escaping UsersCompletion) {
+        let request = UsersRequest()
+        networkClient.send(request: request, type: [User].self) { result in
+            switch result {
+            case .success(let users):
+                completion(.success(users))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func loadNft(id: String, completion: @escaping NftDetailCompletion) {
+        let request = NFTDetailRequest(id: id)
+        networkClient.send(request: request, type: Nft.self) { result in
+            switch result {
+            case .success(let nft):
+                completion(.success(nft))
             case .failure(let error):
                 completion(.failure(error))
             }
