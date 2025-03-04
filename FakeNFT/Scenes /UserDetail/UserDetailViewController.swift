@@ -1,9 +1,10 @@
-import Foundation
 import UIKit
 
 protocol UserDetailViewProtocol: AnyObject {
     func updateUserDetails(name: String, description: NSAttributedString, collectionText: String, image: UIImage?)
     func updateUserImage(_ image: UIImage?)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
 }
 
 class UserDetailViewController: UIViewController, UserDetailViewProtocol {
@@ -80,6 +81,13 @@ class UserDetailViewController: UIViewController, UserDetailViewProtocol {
         return view
     }()
     
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -101,6 +109,7 @@ class UserDetailViewController: UIViewController, UserDetailViewProtocol {
         view.addSubview(websiteButton)
         view.addSubview(collectionContainer)
         collectionContainer.addSubview(collectionStackView)
+        view.addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -127,7 +136,10 @@ class UserDetailViewController: UIViewController, UserDetailViewProtocol {
             
             collectionStackView.centerYAnchor.constraint(equalTo: collectionContainer.centerYAnchor),
             collectionStackView.leadingAnchor.constraint(equalTo: collectionContainer.leadingAnchor),
-            collectionStackView.trailingAnchor.constraint(equalTo: collectionContainer.trailingAnchor)
+            collectionStackView.trailingAnchor.constraint(equalTo: collectionContainer.trailingAnchor),
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
     }
     
@@ -140,6 +152,14 @@ class UserDetailViewController: UIViewController, UserDetailViewProtocol {
     
     func updateUserImage(_ image: UIImage?) {
         avatarImageView.image = image
+    }
+    
+    func showLoadingIndicator() {
+        loadingIndicator.startAnimating()
+    }
+
+    func hideLoadingIndicator() {
+        loadingIndicator.stopAnimating()
     }
     
     @objc private func openWebsite() {

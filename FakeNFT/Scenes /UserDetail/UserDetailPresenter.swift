@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 
 protocol UserDetailPresenterProtocol: AnyObject {
@@ -15,7 +14,12 @@ final class UserDetailPresenter: UserDetailPresenterProtocol {
     private let userId: String
     private var userDetail: UserDetail?
     
-    init(view: UserDetailViewProtocol, interactor: UserDetailInteractorProtocol, router: UserDetailRouterProtocol, userId: String) {
+    init(
+        view: UserDetailViewProtocol,
+        interactor: UserDetailInteractorProtocol,
+        router: UserDetailRouterProtocol,
+        userId: String
+    ) {
         self.view = view
         self.interactor = interactor
         self.router = router
@@ -23,6 +27,7 @@ final class UserDetailPresenter: UserDetailPresenterProtocol {
     }
     
     func loadUserDetails() {
+        view?.showLoadingIndicator()
         interactor.fetchUserDetail(userId: userId)
     }
     
@@ -36,7 +41,7 @@ final class UserDetailPresenter: UserDetailPresenterProtocol {
         router.openCollection(userId: user.id)
     }
     
-    private func prepareUserDetails(_ user: UserDetail) -> (String, NSAttributedString, String, URL?) {
+    private func prepareUserDetails(_ user: UserDetail) -> (name: String, description: NSAttributedString, text: String, imageURL: URL?) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3
         let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraphStyle]
@@ -54,16 +59,21 @@ extension UserDetailPresenter: UserDetailInteractorOutputProtocol {
         self.userDetail = user
         let userDetails = prepareUserDetails(user)
         
-        view?.updateUserDetails(name: userDetails.0, description: userDetails.1, collectionText: userDetails.2, image: UIImage(named: "placeholder"))
-        
-        if let imageUrl = userDetails.3 {
+        view?.updateUserDetails(name: userDetails.name,
+                                description: userDetails.description,
+                                collectionText: userDetails.text,
+                                image: UIImage(named: "placeholder"))
+      
+        if let imageUrl = userDetails.imageURL {
             ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
                 self?.view?.updateUserImage(image)
             }
         }
+        view?.hideLoadingIndicator()
     }
     
     func didFailFetchingUserDetail(with error: Error) {
+        view?.hideLoadingIndicator()
         print("Ошибка загрузки пользователя: \(error.localizedDescription)")
     }
 }

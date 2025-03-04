@@ -1,8 +1,7 @@
-import Foundation
 import UIKit
 
 
-class UserCollectionViewController: UIViewController {
+final class UserCollectionViewController: UIViewController {
     private let userId: String
     
     init(userId: String) {
