@@ -9,6 +9,12 @@ final class TabBarController: UITabBarController {
         image: UIImage(systemName: "square.stack.3d.up.fill"),
         tag: 0
     )
+    
+    private let profileTabBarItem = UITabBarItem(
+        title: Localization.profileTab,
+        image: UIImage(systemName: "person.crop.circle.fill"),
+        tag: 1
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,5 +26,14 @@ final class TabBarController: UITabBarController {
                 assertionFailure(error.localizedDescription)
             }
         }
+
+        let profileContoller = ProfileModuleBuilder.build(
+            servicesAssembly: servicesAssembly
+        )
+        profileContoller.tabBarItem = profileTabBarItem
+
+        viewControllers = [UINavigationController(rootViewController: profileContoller)]
+
+        view.backgroundColor = .systemBackground
     }
 }

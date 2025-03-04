@@ -45,6 +45,7 @@ extension UIColor {
 
     // Project Colors
     static let greenUniversal = UIColor(hexString: "#1C9F00")
+    static let yellowUniversal = UIColor(hexString: "#FEEF0D")
     static let lightGray = UIColor(hexString: "#F7F7F8")
     static let projectBlack = UIColor(hexString: "#1A1B22")
     static let projectGray = UIColor(hexString: "#3C3C4399").withAlphaComponent(0.6)
