@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NFTCollectionCellModel {
+struct NFTCollectionBO {
     let imageURL: URL?
     let name: String
     let nftCount: Int

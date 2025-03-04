@@ -24,6 +24,7 @@ final class NFTCollectionListRouter: NFTCollectionListRouterProtocol {
         let nftCollectionDetailViewController = NFTCollectionDetailModuleBuilder.build(input: nftCollectionDetailInput, serviceAssembly: serviceAssemby)
         
         if let navigationViewController = viewController?.parent as? UINavigationController {
+            navigationViewController.navigationBar.tintColor = UIColor.textPrimary
             navigationViewController.pushViewController(nftCollectionDetailViewController, animated: true)
         }
     }

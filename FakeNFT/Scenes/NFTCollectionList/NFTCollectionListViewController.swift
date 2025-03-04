@@ -47,6 +47,7 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
     }
     
     private func setupLayout() {
+        
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
         NSLayoutConstraint.activate([
@@ -57,10 +58,10 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "CatalogSortButtonImage"), style: .plain, target: self, action: #selector(sortButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.navigationBarButton
+        navigationItem.backBarButtonItem?.tintColor = UIColor.navigationBarButton
+        navigationItem.backButtonTitle = ""
     }
     
     @objc func sortButtonTapped() {
@@ -88,8 +89,8 @@ extension NFTCollectionListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: NFTCollectionListCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        if let model = presenter?.cellModelForIndex(indexPath) {
-            cell.configure(model: model)
+        if let businessObject = presenter?.nftCollectionBOForIndex(indexPath) {
+            cell.configure(businessObject: businessObject)
         }
         return cell
     }
