@@ -62,7 +62,7 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             switch result {
             case .success(let users):
                 self.users = users
-                let user = users.first (where: { $0.name == self.currentNftCollection?.author })
+                _ = users.first (where: { $0.name == self.currentNftCollection?.author })
                 //let correctAuthorWebsiteLink = user?.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                 let correctAuthorWebsiteLink = "https://practicum.yandex.ru/"
                 self.authorWebsiteURL = URL(string: correctAuthorWebsiteLink)

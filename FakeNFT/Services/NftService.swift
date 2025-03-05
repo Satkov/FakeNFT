@@ -1,9 +1,11 @@
 import Foundation
 
-typealias NftCompletion = (Result<NftShort, Error>) -> Void
+typealias UpdateOrderCompletion = (Result<UpdateOrderResponse, Error>) -> Void
+typealias OrderCompletion = (Result<Order, Error>) -> Void
 
 protocol NftService {
-    func loadNft(id: String, completion: @escaping NftCompletion)
+    func loadCart(completion: @escaping OrderCompletion)
+    func sendUpdateOrderRequest(nfts: [String], completion: @escaping UpdateOrderCompletion)
 }
 
 final class NftServiceImpl: NftService {
@@ -16,18 +18,28 @@ final class NftServiceImpl: NftService {
         self.networkClient = networkClient
     }
 
-    func loadNft(id: String, completion: @escaping NftCompletion) {
-        if let nft = storage.getNft(with: id) {
-            completion(.success(nft))
-            return
-        }
-
-        let request = NFTRequest(id: id)
-        networkClient.send(request: request, type: NftShort.self) { [weak storage] result in
+    func loadCart(completion: @escaping OrderCompletion) {
+        let request = NetworkRequests.getNFTInsideCart()
+        networkClient.send(request: request, type: Order.self) { result in
             switch result {
-            case .success(let nft):
-                storage?.saveNft(nft)
-                completion(.success(nft))
+            case .success(let order):
+                completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func sendUpdateOrderRequest(
+        nfts: [String],
+        completion: @escaping UpdateOrderCompletion
+    ) {
+        let dto = UpdateOrderDto(nfts: nfts)
+        let request = NetworkRequests.putOrder1(dto: dto)
+        networkClient.send(request: request, type: UpdateOrderResponse.self) { result in
+            switch result {
+            case .success(let putResponse):
+                completion(.success(putResponse))
             case .failure(let error):
                 completion(.failure(error))
             }

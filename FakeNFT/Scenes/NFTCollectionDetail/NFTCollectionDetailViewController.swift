@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol NFTCollectionDetailViewProtocol: AnyObject {
     func updateNftCollectionInformation(name: String, imageURL: URL?, description: String)
@@ -173,7 +174,6 @@ extension NFTCollectionDetailViewController: NFTCollectionDetailViewProtocol {
     }
     
     func setWebsiteLinkForAuthor(url: URL?) {
-        print(url)
         //TODO: Set link for author link label
     }
     

@@ -5,4 +5,7 @@
 "Error.repeat" = "Повторить";
 "Error.title" = "Ошибка";
 "Filter.table.title" = "Сортировка";
+"Filter.choice.price" = "По цене";
+"Filter.choice.rating" = "По рейтингу";
+"Filter.choice.name" = "По названию";
 "Close" = "Закрыть";
