@@ -106,6 +106,7 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
         super.viewDidLoad()
         showLoading()
         presenter?.loadCurrentNFTCollection()
+        presenter?.loadProfile()
         setupLayout()
     }
     
