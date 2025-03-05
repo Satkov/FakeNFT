@@ -38,6 +38,7 @@
 		91B1CBB52D758B1E00BCF5B8 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B1CBB42D758B1E00BCF5B8 /* Order.swift */; };
 		E1A1B9DA2AA01CE400C3AFBC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A1B9D92AA01CE400C3AFBC /* TabBarController.swift */; };
 		E1CD40DC2A96BECC00BE7FE8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1CD40DB2A96BECC00BE7FE8 /* Localizable.strings */; };
+		F311F06A2D7869FA00280A5C /* OrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311F0692D7869FA00280A5C /* OrderRequest.swift */; };
 		F34375C52D6C9FA10021AB7B /* AuthorPageModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34375C02D6C9FA10021AB7B /* AuthorPageModuleFactory.swift */; };
 		F34375C62D6C9FA10021AB7B /* AuthorPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34375C12D6C9FA10021AB7B /* AuthorPagePresenter.swift */; };
 		F34375C82D6C9FA10021AB7B /* AuthorPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34375C32D6C9FA10021AB7B /* AuthorPageViewController.swift */; };
@@ -141,6 +142,7 @@
 		E1CD40D82A96BE7D00BE7FE8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		E1CD40D92A96BE7D00BE7FE8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E1CD40DB2A96BECC00BE7FE8 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		F311F0692D7869FA00280A5C /* OrderRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRequest.swift; sourceTree = "<group>"; };
 		F34375C02D6C9FA10021AB7B /* AuthorPageModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorPageModuleFactory.swift; sourceTree = "<group>"; };
 		F34375C12D6C9FA10021AB7B /* AuthorPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorPagePresenter.swift; sourceTree = "<group>"; };
 		F34375C32D6C9FA10021AB7B /* AuthorPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorPageViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				91B1CBB22D74EFCE00BCF5B8 /* RequestBuilder.swift */,
 				F3924B192D7723F6002768AD /* UpdateOrderDto.swift */,
 				F388010F2D7831DC002F2D36 /* ProfileRequest.swift */,
+				F311F0692D7869FA00280A5C /* OrderRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				F3FC1A7D2D61FAA8002DBE23 /* NFTCollectionListModuleBuilder.swift in Sources */,
 				F3C495F42D67429B00B58C41 /* NFTCollectionDetailViewController.swift in Sources */,
 				F3FC1A802D61FAA8002DBE23 /* NFTCollectionListViewController.swift in Sources */,
+				F311F06A2D7869FA00280A5C /* OrderRequest.swift in Sources */,
 				F388010E2D783165002F2D36 /* Profile.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				915447452D64F2E500CBED07 /* FilterMenuButtonModel.swift in Sources */,

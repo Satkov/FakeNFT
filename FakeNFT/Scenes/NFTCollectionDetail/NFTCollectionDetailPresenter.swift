@@ -26,6 +26,7 @@ final class NFTCollectionDetailPresenter {
     private var authorWebsiteURL: URL?
     private var nfts: [Nft]? = []
     private var profile: Profile?
+    private var order: Order?
 
     init(interactor: NFTCollectionDetailInteractorProtocol, router: NFTCollectionDetailRouterProtocol, input: NftCollectionDetailInput) {
         self.interactor = interactor
@@ -104,7 +105,12 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             return nil
         }
         let imageURL = URL(string: nft.images.first ?? "")
-        let nftBO = NftBO(imageURL: imageURL, name: nft.name, price: nft.price, rating: nft.rating, isOrdered: false, isLiked: profile?.likes.contains(nft.id) ?? false)
+        let nftBO = NftBO(imageURL: imageURL,
+                          name: nft.name,
+                          price: nft.price,
+                          rating: nft.rating,
+                          isOrdered: order?.nfts.contains(nft.id) ?? false,
+                          isLiked: profile?.likes.contains(nft.id) ?? false)
         return nftBO
     }
     
@@ -114,6 +120,21 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             switch result {
             case .success(let profile):
                 self.profile = profile
+                if self.nfts?.count == self.currentNftCollection?.nfts.count {
+                    self.view?.updateNftList()
+                }
+            case .failure(let error):
+                self.view?.showError(error: error)
+            }
+        }
+    }
+    
+    func loadOrder() {
+        interactor.loadOrder { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let order):
+                self.order = order
                 if self.nfts?.count == self.currentNftCollection?.nfts.count {
                     self.view?.updateNftList()
                 }

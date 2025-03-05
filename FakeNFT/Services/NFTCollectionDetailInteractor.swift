@@ -10,6 +10,7 @@ typealias NftDetailCompletion = (Result<Nft, Error>) -> Void
 typealias UserCompletion = (Result<User, Error>) -> Void
 typealias UsersCompletion = (Result<[User], Error>) -> Void
 typealias ProfileCompletion = (Result<Profile, Error>) -> Void
+typealias OrderCompletion = (Result<Order, Error>) -> Void
 
 protocol NFTCollectionDetailInteractorProtocol: AnyObject {
     func loadNftCollection(id: String, completion: @escaping NftCollectionDetailCompletion)
@@ -17,6 +18,7 @@ protocol NFTCollectionDetailInteractorProtocol: AnyObject {
     func loadAllUsers(completion: @escaping UsersCompletion)
     func loadNft(id: String, completion: @escaping NftDetailCompletion)
     func loadProfile(completion: @escaping ProfileCompletion)
+    func loadOrder(completion: @escaping OrderCompletion)
 }
 
 class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
@@ -86,6 +88,18 @@ class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
             switch result {
             case .success(let profile):
                 completion(.success(profile))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func loadOrder(completion: @escaping OrderCompletion) {
+        let request = OrderRequest()
+        networkClient.send(request: request, type: Order.self) { result in
+            switch result {
+            case .success(let order):
+                completion(.success(order))
             case .failure(let error):
                 completion(.failure(error))
             }
