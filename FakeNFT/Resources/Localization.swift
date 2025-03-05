@@ -7,6 +7,7 @@ enum Localization {
 
     // MARK: - Tab Bar
     static let catalogTab = localized("Tab.catalog")
+    static let profileTab = localized("Tab.profile")
 
     // MARK: - Catalog
     static let openNft = localized("Catalog.openNft")
@@ -23,6 +24,19 @@ enum Localization {
     static let filterChoiceName = localized("Filter.choice.name")
     static let filterChoicePrice = localized("Filter.choice.price")
 
+    
+    // MARK: - Profile
+    static let name = localized("Profile.Name")
+    static let description = localized("Profile.Description")
+    static let website = localized("Profile.Website")
+    
+    // MARK: - MyNft
+    static let myNft = localized("MyNft.Title")
+    
     // MARK: - Common
     static let close = localized("Close")
+    static let price = localized("Price")
+    static let sortByPrice = localized("Sort.Price")
+    static let sortByRating = localized("Sort.Rating")
+    static let sortByName = localized("Sort.Name")
 }
