@@ -17,10 +17,9 @@ class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         return imageView
     }()
     
-    private lazy var nftRatingView: UIView = {
-        let view = UIView()
+    private lazy var nftRatingView: RatingView = {
+        let view = RatingView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .yellow
         return view
     }()
     
@@ -78,7 +77,7 @@ class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         nftPriceLabel.text = "\(businessObject.price) ETH"
         likeImageView.image = businessObject.isLiked ? UIImage(named: "Liked") : UIImage(named: "NotLiked")
         orderImageView.image = businessObject.isOrdered ? UIImage(named: "Ordered") : UIImage(named: "NotOrdered")
-        nftRatingView.tag = businessObject.rating
+        nftRatingView.rating = businessObject.rating
     }
     
     // MARK: - Private Properties
