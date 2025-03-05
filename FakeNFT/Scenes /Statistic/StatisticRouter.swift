@@ -8,7 +8,7 @@ class StatisticRouter: StatisticRouterProtocol {
     weak var viewController: StatisticViewController?
     
     func showUserDetail(userId: String) {
-        let userDetailVC = UserDetailViewController(userId: userId)
+        let userDetailVC = UserDetailModuleBuilder.build(userId: userId)
         viewController?.navigationController?.pushViewController(userDetailVC, animated: true)
     }
 }
