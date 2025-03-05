@@ -47,7 +47,7 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
                 let url = URL(string: nftCollection.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                 self.view?.updateNftCollectionInformation(name: nftCollection.name.capitalized,
                                                           imageURL: url,
-                                                          description: nftCollection.description.capitalized)
+                                                          description: nftCollection.description.capitalized, authorName: nftCollection.author)
                 if let nftIds = self.currentNftCollection?.nfts {
                     for nftId in nftIds {
                         self.loadNft(id: nftId)
@@ -67,9 +67,9 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
                 self.users = users
                 _ = users.first (where: { $0.name == self.currentNftCollection?.author })
                 //let correctAuthorWebsiteLink = user?.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                //TODO: I hardcoded link because data from server is incorrect, users list doesn't contain name nft collection's author
                 let correctAuthorWebsiteLink = "https://practicum.yandex.ru/"
                 self.authorWebsiteURL = URL(string: correctAuthorWebsiteLink)
-                self.view?.setWebsiteLinkForAuthor(url: self.authorWebsiteURL)
             case .failure(let error):
                 self.view?.showError(error: error)
             }

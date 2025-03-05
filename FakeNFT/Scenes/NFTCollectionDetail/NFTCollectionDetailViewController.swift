@@ -9,9 +9,8 @@ import UIKit
 import Kingfisher
 
 protocol NFTCollectionDetailViewProtocol: AnyObject {
-    func updateNftCollectionInformation(name: String, imageURL: URL?, description: String)
+    func updateNftCollectionInformation(name: String, imageURL: URL?, description: String, authorName: String)
     func showError(error: Error)
-    func setWebsiteLinkForAuthor(url: URL?)
     func updateNftList()
 }
 
@@ -43,32 +42,31 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(nftCollectionAuthorTitleLabel)
+        stackView.addArrangedSubview(nftCollectionAuthorNameLabel)
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
+        stackView.alignment = .center
         return stackView
     }()
     
     private lazy var nftCollectionAuthorTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        //Author title
-        let authorTitleFont = UIFont(name: "SF Pro Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
-        let authorTitleAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: authorTitleFont,
-                                     NSAttributedString.Key.foregroundColor: UIColor.textPrimary]
-        let attributedStringAuthorTitle = NSAttributedString(string: "Автор коллекции: ", attributes: authorTitleAttributes)
-        //Author name
-        let authorNameFont = UIFont(name: "SF Pro Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
-        let authorNameAttributes: [NSAttributedString.Key : Any] = [.font: authorNameFont, .foregroundColor: UIColor.linkText]
-        
-        var attributedStringAuthorName = NSMutableAttributedString(string: "Test author", attributes: authorNameAttributes)
-        if let url = URL(string: "https://practicum.yandex.ru/") {
-            let range = NSMakeRange(0, 4)
-            attributedStringAuthorName.addAttribute(.link, value: url, range: range)
-        }
-        let attributedStringFull = NSMutableAttributedString(attributedString: attributedStringAuthorTitle)
-        attributedStringFull.append(attributedStringAuthorName)
-        
-        label.attributedText = attributedStringFull
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.font = UIFont(name: "SF Pro Regular", size: 13)
+        label.textColor = UIColor.textPrimary
+        label.text = "Автор коллекции: "
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var nftCollectionAuthorNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.font = UIFont(name: "SF Pro Regular", size: 15)
+        label.textColor = UIColor.linkText
+        label.textAlignment = .left
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onClickLabel))
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(gestureRecognizer)
@@ -161,21 +159,18 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
 // MARK: - NFTCollectionDetailViewProtocol
 extension NFTCollectionDetailViewController: NFTCollectionDetailViewProtocol {
     
-    func updateNftCollectionInformation(name: String, imageURL: URL?, description: String) {
+    func updateNftCollectionInformation(name: String, imageURL: URL?, description: String, authorName: String) {
         nftCollectionNameLabel.text = name
         nftCollectionImageView.kf.indicatorType = .activity
         nftCollectionImageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "Placeholder"))
         nftCollectionDescription.text = description
+        nftCollectionAuthorNameLabel.text = authorName
     }
     
     func showError(error: Error) {
         hideLoading()
         let errorModel = ErrorModel(message: error.localizedDescription, actionText: "OK", action: {})
         showError(errorModel)
-    }
-    
-    func setWebsiteLinkForAuthor(url: URL?) {
-        //TODO: Set link for author link label
     }
     
     func updateNftList() {
