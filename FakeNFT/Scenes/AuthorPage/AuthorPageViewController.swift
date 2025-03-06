@@ -31,7 +31,7 @@ final class AuthorPageViewController: UIViewController {
     
     private func loadWebViewContent() {
         
-        guard let urlRequest = presenter?.authorPageURLRequest() else {
+        guard let urlRequest = presenter?.makeAuthorPageURLRequest() else {
             return
         }
         DispatchQueue.main.async {

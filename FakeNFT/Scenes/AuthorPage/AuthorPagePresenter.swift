@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AuthorPagePresenterProtocol: AnyObject {
-    func authorPageURLRequest() -> URLRequest
+    func makeAuthorPageURLRequest() -> URLRequest
 }
 
 final class AuthorPagePresenter {
@@ -22,7 +22,7 @@ final class AuthorPagePresenter {
 
 extension AuthorPagePresenter: AuthorPagePresenterProtocol {
     
-    func authorPageURLRequest() -> URLRequest {
+    func makeAuthorPageURLRequest() -> URLRequest {
         return URLRequest(url: authorPageURL)
     }
 }
