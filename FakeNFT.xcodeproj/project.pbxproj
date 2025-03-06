@@ -130,7 +130,6 @@
 		3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatters+Presets.swift"; sourceTree = "<group>"; };
 		558E39E62C68CE0900FB86AC /* NftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftService.swift; sourceTree = "<group>"; };
 		914311402D7480570010F6E0 /* UpdateOrderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOrderResponse.swift; sourceTree = "<group>"; };
-		91513F432D6B42A50093A10E /* NetworkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
 		915447412D64948500CBED07 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		915447442D64F2E500CBED07 /* FilterMenuButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMenuButtonModel.swift; sourceTree = "<group>"; };
 		915447462D64F31900CBED07 /* TableHeaderTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderTitleView.swift; sourceTree = "<group>"; };
@@ -322,7 +321,6 @@
 				F3C495FD2D6759A300B58C41 /* NFTDetailInteractor.swift */,
 				F3C495F02D67429B00B58C41 /* NFTCollectionDetailInteractor.swift */,
 				F3FC1A7C2D61FAA8002DBE23 /* NFTCollectionListInteractor.swift */,
-				91513F432D6B42A50093A10E /* NetworkRequests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
