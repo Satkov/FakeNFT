@@ -38,7 +38,7 @@ final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIden
     }
     
     // MARK: - Public Methods
-    func configure(businessObject: NFTCollectionBO) {
+    func configure(businessObject: NFTCollectionBusinessObject) {
         nameAndNftCountLabel.text = "\(businessObject.name.capitalized) (\(businessObject.nftCount))"
         ntfCollectionImageView.kf.setImage(with: businessObject.imageURL)
     }

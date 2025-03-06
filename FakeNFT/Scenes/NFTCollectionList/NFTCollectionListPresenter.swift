@@ -18,7 +18,7 @@ enum Key: String {
 
 protocol NFTCollectionListPresenterProtocol: AnyObject {
     func numberOfNFTCollections() -> Int
-    func nftCollectionBOForIndex(_ indexPath: IndexPath) -> NFTCollectionBO?
+    func nftCollectionBOForIndex(_ indexPath: IndexPath) -> NFTCollectionBusinessObject?
     func loadNFTCollectionList()
     func sortNftCollectionList(type: SortType)
     func showNftCollectionDetailForIndexPath(_ indexPath: IndexPath)
@@ -47,14 +47,14 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         return nftCollectionList?.count ?? 0
     }
     
-    func nftCollectionBOForIndex(_ indexPath: IndexPath) -> NFTCollectionBO? {
+    func nftCollectionBOForIndex(_ indexPath: IndexPath) -> NFTCollectionBusinessObject? {
         
         let nftCollection: NftCollection? = nftCollectionList?[indexPath.row]
         var imageURL: URL?
         if let imageURLString = nftCollection?.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             imageURL = URL(string: imageURLString)
         }
-        let model = NFTCollectionBO(imageURL: imageURL,
+        let model = NFTCollectionBusinessObject(imageURL: imageURL,
                                            name: nftCollection?.name ?? "",
                                            nftCount: nftCollection?.nfts.count ?? 0)
         return model

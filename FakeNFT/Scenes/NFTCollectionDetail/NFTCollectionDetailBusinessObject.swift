@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NFTCollectionDetailBO {
+struct NFTCollectionDetailBusinessObject {
     let imageURL: URL?
     let name: String
     let authorName: String

@@ -11,7 +11,7 @@ protocol NFTCollectionDetailPresenterProtocol: AnyObject {
     func loadCurrentNFTCollection()
     func showAuthorPage()
     func nftCount() -> Int
-    func nftBusinessObject(index: IndexPath) -> NftBO?
+    func nftBusinessObject(index: IndexPath) -> NftBusinessObject?
     func loadProfile()
 }
 
@@ -99,13 +99,13 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
         }
     }
     
-    func nftBusinessObject(index: IndexPath) -> NftBO? {
+    func nftBusinessObject(index: IndexPath) -> NftBusinessObject? {
         
         guard let nft = nfts?[index.row] else {
             return nil
         }
         let imageURL = URL(string: nft.images.first ?? "")
-        let nftBO = NftBO(imageURL: imageURL,
+        let nftBO = NftBusinessObject(imageURL: imageURL,
                           name: nft.name,
                           price: nft.price,
                           rating: nft.rating,

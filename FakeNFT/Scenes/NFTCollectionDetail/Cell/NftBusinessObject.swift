@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NftBO {
+struct NftBusinessObject {
     let imageURL: URL?
     let name: String
     let price: Float

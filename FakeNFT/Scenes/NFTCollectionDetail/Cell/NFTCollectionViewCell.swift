@@ -70,7 +70,7 @@ class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     // MARK: - Public Methods
-    func configure(businessObject: NftBO) {
+    func configure(businessObject: NftBusinessObject) {
         
         nftImageView.kf.setImage(with: businessObject.imageURL, placeholder: UIImage(named: "Placeholder"))
         nftNameLabel.text = businessObject.name
