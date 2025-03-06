@@ -10,7 +10,7 @@ typealias CurrenciesCompletion = (Result<[Currency], Error>) -> Void
 protocol NFTDetailInteractorProtocol: AnyObject {
 }
 
-class NFTDetailInteractor: NFTDetailInteractorProtocol {
+final class NFTDetailInteractor: NFTDetailInteractorProtocol {
     
     // MARK: - Public Properties
     weak var presenter: NFTDetailPresenterProtocol?

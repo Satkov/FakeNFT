@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
+final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     // MARK: - IB Outlets
     private lazy var nftImageView: UIImageView = {

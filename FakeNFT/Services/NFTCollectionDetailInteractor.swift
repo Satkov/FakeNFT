@@ -21,7 +21,7 @@ protocol NFTCollectionDetailInteractorProtocol: AnyObject {
     func loadOrder(completion: @escaping OrderCompletion)
 }
 
-class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
+final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
     weak var presenter: NFTCollectionDetailPresenterProtocol?
     
     // MARK: - Private Properties

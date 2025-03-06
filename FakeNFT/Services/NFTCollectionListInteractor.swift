@@ -11,7 +11,7 @@ protocol NFTCollectionListInteractorProtocol: AnyObject {
     func loadNftCollectionList(completion: @escaping NftCollectionListCompletion)
 }
 
-class NFTCollectionListInteractor: NFTCollectionListInteractorProtocol {
+final class NFTCollectionListInteractor: NFTCollectionListInteractorProtocol {
     
     // MARK: - Public Properties
     weak var presenter: NFTCollectionListPresenterProtocol?
