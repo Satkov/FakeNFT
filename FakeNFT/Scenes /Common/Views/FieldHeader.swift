@@ -1,10 +1,3 @@
-//
-//  FieldHeader.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 03.03.2025.
-//
-
 import UIKit
 
 final class FieldHeader: UILabel {

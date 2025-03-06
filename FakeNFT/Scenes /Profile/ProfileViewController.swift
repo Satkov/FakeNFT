@@ -1,10 +1,3 @@
-//
-//  ProfileViewController.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 24.02.2025
-//
-
 import UIKit
 import ProgressHUD
 import Kingfisher
@@ -55,6 +48,20 @@ final class ProfileViewController: UIViewController {
     private let myNftButton = ListItem(title: "Мои NFT")
     private let likedNftButton = ListItem(title: "Избранные NFT")
     private let aboutDevButton = ListItem(title: "О разработчике")
+    private let avatarAndNameStack: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 16
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+
+    private let buttonsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.distribution = .fill
+        stack.axis = .vertical
+        return stack
+    }()
 
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -67,6 +74,24 @@ final class ProfileViewController: UIViewController {
 private extension ProfileViewController {
     func initialize() {
         view.backgroundColor = .projectWhite
+        setupNavBar()
+        
+        avatarAndNameStack.addArrangedSubview(avatarImage)
+        avatarAndNameStack.addArrangedSubview(nameLabel)
+        buttonsStack.addArrangedSubview(myNftButton)
+        buttonsStack.addArrangedSubview(likedNftButton)
+        buttonsStack.addArrangedSubview(aboutDevButton)
+        view.addSubview(avatarAndNameStack)
+        view.addSubview(descriptionLabel)
+        view.addSubview(websiteButton)
+        view.addSubview(buttonsStack)
+        
+        setupConstraints()
+        myNftButton.addTarget(self, action: #selector(didTapMyNftButton), for: .touchUpInside)
+        presenter?.viewDidLoad()
+    }
+    
+    private func setupNavBar() {
         let editButton = UIBarButtonItem(
             image: UIImage(systemName: "square.and.pencil"),
             style: .plain,
@@ -76,26 +101,9 @@ private extension ProfileViewController {
         navigationController?.navigationBar.tintColor = .projectBlack
         navigationItem.rightBarButtonItem = editButton
         navigationItem.backButtonTitle = ""
-        
-        let avatarAndNameStack = UIStackView()
-        avatarAndNameStack.spacing = 16
-        avatarAndNameStack.translatesAutoresizingMaskIntoConstraints = false
-        avatarAndNameStack.addArrangedSubview(avatarImage)
-        avatarAndNameStack.addArrangedSubview(nameLabel)
-
-        let buttonsStack = UIStackView()
-        buttonsStack.translatesAutoresizingMaskIntoConstraints = false
-        buttonsStack.distribution = .fill
-        buttonsStack.axis = .vertical
-        buttonsStack.addArrangedSubview(myNftButton)
-        buttonsStack.addArrangedSubview(likedNftButton)
-        buttonsStack.addArrangedSubview(aboutDevButton)
-        
-        view.addSubview(avatarAndNameStack)
-        view.addSubview(descriptionLabel)
-        view.addSubview(websiteButton)
-        view.addSubview(buttonsStack)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             avatarAndNameStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             avatarAndNameStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -116,10 +124,6 @@ private extension ProfileViewController {
             buttonsStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             buttonsStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
-
-        myNftButton.addTarget(self, action: #selector(didTapMyNftButton), for: .touchUpInside)
-        
-        presenter?.viewDidLoad()
     }
     
     // MARK: - Action

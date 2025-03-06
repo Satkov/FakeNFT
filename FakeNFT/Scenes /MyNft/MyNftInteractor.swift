@@ -1,10 +1,3 @@
-//
-//  MyNftInteractor.swift
-//  Super easy dev
-//
-//  Created by Alibi Mailan on 03.03.2025
-//
-
 protocol MyNftInteractorProtocol: AnyObject {
     func fetchNFTs()
 }

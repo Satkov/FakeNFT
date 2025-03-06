@@ -1,16 +1,9 @@
-//
-//  ProfileEditPresenterProtocol.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 01.03.2025.
-//
-
 import UIKit
 import ProgressHUD
 
 protocol ProfileEditPresenterProtocol: AnyObject {
     func viewDidLoad()
-    func didTapSave(name: String, description: String, website: String, photo: UIImage?)
+    func didTapSave(_ profileData: ProfileSaveData)
     func didTapChangePhoto()
     func didTapClose()
     func profileLoaded(_ profile: ProfileEntity)
@@ -29,9 +22,9 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
         interactor.loadProfile()
     }
     
-    func didTapSave(name: String, description: String, website: String, photo: UIImage?) {
+    func didTapSave(_ profileData: ProfileSaveData) {
         view?.showLoadingIndicator()
-        let updatedProfile = ProfileEntity(id: "1", name: name, website: website, description: description, avatarURL: nil, nfts: nil)
+        let updatedProfile = ProfileEntity(id: "1", name: profileData.name, website: profileData.website, description: profileData.description, avatarURL: nil, nfts: nil)
         interactor.saveProfile(updatedProfile)
     }
     
@@ -63,4 +56,11 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     func didTapClose() {
         router.closeProfileEdit()
     }
+}
+
+struct ProfileSaveData {
+    var name: String
+    var description: String
+    var website: String
+    var photo: UIImage?
 }

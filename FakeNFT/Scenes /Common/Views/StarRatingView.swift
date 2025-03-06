@@ -1,11 +1,3 @@
-//
-//  StarRatingView.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 04.03.2025.
-//
-
-
 import UIKit
 
 class StarRatingView: UIView {

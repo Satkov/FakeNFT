@@ -1,10 +1,3 @@
-//
-//  MyNftTableViewCell.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 04.03.2025.
-//
-
 import Foundation
 import UIKit
 
@@ -44,6 +37,22 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         label.textColor = .projectBlack
         return label
     }()
+    private let middleStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 4
+        stack.alignment = .leading
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    private let priceStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 2
+        stack.alignment = .leading
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,31 +64,24 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     private func setupViews() {
-        let middleStackView = UIStackView()
-        middleStackView.axis = .vertical
-        middleStackView.spacing = 4
-        middleStackView.alignment = .leading
-        middleStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(middleStackView)
-        
         [nftNameLabel, nftRatingView, nftAuthorLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             middleStackView.addArrangedSubview($0)
         }
-        
-        let priceStackView = UIStackView()
-        priceStackView.axis = .vertical
-        priceStackView.spacing = 2
-        priceStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(priceStackView)
         
         [nftPriceHeaderLabel, nftPriceLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             priceStackView.addArrangedSubview($0)
         }
         
+        addSubview(middleStackView)
+        addSubview(priceStackView)
         addSubview(nftImageView)
         
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             nftImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             nftImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),

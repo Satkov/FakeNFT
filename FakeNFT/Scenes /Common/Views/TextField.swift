@@ -1,10 +1,3 @@
-//
-//  TextField.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 03.03.2025.
-//
-
 import Foundation
 import UIKit
 

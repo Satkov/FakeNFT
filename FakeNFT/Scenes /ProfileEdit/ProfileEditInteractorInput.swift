@@ -1,11 +1,3 @@
-//
-//  ProfileEditInteractorInput.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 01.03.2025.
-//
-
-
 protocol ProfileEditInteractorInput: AnyObject {
     func loadProfile()
     func saveProfile(_ profile: ProfileEntity)
@@ -22,7 +14,7 @@ final class ProfileEditInteractor: ProfileEditInteractorInput {
 
     func loadProfile() {
         profileService.loadProfile(id: "1") { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch (result) {
             case .success(let profile) :
                 self.presenter?.profileLoaded(profile)

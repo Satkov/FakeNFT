@@ -1,10 +1,3 @@
-//
-//  ProfileService.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 26.02.2025.
-//
-
 typealias ProfileCompletion = (Result<ProfileEntity, Error>) -> Void
 
 protocol ProfileService {

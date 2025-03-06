@@ -1,10 +1,3 @@
-//
-//  MyNftViewController.swift
-//  Super easy dev
-//
-//  Created by Alibi Mailan on 03.03.2025
-//
-
 import UIKit
 
 protocol MyNftViewProtocol: AnyObject {
@@ -65,6 +58,10 @@ private extension MyNftViewController {
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

@@ -1,10 +1,3 @@
-//
-//  MyNftPresenter.swift
-//  Super easy dev
-//
-//  Created by Alibi Mailan on 03.03.2025
-//
-
 enum SortOption {
     case name
     case price

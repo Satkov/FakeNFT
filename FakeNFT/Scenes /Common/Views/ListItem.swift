@@ -1,10 +1,3 @@
-//
-//  ListItem.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 01.03.2025.
-//
-
 import Foundation
 import UIKit
 

@@ -1,10 +1,3 @@
-//
-//  ProfileEditViewController.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 01.03.2025.
-//
-
 import UIKit
 import ProgressHUD
 
@@ -19,7 +12,15 @@ final class ProfileEditViewController: UIViewController {
     
     var presenter: ProfileEditPresenterProtocol?
     
-    private let contentView = UIStackView()
+    private let contentView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 24
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     
     private let headerView = UIView()
     private let closeButton: UIButton = {
@@ -71,11 +72,6 @@ extension ProfileEditViewController {
         headerView.addSubview(closeButton)
         headerView.addSubview(profileImageView)
         
-        contentView.spacing = 24
-        contentView.axis = .vertical
-        contentView.alignment = .fill
-        contentView.distribution = .fill
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(contentView)
         
         [headerView,
@@ -89,7 +85,12 @@ extension ProfileEditViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
         profileImageView.addGestureRecognizer(tapGesture)
-        
+        setupConstraints()
+        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
+        presenter?.viewDidLoad()
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: headerView.topAnchor),
             closeButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
@@ -109,10 +110,6 @@ extension ProfileEditViewController {
             
             descriptionTextView.heightAnchor.constraint(equalToConstant: 132)
         ])
-        
-        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
-        
-        presenter?.viewDidLoad()
     }
     
     private func fieldStackView(label: UIView, field: UIView) -> UIStackView {

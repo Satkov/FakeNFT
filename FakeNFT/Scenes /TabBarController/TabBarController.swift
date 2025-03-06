@@ -27,9 +27,7 @@ final class TabBarController: UITabBarController {
             }
         }
 
-        let profileContoller = ProfileModuleBuilder.build(
-            servicesAssembly: servicesAssembly
-        )
+        let profileContoller = ProfileRouter.createModule(servicesAssembly: servicesAssembly)
         profileContoller.tabBarItem = profileTabBarItem
 
         viewControllers = [UINavigationController(rootViewController: profileContoller)]

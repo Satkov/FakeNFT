@@ -1,10 +1,3 @@
-//
-//  UIImageView+Kingfisher.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 03.03.2025.
-//
-
 import UIKit
 import Kingfisher
 

@@ -1,10 +1,3 @@
-//
-//  ProfileInteractor.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 24.02.2025
-//
-
 import Foundation
 
 protocol ProfileInteractorProtocol: AnyObject {
@@ -22,7 +15,7 @@ final class ProfileInteractor: ProfileInteractorProtocol {
     }
     
     func fetchProfile(userId: String) {
-        profileService.loadProfile(id: userId) { (result) in
+        profileService.loadProfile(id: userId) { result in
             switch (result) {
             case .success(let profile):
                 self.presenter?.didFetchProfile(profile)
