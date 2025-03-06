@@ -181,7 +181,7 @@ extension NFTCollectionDetailViewController: NFTCollectionDetailViewProtocol {
 extension NFTCollectionDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return presenter?.nftCount() ?? 0
+        return presenter?.nftCount ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

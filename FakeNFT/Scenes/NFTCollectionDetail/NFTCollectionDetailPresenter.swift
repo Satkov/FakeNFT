@@ -8,9 +8,9 @@
 import Foundation
 
 protocol NFTCollectionDetailPresenterProtocol: AnyObject {
+    var nftCount: Int { get }
     func loadCurrentNFTCollection()
     func showAuthorPage()
-    func nftCount() -> Int
     func nftBusinessObject(index: IndexPath) -> NftBusinessObject?
     func loadProfile()
 }
@@ -80,8 +80,8 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
         router.showAuthorPage(url: authorWebsiteURL)
     }
     
-    func nftCount() -> Int {
-        return currentNftCollection?.nfts.count ?? 0
+    var nftCount: Int {
+        currentNftCollection?.nfts.count ?? 0
     }
     
     func loadNft(id: String) {
