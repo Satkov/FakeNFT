@@ -77,7 +77,7 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
     }
     
     func showAuthorPage() {
-        router.showAthorPage(url: authorWebsiteURL)
+        router.showAuthorPage(url: authorWebsiteURL)
     }
     
     func nftCount() -> Int {

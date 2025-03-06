@@ -8,13 +8,13 @@
 import UIKit
 
 protocol NFTCollectionDetailRouterProtocol {
-    func showAthorPage(url: URL?)
+    func showAuthorPage(url: URL?)
 }
 
 final class NFTCollectionDetailRouter: NFTCollectionDetailRouterProtocol {
     weak var viewController: NFTCollectionDetailViewController?
     
-    func showAthorPage(url: URL?) {
+    func showAuthorPage(url: URL?) {
         guard let url = url else { return }
         let authorViewController = AuthorPageModuleFactory.build(url: url)
         if let navigationViewController = viewController?.parent as? UINavigationController {
