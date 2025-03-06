@@ -20,7 +20,6 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
         return activityIndicator
     }()
     
-    // MARK: - IB Outlets
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

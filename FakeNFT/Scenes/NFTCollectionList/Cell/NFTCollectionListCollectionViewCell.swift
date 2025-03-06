@@ -9,7 +9,6 @@ import UIKit
 
 final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
-    // MARK: - IB Outlets
     private lazy var ntfCollectionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

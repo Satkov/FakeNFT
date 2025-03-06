@@ -9,7 +9,6 @@ import UIKit
 
 final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
-    // MARK: - IB Outlets
     private lazy var nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

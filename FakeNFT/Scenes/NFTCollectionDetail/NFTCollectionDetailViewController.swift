@@ -16,7 +16,6 @@ protocol NFTCollectionDetailViewProtocol: AnyObject {
 
 final class NFTCollectionDetailViewController: UIViewController, ErrorView, LoadingView {
     
-    // MARK: - IB Outlets
     var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
