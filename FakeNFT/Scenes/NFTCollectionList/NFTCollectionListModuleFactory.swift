@@ -4,7 +4,7 @@ import UIKit
 struct NFTCollectionListModuleFactory {
     static func build(serviceAssembly: ServicesAssembly) -> NFTCollectionListViewController {
         let interactor = serviceAssembly.nftCollectionListInteractor
-        let router = NFTCollectionListRouter(serviceAssemby: serviceAssembly)
+        let router = NFTCollectionListRouter(serviceAssembly: serviceAssembly)
         let presenter = NFTCollectionListPresenter(interactor: interactor, router: router)
         let viewController = NFTCollectionListViewController()
         presenter.view  = viewController
