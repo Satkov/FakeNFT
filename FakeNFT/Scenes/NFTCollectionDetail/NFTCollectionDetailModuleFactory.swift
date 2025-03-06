@@ -1,13 +1,7 @@
-//
-//  NFTCollectionDetailModuleBuilder.swift
-//  Super easy dev
-//
-//  Created by Nikolay on 20.02.2025
-//
 
 import UIKit
 
-final class NFTCollectionDetailModuleBuilder {
+struct NFTCollectionDetailModuleFactory {
     static func build(input: NftCollectionDetailInput, serviceAssembly: ServicesAssembly) -> NFTCollectionDetailViewController {
         let interactor = serviceAssembly.nftCollectionDetailInteractor
         let router = NFTCollectionDetailRouter()

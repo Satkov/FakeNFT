@@ -1,13 +1,7 @@
-//
-//  NFTCollectionListModuleBuilder.swift
-//  Super easy dev
-//
-//  Created by Nikolay on 16.02.2025
-//
 
 import UIKit
 
-final class NFTCollectionListModuleBuilder {
+struct NFTCollectionListModuleFactory {
     static func build(serviceAssembly: ServicesAssembly) -> NFTCollectionListViewController {
         let interactor = serviceAssembly.nftCollectionListInteractor
         let router = NFTCollectionListRouter(serviceAssemby: serviceAssembly)

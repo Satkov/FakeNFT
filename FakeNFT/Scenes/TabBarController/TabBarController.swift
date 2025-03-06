@@ -15,7 +15,7 @@ final class TabBarController: UITabBarController {
         guard let servicesAssembly = servicesAssembly else {
             return
         }
-        let catalogController = NFTCollectionListModuleBuilder.build(serviceAssembly: servicesAssembly)
+        let catalogController = NFTCollectionListModuleFactory.build(serviceAssembly: servicesAssembly)
         let navigationViewController = UINavigationController(rootViewController: catalogController)
         catalogController.tabBarItem = catalogTabBarItem
         viewControllers = [navigationViewController]
