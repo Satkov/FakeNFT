@@ -5,7 +5,6 @@
 //  Created by Nikolay on 20.02.2025
 //
 
-import Foundation
 import UIKit
 
 protocol NFTCollectionDetailRouterProtocol {

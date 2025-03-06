@@ -1,11 +1,11 @@
 //
-//  AuthorPageModuleBuilder.swift
+//  AuthorPageModuleFactory.swift
 //  Super easy dev
 //
 //  Created by Nikolay on 24.02.2025
 //
 
-import UIKit
+import Foundation
 
 struct AuthorPageModuleFactory {
     static func build(url: URL) -> AuthorPageViewController {
