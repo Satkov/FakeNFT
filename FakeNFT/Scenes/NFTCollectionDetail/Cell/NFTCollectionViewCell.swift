@@ -25,7 +25,7 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "SF Pro Bold", size: 17)
+        label.font = UIFont.sfProBold17
         label.textColor = UIColor.textPrimary
         label.numberOfLines = 0
         return label
@@ -34,7 +34,7 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var nftPriceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "SF Pro Medium", size: 10)
+        label.font = UIFont.sfProMedium10
         label.textColor = UIColor.textPrimary
         return label
     }()

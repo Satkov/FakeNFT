@@ -21,7 +21,7 @@ final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIden
     private lazy var nameAndNftCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "SF Pro Bold", size: 17)
+        label.font = UIFont.sfProBold17
         label.textColor = UIColor.textPrimary
         return label
     }()

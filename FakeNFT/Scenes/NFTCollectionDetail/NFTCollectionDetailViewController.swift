@@ -32,7 +32,7 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
     private lazy var nftCollectionNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "SF Pro Bold", size: 22)
+        label.font = UIFont.sfProBold22
         label.textColor = UIColor.textPrimary
         return label
     }()
@@ -52,7 +52,7 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        label.font = UIFont(name: "SF Pro Regular", size: 13)
+        label.font = UIFont.sfRegular15
         label.textColor = UIColor.textPrimary
         label.text = "Автор коллекции: "
         label.textAlignment = .left
@@ -63,7 +63,7 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.font = UIFont(name: "SF Pro Regular", size: 15)
+        label.font = UIFont.sfRegular15
         label.textColor = UIColor.linkText
         label.textAlignment = .left
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onClickLabel))
@@ -75,7 +75,7 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
     private lazy var nftCollectionDescription: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "SF Pro Regular", size: 13)
+        label.font = UIFont.sfRegular13
         label.textColor = UIColor.textPrimary
         label.numberOfLines = 0
         return label

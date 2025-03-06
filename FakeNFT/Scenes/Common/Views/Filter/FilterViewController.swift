@@ -11,7 +11,7 @@ final class FilterViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .white
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "SF Pro Semibold", size: 20)
+        button.titleLabel?.font = UIFont.sfProSemibold20
         button.setTitleColor(UIColor.filterMenuText, for: .normal)
         button.layer.cornerRadius = 13
         return button
@@ -179,7 +179,7 @@ extension FilterViewController: UITableViewDataSource {
         let buttonModel = buttons[indexPath.row]
         cell.textLabel?.text = buttonModel.title
         cell.textLabel?.textAlignment = .center
-        cell.textLabel?.font = UIFont(name: "SF Pro Regular", size: 20)
+        cell.textLabel?.font = UIFont.sfRegular20
         cell.textLabel?.textColor = UIColor.filterMenuText
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         cell.selectionStyle = .none
