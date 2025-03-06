@@ -122,11 +122,11 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
         
         view.addSubview(nftCollectionImageView)
         view.addSubview(nftCollectionNameLabel)
-        //view.addSubview(nftCollectionAuthorTitleLabel)
         view.addSubview(nftCollectionDescription)
         view.addSubview(nftCollectionAuthorStackView)
         view.addSubview(nftsCollectionView)
         view.addSubview(activityIndicator)
+        view.backgroundColor = UIColor.background
         navigationItem.backButtonTitle = ""
         
         NSLayoutConstraint.activate([
