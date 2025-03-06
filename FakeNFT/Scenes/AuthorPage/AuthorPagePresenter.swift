@@ -13,7 +13,7 @@ protocol AuthorPagePresenterProtocol: AnyObject {
 
 final class AuthorPagePresenter {
     weak var view: AuthorPageViewProtocol?
-    var authorPageURL: URL
+    private var authorPageURL: URL
 
     init(url: URL) {
         self.authorPageURL = url
