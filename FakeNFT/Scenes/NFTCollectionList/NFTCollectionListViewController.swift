@@ -20,40 +20,42 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
         return activityIndicator
     }()
     
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(NFTCollectionListCollectionViewCell.self)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
+    private lazy var nftCollectionListTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .systemBackground
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(NFTCollectionListTableViewCell.self)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 187
+        tableView.separatorStyle = .none
+        return tableView
     }()
     
     // MARK: - Public
     var presenter: NFTCollectionListPresenterProtocol?
     
     // MARK: - Private
-    private let cellIdentifier = "trackCellIdentifier"
+    private let cellIdentifier = "nftCollectionCellIdentifier"
+    private var isLoading  = false
 
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoading()
-        presenter?.loadNFTCollectionList()
+        presenter?.loadNextPageNFTCollectionList()
         setupLayout()
     }
     
     private func setupLayout() {
         
-        view.addSubview(collectionView)
+        view.addSubview(nftCollectionListTableView)
         view.addSubview(activityIndicator)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            nftCollectionListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            nftCollectionListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            nftCollectionListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            nftCollectionListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
@@ -78,31 +80,24 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
     }
 }
 
-extension NFTCollectionListViewController: UICollectionViewDataSource {
+extension NFTCollectionListViewController: UITableViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return presenter?.numberOfNFTCollections() ?? 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter?.numberOfNFTCollections ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell: NFTCollectionListCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        if let businessObject = presenter?.nftCollectionBOForIndex(indexPath) {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: NFTCollectionListTableViewCell = tableView.dequeueReusableCell()
+        if let businessObject = presenter?.nftCollectionBusinessObjectForIndex(indexPath) {
             cell.configure(businessObject: businessObject)
         }
         return cell
     }
 }
 
-extension NFTCollectionListViewController: UICollectionViewDelegateFlowLayout {
+extension NFTCollectionListViewController: UITableViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        return CGSize(width: view.bounds.size.width - 16 * 2, height: 187)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.showNftCollectionDetailForIndexPath(indexPath)
     }
 }
@@ -111,12 +106,29 @@ extension NFTCollectionListViewController: UICollectionViewDelegateFlowLayout {
 extension NFTCollectionListViewController: NFTCollectionListViewProtocol {
     func updateForNewData() {
         hideLoading()
-        collectionView.reloadData()
+        nftCollectionListTableView.reloadData()
+        isLoading = false
     }
     
     func showError(error: Error) {
         hideLoading()
         let errorModel = ErrorModel(message: error.localizedDescription, actionText: "OK", action: {})
         showError(errorModel)
+    }
+}
+
+extension NFTCollectionListViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        if scrollView == nftCollectionListTableView {
+            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
+                if !isLoading {
+                    print("Loading is false")
+                    isLoading = true
+                    presenter?.loadNextPageNFTCollectionList()
+                }
+            }
+        }
     }
 }

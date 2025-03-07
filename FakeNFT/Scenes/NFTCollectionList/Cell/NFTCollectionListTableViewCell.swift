@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
+final class NFTCollectionListTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var ntfCollectionImageView: UIImageView = {
         let imageView = UIImageView()
@@ -27,8 +27,8 @@ final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIden
     }()
     
     // MARK: - Init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
     }
     
