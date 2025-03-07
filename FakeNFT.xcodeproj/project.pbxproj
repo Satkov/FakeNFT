@@ -54,6 +54,13 @@
 		B904828C2D7604D7002F0216 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904828B2D7604D7002F0216 /* UserCollectionViewController.swift */; };
 		B904828E2D760938002F0216 /* UserDetailModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904828D2D760938002F0216 /* UserDetailModuleBuilder.swift */; };
 		B90482902D7664FB002F0216 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904828F2D7664FB002F0216 /* WebViewController.swift */; };
+		B904829A2D7A0746002F0216 /* UserCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90482992D7A0746002F0216 /* UserCollectionPresenter.swift */; };
+		B904829C2D7A0763002F0216 /* UserCollectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904829B2D7A0763002F0216 /* UserCollectionInteractor.swift */; };
+		B904829E2D7A0779002F0216 /* UserCollectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904829D2D7A0779002F0216 /* UserCollectionRouter.swift */; };
+		B90482A02D7A079F002F0216 /* UserCollectionModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904829F2D7A079F002F0216 /* UserCollectionModuleBuilder.swift */; };
+		B90482A22D7A08FC002F0216 /* UserCollectionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90482A12D7A08FC002F0216 /* UserCollectionRequest.swift */; };
+		B90482A42D7A0F08002F0216 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90482A32D7A0F08002F0216 /* UserCollectionViewCell.swift */; };
+		B90482B52D7B5D41002F0216 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90482B42D7B5D41002F0216 /* UserProfile.swift */; };
 		B90EA9DF2D6778A3002D3582 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90EA9DE2D6778A3002D3582 /* StatisticViewController.swift */; };
 		B90EA9E12D677EC0002D3582 /* StatisticPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90EA9E02D677EC0002D3582 /* StatisticPresenter.swift */; };
 		B90EA9E32D677F9E002D3582 /* StatisticInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90EA9E22D677F9E002D3582 /* StatisticInteractor.swift */; };
@@ -137,6 +144,13 @@
 		B904828B2D7604D7002F0216 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
 		B904828D2D760938002F0216 /* UserDetailModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModuleBuilder.swift; sourceTree = "<group>"; };
 		B904828F2D7664FB002F0216 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		B90482992D7A0746002F0216 /* UserCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionPresenter.swift; sourceTree = "<group>"; };
+		B904829B2D7A0763002F0216 /* UserCollectionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionInteractor.swift; sourceTree = "<group>"; };
+		B904829D2D7A0779002F0216 /* UserCollectionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionRouter.swift; sourceTree = "<group>"; };
+		B904829F2D7A079F002F0216 /* UserCollectionModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionModuleBuilder.swift; sourceTree = "<group>"; };
+		B90482A12D7A08FC002F0216 /* UserCollectionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionRequest.swift; sourceTree = "<group>"; };
+		B90482A32D7A0F08002F0216 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		B90482B42D7B5D41002F0216 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		B90EA9DE2D6778A3002D3582 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		B90EA9E02D677EC0002D3582 /* StatisticPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticPresenter.swift; sourceTree = "<group>"; };
 		B90EA9E22D677F9E002D3582 /* StatisticInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticInteractor.swift; sourceTree = "<group>"; };
@@ -368,6 +382,7 @@
 				0CFCB7412A78013E0009A829 /* Nft.swift */,
 				B92FE12F2D692DA500371E0C /* UserStatistic.swift */,
 				B90482882D7601B3002F0216 /* UserDetail.swift */,
+				B90482B42D7B5D41002F0216 /* UserProfile.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -395,9 +410,23 @@
 		B904828A2D7604BA002F0216 /* UserCollection */ = {
 			isa = PBXGroup;
 			children = (
+				B90482AF2D7B55BF002F0216 /* Requests  */,
 				B904828B2D7604D7002F0216 /* UserCollectionViewController.swift */,
+				B90482992D7A0746002F0216 /* UserCollectionPresenter.swift */,
+				B904829B2D7A0763002F0216 /* UserCollectionInteractor.swift */,
+				B904829D2D7A0779002F0216 /* UserCollectionRouter.swift */,
+				B904829F2D7A079F002F0216 /* UserCollectionModuleBuilder.swift */,
+				B90482A32D7A0F08002F0216 /* UserCollectionViewCell.swift */,
 			);
 			path = UserCollection;
+			sourceTree = "<group>";
+		};
+		B90482AF2D7B55BF002F0216 /* Requests  */ = {
+			isa = PBXGroup;
+			children = (
+				B90482A12D7A08FC002F0216 /* UserCollectionRequest.swift */,
+			);
+			path = "Requests ";
 			sourceTree = "<group>";
 		};
 		B90EA9DD2D677884002D3582 /* Statistic */ = {
@@ -611,13 +640,16 @@
 				B90482812D75FE8F002F0216 /* UserDetailPresenter.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				0C79EE662A76DDFF00EE90EA /* NftDetailViewController.swift in Sources */,
+				B90482A22D7A08FC002F0216 /* UserCollectionRequest.swift in Sources */,
 				E1A1B9DA2AA01CE400C3AFBC /* TabBarController.swift in Sources */,
 				B90482872D75FEE9002F0216 /* UserDetailRequest.swift in Sources */,
 				B92FE1382D6BDD5E00371E0C /* UserDetailViewController.swift in Sources */,
+				B90482A42D7A0F08002F0216 /* UserCollectionViewCell.swift in Sources */,
 				B90482852D75FED2002F0216 /* UserDetailRouter.swift in Sources */,
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				B92FE13F2D6CBF6800371E0C /* SortOption.swift in Sources */,
 				0C79EE6A2A76DE1000EE90EA /* NftDetailAssembly.swift in Sources */,
+				B90482A02D7A079F002F0216 /* UserCollectionModuleBuilder.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				0CFCB7422A78013E0009A829 /* Nft.swift in Sources */,
 				B90EA9DF2D6778A3002D3582 /* StatisticViewController.swift in Sources */,
@@ -631,7 +663,9 @@
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				0CF2C2DB2A783C1B00FDC837 /* LoadingView.swift in Sources */,
 				558E39E72C68CE0A00FB86AC /* NftService.swift in Sources */,
+				B904829E2D7A0779002F0216 /* UserCollectionRouter.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
+				B904829A2D7A0746002F0216 /* UserCollectionPresenter.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				0C79EE6C2A76DE2E00EE90EA /* ServicesAssemly.swift in Sources */,
 				0CFCB74E2A7817DC0009A829 /* NftStorage.swift in Sources */,
@@ -646,6 +680,7 @@
 				B904828C2D7604D7002F0216 /* UserCollectionViewController.swift in Sources */,
 				0CFCB74B2A780EA80009A829 /* UIView+Constraints.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
+				B90482B52D7B5D41002F0216 /* UserProfile.swift in Sources */,
 				0C79EE612A76DCD600EE90EA /* NftByIdRequest.swift in Sources */,
 				E19CD5AB2A98B56600CA39A5 /* NftImageCollectionViewCell.swift in Sources */,
 				0CF2C2E12A784C7000FDC837 /* LinePageControl.swift in Sources */,
@@ -660,6 +695,7 @@
 				B90EA9E12D677EC0002D3582 /* StatisticPresenter.swift in Sources */,
 				B90EA9E52D677FF1002D3582 /* StatisticRouter.swift in Sources */,
 				B92FE12E2D67CC7900371E0C /* StatisticTableCell.swift in Sources */,
+				B904829C2D7A0763002F0216 /* UserCollectionInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
