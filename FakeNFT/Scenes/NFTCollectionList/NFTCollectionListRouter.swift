@@ -14,16 +14,17 @@ protocol NFTCollectionListRouterProtocol {
 final class NFTCollectionListRouter: NFTCollectionListRouterProtocol {
     weak var viewController: NFTCollectionListViewController?
     
-    private let serviceAssemby: ServicesAssembly
+    private let serviceAssembly: ServicesAssembly
     
-    init(serviceAssemby: ServicesAssembly) {
-        self.serviceAssemby = serviceAssemby
+    init(serviceAssembly: ServicesAssembly) {
+        self.serviceAssembly = serviceAssembly
     }
     
     func showNftCollectionDetail(nftCollectionDetailInput: NftCollectionDetailInput) {
-        let nftCollectionDetailViewController = NFTCollectionDetailModuleBuilder.build(input: nftCollectionDetailInput, serviceAssembly: serviceAssemby)
+        let nftCollectionDetailViewController = NFTCollectionDetailModuleFactory.build(input: nftCollectionDetailInput, serviceAssembly: serviceAssembly)
         
         if let navigationViewController = viewController?.parent as? UINavigationController {
+            navigationViewController.navigationBar.tintColor = UIColor.textPrimary
             navigationViewController.pushViewController(nftCollectionDetailViewController, animated: true)
         }
     }

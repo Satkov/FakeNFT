@@ -3,7 +3,7 @@ import UIKit
 final class TableHeaderTitleView: UIView {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = UIFont(name: "SF Pro Regular", size: 13)
+        titleLabel.font = UIFont.sfRegular13
         titleLabel.textAlignment = .center
         titleLabel.textColor = UIColor.projectGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

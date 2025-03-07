@@ -1,13 +1,7 @@
-//
-//  NFTDetailModuleBuilder.swift
-//  Super easy dev
-//
-//  Created by Nikolay on 20.02.2025
-//
 
 import UIKit
 
-final class NFTDetailModuleBuilder {
+struct NFTDetailModuleFactory {
     static func build(serviceAssembly: ServicesAssembly) -> NFTDetailViewController {
         let interactor = serviceAssembly.nftDetailInteractor
         let router = NFTDetailRouter()

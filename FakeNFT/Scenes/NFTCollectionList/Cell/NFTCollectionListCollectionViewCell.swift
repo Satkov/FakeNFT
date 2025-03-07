@@ -9,7 +9,6 @@ import UIKit
 
 final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
-    // MARK: - IB Outlets
     private lazy var ntfCollectionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +21,7 @@ final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIden
     private lazy var nameAndNftCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "SF Pro Bold", size: 17)
+        label.font = UIFont.sfProBold17
         label.textColor = UIColor.textPrimary
         return label
     }()
@@ -38,9 +37,9 @@ final class NFTCollectionListCollectionViewCell: UICollectionViewCell, ReuseIden
     }
     
     // MARK: - Public Methods
-    func configure(model: NFTCollectionCellModel) {
-        nameAndNftCountLabel.text = "\(model.name.capitalized) (\(model.nftCount))"
-        ntfCollectionImageView.kf.setImage(with: model.imageURL)
+    func configure(businessObject: NFTCollectionBusinessObject) {
+        nameAndNftCountLabel.text = "\(businessObject.name.capitalized) (\(businessObject.nftCount))"
+        ntfCollectionImageView.kf.setImage(with: businessObject.imageURL)
     }
     
     // MARK: - Private Methods
