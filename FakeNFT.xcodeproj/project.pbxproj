@@ -69,6 +69,7 @@
 		F3C496102D676EF000B58C41 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C4960F2D676EF000B58C41 /* Currency.swift */; };
 		F3C496122D6773BB00B58C41 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C496112D6773BB00B58C41 /* UserRequest.swift */; };
 		F3C496142D67745500B58C41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C496132D67745500B58C41 /* User.swift */; };
+		F3C66D132D7B10B6003F5259 /* UpdateProfileDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C66D122D7B10B6003F5259 /* UpdateProfileDto.swift */; };
 		F3C696392D6457F600D67D34 /* NFTCollectionBusinessObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C696382D6457F600D67D34 /* NFTCollectionBusinessObject.swift */; };
 		F3CF616B2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF616A2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift */; };
 		F3CF616D2D632500002D1B56 /* NFTCollectionListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CF616C2D632500002D1B56 /* NFTCollectionListRequest.swift */; };
@@ -170,6 +171,7 @@
 		F3C4960F2D676EF000B58C41 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		F3C496112D6773BB00B58C41 /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
 		F3C496132D67745500B58C41 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F3C66D122D7B10B6003F5259 /* UpdateProfileDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileDto.swift; sourceTree = "<group>"; };
 		F3C696382D6457F600D67D34 /* NFTCollectionBusinessObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionBusinessObject.swift; sourceTree = "<group>"; };
 		F3CF616A2D631C65002D1B56 /* NFTCollectionListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F3CF616C2D632500002D1B56 /* NFTCollectionListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionListRequest.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				F3924B192D7723F6002768AD /* UpdateOrderDto.swift */,
 				F388010F2D7831DC002F2D36 /* ProfileRequest.swift */,
 				F311F0692D7869FA00280A5C /* OrderRequest.swift */,
+				F3C66D122D7B10B6003F5259 /* UpdateProfileDto.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				0C79EE632A76DD1900EE90EA /* RequestConstants.swift in Sources */,
 				F3C495F32D67429B00B58C41 /* NFTCollectionDetailRouter.swift in Sources */,
 				91B1CBB52D758B1E00BCF5B8 /* Order.swift in Sources */,
+				F3C66D132D7B10B6003F5259 /* UpdateProfileDto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
