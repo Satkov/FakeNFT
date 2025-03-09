@@ -104,6 +104,7 @@ final class NFTCollectionDetailViewController: UIViewController, ErrorView, Load
         showLoading()
         presenter?.loadCurrentNFTCollection()
         presenter?.loadProfile()
+        presenter?.loadOrder()
         setupLayout()
     }
     
@@ -190,6 +191,16 @@ extension NFTCollectionDetailViewController: UICollectionViewDataSource {
         
         if let businessObject = presenter?.nftBusinessObject(index: indexPath) {
             cell.configure(businessObject: businessObject)
+        }
+        cell.onLikeButtonTapped = { [weak self] nftBusinessObject in
+            guard let self = self else { return }
+            self.showLoading()
+            self.presenter?.updateFavoriteStatus(nftBusinessObject: nftBusinessObject)
+        }
+        cell.onOrderButtonTapped = { [weak self] nftBusinessObject in
+            guard let self = self else { return }
+            self.showLoading()
+            self.presenter?.updateOrder(nftBusinessObject: nftBusinessObject)
         }
         return cell
     }

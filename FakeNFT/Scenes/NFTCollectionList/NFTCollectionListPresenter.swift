@@ -17,9 +17,9 @@ enum Key: String {
 }
 
 protocol NFTCollectionListPresenterProtocol: AnyObject {
-    func numberOfNFTCollections() -> Int
-    func nftCollectionBOForIndex(_ indexPath: IndexPath) -> NFTCollectionBusinessObject?
-    func loadNFTCollectionList()
+    var numberOfNFTCollections: Int { get }
+    func nftCollectionBusinessObjectForIndex(_ indexPath: IndexPath) -> NFTCollectionBusinessObject?
+    func loadNextPageNFTCollectionList()
     func sortNftCollectionList(type: SortType)
     func showNftCollectionDetailForIndexPath(_ indexPath: IndexPath)
 }
@@ -32,8 +32,10 @@ final class NFTCollectionListPresenter {
     var interactor: NFTCollectionListInteractorProtocol
     
     // MARK: - Private Properties
-    private var nftCollectionList: [NftCollection]?
-
+    private var nftCollectionList: [NftCollection]? = []
+    private var lastLoadedPage: Int?
+    private let defaultPageSize = 10
+    
     // MARK: - Initializers
     init(interactor: NFTCollectionListInteractorProtocol, router: NFTCollectionListRouterProtocol) {
         self.interactor = interactor
@@ -43,11 +45,11 @@ final class NFTCollectionListPresenter {
 
 // MARK: - NFTCollectionListPresenterProtocol
 extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
-    func numberOfNFTCollections() -> Int {
-        return nftCollectionList?.count ?? 0
+    var numberOfNFTCollections: Int {
+        nftCollectionList?.count ?? 0
     }
     
-    func nftCollectionBOForIndex(_ indexPath: IndexPath) -> NFTCollectionBusinessObject? {
+    func nftCollectionBusinessObjectForIndex(_ indexPath: IndexPath) -> NFTCollectionBusinessObject? {
         
         let nftCollection: NftCollection? = nftCollectionList?[indexPath.row]
         var imageURL: URL?
@@ -60,12 +62,21 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         return model
     }
     
-    func loadNFTCollectionList() {
-        interactor.loadNftCollectionList { [weak self] result in
+    func loadNextPageNFTCollectionList() {
+        
+        var nextPage: Int
+        if let lastLoadedPage = lastLoadedPage {
+            nextPage = lastLoadedPage + 1
+        } else {
+            nextPage = 0
+            self.lastLoadedPage = 0
+        }
+        
+        interactor.loadNftCollectionList(page: nextPage, size: defaultPageSize) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let nftCollectionList):
-                self.nftCollectionList = nftCollectionList
+                self.nftCollectionList?.append(contentsOf: nftCollectionList)
                 self.sortNftCollectionList(type: .none)
                 self.view?.updateForNewData()
             case .failure(let error):

@@ -8,7 +8,7 @@
 typealias NftCollectionListCompletion = (Result<[NftCollection], Error>) -> Void
 
 protocol NFTCollectionListInteractorProtocol: AnyObject {
-    func loadNftCollectionList(completion: @escaping NftCollectionListCompletion)
+    func loadNftCollectionList(page: Int, size: Int, completion: @escaping NftCollectionListCompletion)
 }
 
 final class NFTCollectionListInteractor: NFTCollectionListInteractorProtocol {
@@ -25,8 +25,8 @@ final class NFTCollectionListInteractor: NFTCollectionListInteractorProtocol {
         self.nftStorage = nftStorage
     }
     
-    func loadNftCollectionList(completion: @escaping NftCollectionListCompletion) {
-        let request = NFTCollectionListRequest()
+    func loadNftCollectionList(page: Int, size: Int, completion: @escaping NftCollectionListCompletion) {
+        let request = NFTCollectionListRequest(page: page, size: size)
         networkClient.send(request: request, type: [NftCollection].self) { result in
             switch result {
             case .success(let nftCollectionList):

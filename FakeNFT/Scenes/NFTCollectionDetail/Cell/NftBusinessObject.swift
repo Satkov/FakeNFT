@@ -14,4 +14,5 @@ struct NftBusinessObject {
     let rating: Int
     let isOrdered: Bool
     let isLiked: Bool
+    let id: String
 }

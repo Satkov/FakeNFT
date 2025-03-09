@@ -19,6 +19,8 @@ protocol NFTCollectionDetailInteractorProtocol: AnyObject {
     func loadNft(id: String, completion: @escaping NftDetailCompletion)
     func loadProfile(completion: @escaping ProfileCompletion)
     func loadOrder(completion: @escaping OrderCompletion)
+    func updateOrder(nfts: [String], completion: @escaping OrderCompletion)
+    func updateProfile(profile: Profile, completion: @escaping ProfileCompletion)
 }
 
 final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
@@ -100,6 +102,32 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             switch result {
             case .success(let order):
                 completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func updateOrder(nfts: [String], completion: @escaping OrderCompletion) {
+        let dto = UpdateOrderDto(nfts: nfts)
+        let request = NetworkRequests.putOrder1(dto: dto)
+        networkClient.send(request: request, type: Order.self) { result in
+            switch result {
+            case .success(let order):
+                completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func updateProfile(profile: Profile, completion: @escaping ProfileCompletion) {
+        let dto = UpdateProfileDto(profile: profile)
+        let request = NetworkRequests.putProfile1(dto: dto)
+        networkClient.send(request: request, type: Profile.self) { result in
+            switch result {
+            case .success(let profile):
+                completion(.success(profile))
             case .failure(let error):
                 completion(.failure(error))
             }

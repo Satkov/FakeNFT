@@ -9,6 +9,9 @@ import UIKit
 
 final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
+    var onLikeButtonTapped: ((NftBusinessObject) -> Void)?
+    var onOrderButtonTapped: ((NftBusinessObject) -> Void)?
+    
     private lazy var nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,19 +42,36 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         return label
     }()
     
-    private lazy var orderImageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .center
-        return image
+    private lazy var orderButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .center
+        button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
+        return button
     }()
     
-    private lazy var likeImageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .center
-        return image
+    private lazy var likeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .center
+        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        return button
     }()
+    
+    private var currentNftBusinessObject: NftBusinessObject?
+    
+    @objc private func likeButtonTapped() {
+        if let currentNftBusinessObject = currentNftBusinessObject {
+            onLikeButtonTapped?(currentNftBusinessObject)
+        }
+    }
+    
+    @objc private func orderButtonTapped() {
+        
+        if let currentNftBusinessObject = currentNftBusinessObject {
+            onOrderButtonTapped?(currentNftBusinessObject)
+        }
+    }
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -65,17 +85,21 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        currentNftBusinessObject = nil
         nftImageView.kf.cancelDownloadTask()
     }
     
     // MARK: - Public Methods
     func configure(businessObject: NftBusinessObject) {
         
+        currentNftBusinessObject = businessObject
         nftImageView.kf.setImage(with: businessObject.imageURL, placeholder: UIImage(named: "Placeholder"))
         nftNameLabel.text = businessObject.name
         nftPriceLabel.text = "\(businessObject.price) ETH"
-        likeImageView.image = businessObject.isLiked ? UIImage(named: "Liked") : UIImage(named: "NotLiked")
-        orderImageView.image = businessObject.isOrdered ? UIImage(named: "Ordered") : UIImage(named: "NotOrdered")
+        let likeImage = businessObject.isLiked ? UIImage(named: "Liked") : UIImage(named: "NotLiked")
+        likeButton.setImage(likeImage, for: .normal)
+        let orderImage = businessObject.isOrdered ? UIImage(named: "Ordered") : UIImage(named: "NotOrdered")
+        orderButton.setImage(orderImage, for: .normal)
         nftRatingView.rating = businessObject.rating
     }
     
@@ -85,9 +109,9 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         contentView.addSubview(nftImageView)
         contentView.addSubview(nftRatingView)
         contentView.addSubview(nftNameLabel)
-        contentView.addSubview(orderImageView)
+        contentView.addSubview(orderButton)
         contentView.addSubview(nftPriceLabel)
-        contentView.addSubview(likeImageView)
+        contentView.addSubview(likeButton)
         
         NSLayoutConstraint.activate([
             nftImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -100,21 +124,21 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
             nftRatingView.heightAnchor.constraint(equalToConstant: 12),
             nftRatingView.bottomAnchor.constraint(equalTo: nftNameLabel.topAnchor, constant: -4),
             nftNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nftNameLabel.trailingAnchor.constraint(equalTo: orderImageView.leadingAnchor),
+            nftNameLabel.trailingAnchor.constraint(equalTo: orderButton.leadingAnchor),
             nftNameLabel.bottomAnchor.constraint(equalTo: nftPriceLabel.topAnchor),
-            orderImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            orderImageView.topAnchor.constraint(equalTo: nftRatingView.bottomAnchor, constant: 4),
-            orderImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            orderImageView.heightAnchor.constraint(equalToConstant: 40),
-            orderImageView.widthAnchor.constraint(equalToConstant: 40),
+            orderButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            orderButton.topAnchor.constraint(equalTo: nftRatingView.bottomAnchor, constant: 4),
+            orderButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            orderButton.heightAnchor.constraint(equalToConstant: 40),
+            orderButton.widthAnchor.constraint(equalToConstant: 40),
             nftPriceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nftPriceLabel.trailingAnchor.constraint(equalTo: orderImageView.leadingAnchor),
+            nftPriceLabel.trailingAnchor.constraint(equalTo: orderButton.leadingAnchor),
             nftPriceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             nftPriceLabel.heightAnchor.constraint(equalToConstant: 12),
-            likeImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            likeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            likeImageView.heightAnchor.constraint(equalToConstant: 40),
-            likeImageView.widthAnchor.constraint(equalToConstant: 40)
+            likeButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            likeButton.heightAnchor.constraint(equalToConstant: 40),
+            likeButton.widthAnchor.constraint(equalToConstant: 40)
         ])
     }
 }
