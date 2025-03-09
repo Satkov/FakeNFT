@@ -71,6 +71,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     }
 
     private func setupUI() {
+        backgroundColor = .projectWhite
         nftImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         ratingView.translatesAutoresizingMaskIntoConstraints = false

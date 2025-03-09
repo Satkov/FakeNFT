@@ -22,6 +22,7 @@ final class CartViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.isHidden = true
         tableView.allowsSelection = false
+        tableView.backgroundColor = .projectWhite
         return tableView
     }()
 
@@ -66,6 +67,7 @@ private extension CartViewController {
         setupTableView()
         setupConstraints()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        view.backgroundColor = .projectWhite
     }
 
     func setupNavBar() {

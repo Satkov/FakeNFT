@@ -5,7 +5,8 @@ final class PaymentBlockView: UIView {
         let button = UIButton()
         button.setTitle("К оплате", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        button.backgroundColor = UIColor.black
+        button.backgroundColor = UIColor.projectBlack
+        button.setTitleColor(.projectWhite, for: .normal)
         button.layer.cornerRadius = 16
         return button
     }()
@@ -50,10 +51,6 @@ final class PaymentBlockView: UIView {
         payButton.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
     }
 
-    @objc private func payButtonTapped() {
-        buttonAction?()
-    }
-
     private func setupConstraints() {
         payButton.translatesAutoresizingMaskIntoConstraints = false
         nftCounterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -81,5 +78,9 @@ final class PaymentBlockView: UIView {
             payButton.heightAnchor.constraint(equalToConstant: 44),
             payButton.widthAnchor.constraint(equalToConstant: 240)
         ])
+    }
+
+    @objc private func payButtonTapped() {
+        buttonAction?()
     }
 }
