@@ -29,7 +29,7 @@ struct NetworkRequests {
             dto: dto
         )
     }
-    
+
     static func putProfile1(dto: Dto) -> NetworkRequest {
         RequestBuilder(
             endpoint: URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1"),

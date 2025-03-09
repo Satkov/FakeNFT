@@ -13,7 +13,7 @@ enum SortType: Int {
 }
 
 enum Key: String {
-   case sortType = "sortType"
+   case sortType
 }
 
 protocol NFTCollectionListPresenterProtocol: AnyObject {
@@ -25,17 +25,17 @@ protocol NFTCollectionListPresenterProtocol: AnyObject {
 }
 
 final class NFTCollectionListPresenter {
-    
+
     // MARK: - Public Properties
     weak var view: NFTCollectionListViewProtocol?
     var router: NFTCollectionListRouterProtocol
     var interactor: NFTCollectionListInteractorProtocol
-    
+
     // MARK: - Private Properties
     private var nftCollectionList: [NftCollection]? = []
     private var lastLoadedPage: Int?
     private let defaultPageSize = 10
-    
+
     // MARK: - Initializers
     init(interactor: NFTCollectionListInteractorProtocol, router: NFTCollectionListRouterProtocol) {
         self.interactor = interactor
@@ -48,9 +48,9 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
     var numberOfNFTCollections: Int {
         nftCollectionList?.count ?? 0
     }
-    
+
     func nftCollectionBusinessObjectForIndex(_ indexPath: IndexPath) -> NFTCollectionBusinessObject? {
-        
+
         let nftCollection: NftCollection? = nftCollectionList?[indexPath.row]
         var imageURL: URL?
         if let imageURLString = nftCollection?.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
@@ -61,9 +61,9 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
                                            nftCount: nftCollection?.nfts.count ?? 0)
         return model
     }
-    
+
     func loadNextPageNFTCollectionList() {
-        
+
         var nextPage: Int
         if let lastLoadedPage = lastLoadedPage {
             nextPage = lastLoadedPage + 1
@@ -71,7 +71,7 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
             nextPage = 0
             self.lastLoadedPage = 0
         }
-        
+
         interactor.loadNftCollectionList(page: nextPage, size: defaultPageSize) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -84,9 +84,9 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
             }
         }
     }
-    
+
     func sortNftCollectionList(type: SortType) {
-        
+
         var currentType = type
         if type == .none {
             let savedSortType = SortType(rawValue: LocalStorage.shared.getValue(for: Key.sortType.rawValue))
@@ -96,10 +96,10 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
                 currentType = savedSortType
             }
         }
-        
+
         LocalStorage.shared.saveValue(currentType.rawValue, for: Key.sortType.rawValue)
-        
-        switch(currentType) {
+
+        switch currentType {
         case .name:
             nftCollectionList = nftCollectionList?.sorted(by: { return $0.name < $1.name })
         case .nftCount:
@@ -107,10 +107,10 @@ extension NFTCollectionListPresenter: NFTCollectionListPresenterProtocol {
         default:
             break
         }
-        
+
         view?.updateForNewData()
     }
-    
+
     func showNftCollectionDetailForIndexPath(_ indexPath: IndexPath) {
         if let nftCollection = nftCollectionList?[indexPath.row] {
             let nftCollectionDetailInput = NftCollectionDetailInput(id: nftCollection.id)

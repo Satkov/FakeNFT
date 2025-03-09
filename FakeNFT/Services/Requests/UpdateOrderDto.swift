@@ -2,7 +2,7 @@ import Foundation
 
 struct UpdateOrderDto: Dto {
     let nfts: [String]
-    
+
     func asDictionary() -> [String: String] {
         if nfts.isEmpty {
             return [:]

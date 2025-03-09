@@ -21,7 +21,7 @@ final class AuthorPagePresenter {
 }
 
 extension AuthorPagePresenter: AuthorPagePresenterProtocol {
-    
+
     func makeAuthorPageURLRequest() -> URLRequest {
         return URLRequest(url: authorPageURL)
     }

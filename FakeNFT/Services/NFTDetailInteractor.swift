@@ -11,10 +11,10 @@ protocol NFTDetailInteractorProtocol: AnyObject {
 }
 
 final class NFTDetailInteractor: NFTDetailInteractorProtocol {
-    
+
     // MARK: - Public Properties
     weak var presenter: NFTDetailPresenterProtocol?
-    
+
     // MARK: - Private Properties
     private let networkClient: NetworkClient
     private let nftStorage: NftStorage
@@ -24,7 +24,7 @@ final class NFTDetailInteractor: NFTDetailInteractorProtocol {
         self.networkClient = networkClient
         self.nftStorage = nftStorage
     }
-    
+
     func loadCurrencies(completion: @escaping CurrenciesCompletion) {
         let request = CurrenciesRequest()
         networkClient.send(request: request, type: [Currency].self) { result in

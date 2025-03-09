@@ -23,7 +23,7 @@ final class NFTCollectionDetailPresenter {
     var router: NFTCollectionDetailRouterProtocol
     var interactor: NFTCollectionDetailInteractorProtocol
     var input: NftCollectionDetailInput
-    
+
     private var currentNftCollection: NftCollection?
     private var users: [User]?
     private var authorWebsiteURL: URL?
@@ -31,7 +31,11 @@ final class NFTCollectionDetailPresenter {
     private var profile: Profile?
     private var order: Order?
 
-    init(interactor: NFTCollectionDetailInteractorProtocol, router: NFTCollectionDetailRouterProtocol, input: NftCollectionDetailInput) {
+    init(
+        interactor: NFTCollectionDetailInteractorProtocol,
+        router: NFTCollectionDetailRouterProtocol,
+        input: NftCollectionDetailInput
+    ) {
         self.interactor = interactor
         self.router = router
         self.input = input
@@ -39,7 +43,7 @@ final class NFTCollectionDetailPresenter {
 }
 
 extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
-    
+
     func loadCurrentNFTCollection() {
         interactor.loadNftCollection(id: input.id) { [weak self] result in
             guard let self = self else { return }
@@ -47,10 +51,15 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             case .success(let nftCollection):
                 self.loadUsers()
                 self.currentNftCollection = nftCollection
-                let url = URL(string: nftCollection.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
-                self.view?.updateNftCollectionInformation(name: nftCollection.name.capitalized,
-                                                          imageURL: url,
-                                                          description: nftCollection.description.capitalized, authorName: nftCollection.author)
+                let url = URL(string: nftCollection.cover.addingPercentEncoding(
+                    withAllowedCharacters: .urlQueryAllowed) ?? ""
+                )
+                self.view?.updateNftCollectionInformation(
+                    name: nftCollection.name.capitalized,
+                    imageURL: url,
+                    description: nftCollection.description.capitalized,
+                    authorName: nftCollection.author
+                )
                 if let nftIds = self.currentNftCollection?.nfts {
                     for nftId in nftIds {
                         self.loadNft(id: nftId)
@@ -61,16 +70,16 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             }
         }
     }
-    
+
     func loadUsers() {
-        interactor.loadAllUsers{ [weak self] result in
+        interactor.loadAllUsers { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let users):
                 self.users = users
-                _ = users.first (where: { $0.name == self.currentNftCollection?.author })
-                //let correctAuthorWebsiteLink = user?.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                //TODO: I hardcoded link because data from server is incorrect, users list doesn't contain name nft collection's author
+                _ = users.first(where: { $0.name == self.currentNftCollection?.author })
+                // TODO: I hardcoded link because data from server is incorrect,
+                // users list doesn't contain name nft collection's author
                 let correctAuthorWebsiteLink = "https://practicum.yandex.ru/"
                 self.authorWebsiteURL = URL(string: correctAuthorWebsiteLink)
             case .failure(let error):
@@ -78,15 +87,15 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             }
         }
     }
-    
+
     func showAuthorPage() {
         router.showAuthorPage(url: authorWebsiteURL)
     }
-    
+
     var nftCount: Int {
         currentNftCollection?.nfts.count ?? 0
     }
-    
+
     func loadNft(id: String) {
         interactor.loadNft(id: id) { [weak self] result in
             guard let self = self else { return }
@@ -101,9 +110,9 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             }
         }
     }
-    
+
     func nftBusinessObject(index: IndexPath) -> NftBusinessObject? {
-        
+
         guard let nft = nfts?[index.row] else {
             return nil
         }
@@ -117,7 +126,7 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
                                       id: nft.id)
         return nftBO
     }
-    
+
     func loadProfile() {
         interactor.loadProfile { [weak self] result in
             guard let self = self else { return }
@@ -129,7 +138,7 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             }
         }
     }
-    
+
     func loadOrder() {
         interactor.loadOrder { [weak self] result in
             guard let self = self else { return }
@@ -141,7 +150,7 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             }
         }
     }
-    
+
     func updateOrder(nftBusinessObject: NftBusinessObject) {
         var currentOrderNfts = order?.nfts ?? []
         if nftBusinessObject.isOrdered {
@@ -159,12 +168,12 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             }
         }
     }
-    
+
     private func updateCurrentOrderAndUI(order: Order) {
         self.order = order
         updateNftList()
     }
-    
+
     func updateFavoriteStatus(nftBusinessObject: NftBusinessObject) {
         var currentLikes = profile?.likes ?? []
         if nftBusinessObject.isLiked {
@@ -189,12 +198,12 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             }
         }
     }
-    
+
     private func updateCurrentProfileAndUI(profile: Profile) {
         self.profile = profile
         updateNftList()
     }
-    
+
     private func updateNftList() {
         if self.nfts?.count == self.currentNftCollection?.nfts.count {
             self.view?.updateNftList()

@@ -8,23 +8,23 @@
 import UIKit
 
 final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
-    
+
     var onLikeButtonTapped: ((NftBusinessObject) -> Void)?
     var onOrderButtonTapped: ((NftBusinessObject) -> Void)?
-    
+
     private lazy var nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 12
         return imageView
     }()
-    
+
     private lazy var nftRatingView: RatingView = {
         let view = RatingView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         label.numberOfLines = 0
         return label
     }()
-    
+
     private lazy var nftPriceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +41,7 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         label.textColor = UIColor.textPrimary
         return label
     }()
-    
+
     private lazy var orderButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+
     private lazy var likeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -57,41 +57,41 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+
     private var currentNftBusinessObject: NftBusinessObject?
-    
+
     @objc private func likeButtonTapped() {
         if let currentNftBusinessObject = currentNftBusinessObject {
             onLikeButtonTapped?(currentNftBusinessObject)
         }
     }
-    
+
     @objc private func orderButtonTapped() {
-        
+
         if let currentNftBusinessObject = currentNftBusinessObject {
             onOrderButtonTapped?(currentNftBusinessObject)
         }
     }
-    
+
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         currentNftBusinessObject = nil
         nftImageView.kf.cancelDownloadTask()
     }
-    
+
     // MARK: - Public Methods
     func configure(businessObject: NftBusinessObject) {
-        
+
         currentNftBusinessObject = businessObject
         nftImageView.kf.setImage(with: businessObject.imageURL, placeholder: UIImage(named: "Placeholder"))
         nftNameLabel.text = businessObject.name
@@ -102,17 +102,17 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         orderButton.setImage(orderImage, for: .normal)
         nftRatingView.rating = businessObject.rating
     }
-    
+
     // MARK: - Private Properties
     private func setupLayout() {
-        
+
         contentView.addSubview(nftImageView)
         contentView.addSubview(nftRatingView)
         contentView.addSubview(nftNameLabel)
         contentView.addSubview(orderButton)
         contentView.addSubview(nftPriceLabel)
         contentView.addSubview(likeButton)
-        
+
         NSLayoutConstraint.activate([
             nftImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             nftImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

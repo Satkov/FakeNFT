@@ -25,17 +25,17 @@ protocol NFTCollectionDetailInteractorProtocol: AnyObject {
 
 final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol {
     weak var presenter: NFTCollectionDetailPresenterProtocol?
-    
+
     // MARK: - Private Properties
     private let networkClient: NetworkClient
     private let nftStorage: NftStorage
-    
+
     // MARK: - Initializers
     init(networkClient: NetworkClient, nftStorage: NftStorage) {
         self.networkClient = networkClient
         self.nftStorage = nftStorage
     }
-    
+
     func loadNftCollection(id: String, completion: @escaping NftCollectionDetailCompletion) {
         let request = NFTCollectionDetailRequest(id: id)
         networkClient.send(request: request, type: NftCollection.self) { result in
@@ -47,7 +47,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             }
         }
     }
-    
+
     func loadUser(userId: String, completion: @escaping UserCompletion) {
         let request = UserRequest(id: userId)
         networkClient.send(request: request, type: User.self) { result in
@@ -59,7 +59,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             }
         }
     }
-    
+
     func loadAllUsers(completion: @escaping UsersCompletion) {
         let request = UsersRequest()
         networkClient.send(request: request, type: [User].self) { result in
@@ -71,7 +71,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             }
         }
     }
-    
+
     func loadNft(id: String, completion: @escaping NftDetailCompletion) {
         let request = NFTDetailRequest(id: id)
         networkClient.send(request: request, type: Nft.self) { result in
@@ -83,7 +83,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             }
         }
     }
-    
+
     func loadProfile(completion: @escaping ProfileCompletion) {
         let request = ProfileRequest()
         networkClient.send(request: request, type: Profile.self) { result in
@@ -95,7 +95,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             }
         }
     }
-    
+
     func loadOrder(completion: @escaping OrderCompletion) {
         let request = OrderRequest()
         networkClient.send(request: request, type: Order.self) { result in
@@ -107,7 +107,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             }
         }
     }
-    
+
     func updateOrder(nfts: [String], completion: @escaping OrderCompletion) {
         let dto = UpdateOrderDto(nfts: nfts)
         let request = NetworkRequests.putOrder1(dto: dto)
@@ -120,7 +120,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
             }
         }
     }
-    
+
     func updateProfile(profile: Profile, completion: @escaping ProfileCompletion) {
         let dto = UpdateProfileDto(profile: profile)
         let request = NetworkRequests.putProfile1(dto: dto)

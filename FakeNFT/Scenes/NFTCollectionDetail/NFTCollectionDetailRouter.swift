@@ -13,7 +13,7 @@ protocol NFTCollectionDetailRouterProtocol {
 
 final class NFTCollectionDetailRouter: NFTCollectionDetailRouterProtocol {
     weak var viewController: NFTCollectionDetailViewController?
-    
+
     func showAuthorPage(url: URL?) {
         guard let url = url else { return }
         let authorViewController = AuthorPageModuleFactory.build(url: url)

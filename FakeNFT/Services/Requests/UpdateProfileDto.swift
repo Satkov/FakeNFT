@@ -2,7 +2,7 @@ import Foundation
 
 struct UpdateProfileDto: Dto {
     let profile: Profile
-    
+
     func asDictionary() -> [String: String] {
         return ["name": profile.name,
                 "avatar": profile.avatar,

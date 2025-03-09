@@ -12,10 +12,10 @@ protocol NFTCollectionListInteractorProtocol: AnyObject {
 }
 
 final class NFTCollectionListInteractor: NFTCollectionListInteractorProtocol {
-    
+
     // MARK: - Public Properties
     weak var presenter: NFTCollectionListPresenterProtocol?
-    
+
     // MARK: - Private Properties
     private let networkClient: NetworkClient
     private let nftStorage: NftStorage
@@ -24,7 +24,7 @@ final class NFTCollectionListInteractor: NFTCollectionListInteractorProtocol {
         self.networkClient = networkClient
         self.nftStorage = nftStorage
     }
-    
+
     func loadNftCollectionList(page: Int, size: Int, completion: @escaping NftCollectionListCompletion) {
         let request = NFTCollectionListRequest(page: page, size: size)
         networkClient.send(request: request, type: [NftCollection].self) { result in

@@ -13,13 +13,13 @@ protocol NFTCollectionListViewProtocol: AnyObject {
 }
 
 final class NFTCollectionListViewController: UIViewController, ErrorView, LoadingView {
-    
+
     var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
-    
+
     private lazy var nftCollectionListTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .systemBackground
@@ -31,10 +31,10 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
         tableView.separatorStyle = .none
         return tableView
     }()
-    
+
     // MARK: - Public
     var presenter: NFTCollectionListPresenterProtocol?
-    
+
     // MARK: - Private
     private let cellIdentifier = "nftCollectionCellIdentifier"
     private var isLoading  = false
@@ -46,27 +46,33 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
         presenter?.loadNextPageNFTCollectionList()
         setupLayout()
     }
-    
+
     private func setupLayout() {
-        
+
         view.addSubview(nftCollectionListTableView)
         view.addSubview(activityIndicator)
+        let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            nftCollectionListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            nftCollectionListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            nftCollectionListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            nftCollectionListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            nftCollectionListTableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            nftCollectionListTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            nftCollectionListTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
+            nftCollectionListTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "CatalogSortButtonImage"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "CatalogSortButtonImage"),
+            style: .plain,
+            target: self,
+            action: #selector(sortButtonTapped)
+        )
         navigationItem.rightBarButtonItem?.tintColor = UIColor.navigationBarButton
         navigationItem.backBarButtonItem?.tintColor = UIColor.navigationBarButton
         navigationItem.backButtonTitle = ""
     }
-    
+
     @objc func sortButtonTapped() {
-        
+
         let nameSortModel = FilterMenuButtonModel(title: "По названию", action: {
             self.presenter?.sortNftCollectionList(type: .name)
         })
@@ -81,11 +87,11 @@ final class NFTCollectionListViewController: UIViewController, ErrorView, Loadin
 }
 
 extension NFTCollectionListViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter?.numberOfNFTCollections ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: NFTCollectionListTableViewCell = tableView.dequeueReusableCell()
         if let businessObject = presenter?.nftCollectionBusinessObjectForIndex(indexPath) {
@@ -96,7 +102,7 @@ extension NFTCollectionListViewController: UITableViewDataSource {
 }
 
 extension NFTCollectionListViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.showNftCollectionDetailForIndexPath(indexPath)
     }
@@ -109,7 +115,7 @@ extension NFTCollectionListViewController: NFTCollectionListViewProtocol {
         nftCollectionListTableView.reloadData()
         isLoading = false
     }
-    
+
     func showError(error: Error) {
         hideLoading()
         let errorModel = ErrorModel(message: error.localizedDescription, actionText: "OK", action: {})
@@ -118,11 +124,11 @@ extension NFTCollectionListViewController: NFTCollectionListViewProtocol {
 }
 
 extension NFTCollectionListViewController: UIScrollViewDelegate {
-    
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
+
         if scrollView == nftCollectionListTableView {
-            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
+            if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height {
                 if !isLoading {
                     print("Loading is false")
                     isLoading = true

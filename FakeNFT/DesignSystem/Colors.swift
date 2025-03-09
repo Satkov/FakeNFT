@@ -51,7 +51,7 @@ extension UIColor {
     static let projectGray = UIColor(hexString: "#3C3C4399").withAlphaComponent(0.6)
     static let projectWhite = UIColor(hexString: "#FFFFFF")
     static let blueUniversal = UIColor(hexString: "#0A84FF")
-    
+
     static let filterMenuBorder = UIColor(hexString: "#3C3C43").withAlphaComponent(0.36)
     static let navigationBarButton = yaBlackLight
 

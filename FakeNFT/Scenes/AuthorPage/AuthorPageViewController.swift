@@ -12,13 +12,13 @@ protocol AuthorPageViewProtocol: AnyObject {
 }
 
 final class AuthorPageViewController: UIViewController {
-    
+
     private lazy var webView: WKWebView = {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         return webView
     }()
-    
+
     // MARK: - Public
     var presenter: AuthorPagePresenterProtocol?
 
@@ -28,9 +28,9 @@ final class AuthorPageViewController: UIViewController {
         loadWebViewContent()
         initialize()
     }
-    
+
     private func loadWebViewContent() {
-        
+
         guard let urlRequest = presenter?.makeAuthorPageURLRequest() else {
             return
         }
