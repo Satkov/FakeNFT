@@ -99,10 +99,11 @@ extension UserCollectionViewController: UICollectionViewDelegate, UICollectionVi
         }
 
         let nft = nfts[indexPath.row]
-        cell.configure(with: nft)
+        cell.configure(with: nft, cart: presenter?.cart, profile: presenter?.profile)
         return cell
     }
 }
+
 
 extension UserCollectionViewController: UserCollectionViewProtocol {
     func showNFTs(_ nfts: [NFT]) {

@@ -2,6 +2,10 @@ import Foundation
 
 protocol UserCollectionPresenterProtocol: AnyObject {
     func viewDidLoad()
+    var cart: Cart? { get }
+    var profile: Profile? { get }
+    func updateCart(nfts: [String])
+    func updateProfile(likes: [String])
 }
 
 final class UserCollectionPresenter: UserCollectionPresenterProtocol {
@@ -9,6 +13,9 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
     private let interactor: UserCollectionInteractorProtocol
     private let router: UserCollectionRouterProtocol
     private let userId: String
+    private(set) var profile: Profile?
+    private(set) var cart: Cart?
+    private var nfts: [NFT]?
     
     init(
         view: UserCollectionViewProtocol,
@@ -25,6 +32,16 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
     func viewDidLoad() {
         view?.showLoadingIndicator()
         interactor.fetchNFTs(for: userId)
+        interactor.fetchCart(for: userId)
+        interactor.fetchProfile(for: userId)
+    }
+    
+    func updateCart(nfts: [String]) {
+        interactor.updateCart(nfts: nfts)
+    }
+    
+    func updateProfile(likes: [String]) {
+        interactor.updateProfile(likes: likes)
     }
 }
 
@@ -34,7 +51,29 @@ extension UserCollectionPresenter: UserCollectionInteractorOutputProtocol {
         view?.showNFTs(nfts)
     }
     
-    func didFailFetchingNFTs(with error: Error) {
+    func didFetchCart(_ cart: Cart) {
+        self.cart = cart
+    }
+    
+    func didUpdateCart(_ cart: Cart) {
+        self.cart = cart
+        if let nfts = self.nfts {
+            view?.showNFTs(nfts)
+        }
+    }
+    
+    func didFetchProfile(_ profile: Profile) {
+        self.profile = profile
+    }
+    
+    func didUpdateProfile(_ profile: Profile) {
+        self.profile = profile
+        if let nfts = self.nfts {
+            view?.showNFTs(nfts)
+        }
+    }
+    
+    func handleError(with error: Error) {
         view?.hideLoadingIndicator()
         view?.showError(error)
     }

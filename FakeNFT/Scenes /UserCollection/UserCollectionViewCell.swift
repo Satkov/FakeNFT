@@ -1,6 +1,9 @@
 import UIKit
+
 final class NFTCollectionViewCell: UICollectionViewCell {
+    
     static let reuseIdentifier = "NFTCollectionViewCell"
+    private var nftId: String?
 
     private var isLiked: Bool = false {
         didSet {
@@ -24,7 +27,6 @@ final class NFTCollectionViewCell: UICollectionViewCell {
 
     private let likeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "heartWhite"), for: .normal)
         return button
     }()
 
@@ -51,7 +53,6 @@ final class NFTCollectionViewCell: UICollectionViewCell {
 
     private let cartButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "cart1"), for: .normal)
         return button
     }()
 
@@ -107,7 +108,8 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    func configure(with nft: NFT) {
+    func configure(with nft: NFT, cart: Cart?, profile: Profile?) {
+        self.nftId = nft.id
         if let imageUrl = nft.images.first {
             ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
                 self?.nftImageView.image = image
@@ -118,8 +120,21 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         updateRating(nft.rating)
         let priceString = String(format: "%.2f", nft.price).replacingOccurrences(of: ".", with: ",")
         priceLabel.text = "\(priceString) ETH"
+        
+        if let cart = cart, cart.nfts.contains(nft.id) {
+            isInCart = true
+        } else {
+            isInCart = false
+        }
+        
+        if let profile = profile, profile.likes.contains(nft.id) {
+            isLiked = true
+        } else {
+            isLiked = false
+        }
     }
-
+    
+    
     private func updateRating(_ rating: Int) {
         let ratingImageName: String
         switch rating {
@@ -138,7 +153,6 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         default:
             ratingImageName = "zero"
         }
-
         ratingImageView.image = UIImage(named: ratingImageName)
     }
 
@@ -153,10 +167,31 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func cartButtonTapped() {
+        guard let nftId = nftId else { return }
         isInCart.toggle()
+        if let parentViewController = self.parentViewController as? UserCollectionViewController {
+            var updatedNFTs = parentViewController.presenter?.cart?.nfts ?? []
+            if isInCart {
+                updatedNFTs.append(nftId)
+            } else {
+                updatedNFTs.removeAll { $0 == nftId }
+            }
+            parentViewController.presenter?.updateCart(nfts: updatedNFTs)
+        }
     }
     
     @objc private func likeButtonTapped() {
+        guard let nftId = nftId else { return }
         isLiked.toggle()
+        
+        if let parentViewController = self.parentViewController as? UserCollectionViewController {
+            var updatedLikes = parentViewController.presenter?.profile?.likes ?? []
+            if isLiked {
+                updatedLikes.append(nftId)
+            } else {
+                updatedLikes.removeAll { $0 == nftId }
+            }
+            parentViewController.presenter?.updateProfile(likes: updatedLikes)
+        }
     }
 }
