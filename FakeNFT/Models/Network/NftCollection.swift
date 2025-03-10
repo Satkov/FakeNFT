@@ -1,19 +1,18 @@
 //
-//  Nft.swift
+//  NftCollection.swift
 //  FakeNFT
 //
-//  Created by Nikolay on 20.02.2025.
+//  Created by Nikolay on 17.02.2025.
 //
 
 import Foundation
 
-struct Nft: Decodable {
+struct NftCollection: Decodable {
     let createdAt: String
     let name: String
-    let images: [String]
-    let rating: Int
+    let cover: String
+    let nfts: [String]
     let description: String
-    let price: Float
     let author: String
     let id: String
 }

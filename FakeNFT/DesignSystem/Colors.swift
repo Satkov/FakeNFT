@@ -37,11 +37,12 @@ extension UIColor {
     static let background = UIColor.white
 
     // Text Colors
-    static let textPrimary = UIColor.black
+    static let textPrimary = yaBlackLight
     static let textSecondary = UIColor.gray
     static let textOnPrimary = UIColor.white
     static let textOnSecondary = UIColor.black
-    static let filterMenuText = UIColor(hexString: "#0A84FF")
+    static let filterMenuText = blueUniversal
+    static let linkText = blueUniversal
 
     // Project Colors
     static let greenUniversal = UIColor(hexString: "#1C9F00")
@@ -49,9 +50,12 @@ extension UIColor {
     static let projectBlack = UIColor(hexString: "#1A1B22")
     static let projectGray = UIColor(hexString: "#3C3C4399").withAlphaComponent(0.6)
     static let projectWhite = UIColor(hexString: "#FFFFFF")
-    static let filterMenuBorder = UIColor(hexString: "#3C3C43").withAlphaComponent(0.36)
+    static let blueUniversal = UIColor(hexString: "#0A84FF")
 
-    private static let yaBlackLight = UIColor(hexString: "1A1B22")
+    static let filterMenuBorder = UIColor(hexString: "#3C3C43").withAlphaComponent(0.36)
+    static let navigationBarButton = yaBlackLight
+
+    private static let yaBlackLight = UIColor(hexString: "#1A1B22")
     private static let yaBlackDark = UIColor.white
     private static let yaLightGrayLight = UIColor(hexString: "#F7F7F8")
     private static let yaLightGrayDark = UIColor(hexString: "#2C2C2E")

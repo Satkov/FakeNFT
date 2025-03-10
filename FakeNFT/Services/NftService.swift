@@ -1,7 +1,7 @@
 import Foundation
 
 typealias UpdateOrderCompletion = (Result<UpdateOrderResponse, Error>) -> Void
-typealias OrderCompletion = (Result<Order, Error>) -> Void
+typealias CartCompletion = (Result<Order, Error>) -> Void
 
 protocol NftService {
     func loadCart(completion: @escaping OrderCompletion)
