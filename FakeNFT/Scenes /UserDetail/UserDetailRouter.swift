@@ -16,7 +16,7 @@ class UserDetailRouter: UserDetailRouterProtocol {
     }
 
     func openCollection(userId: String) {
-        let collectionVC = UserCollectionViewController(userId: userId)
+        let collectionVC = UserCollectionModuleBuilder.build(userId: userId)
         viewController?.navigationController?.pushViewController(collectionVC, animated: true)
     }
 }
