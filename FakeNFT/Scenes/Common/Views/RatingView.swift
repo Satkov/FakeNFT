@@ -49,7 +49,8 @@ final class RatingView: UIView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.widthAnchor.constraint(equalToConstant: 68),
-            stackView.heightAnchor.constraint(equalToConstant: 12)
+            stackView.heightAnchor.constraint(equalToConstant: 12),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 
