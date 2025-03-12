@@ -23,6 +23,7 @@ final class ProfileEditViewController: UIViewController {
     }()
     
     private let headerView = UIView()
+    
     private let closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -30,6 +31,7 @@ final class ProfileEditViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 35
@@ -85,9 +87,20 @@ extension ProfileEditViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
         profileImageView.addGestureRecognizer(tapGesture)
+        
         setupConstraints()
+        
         closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
         presenter?.viewDidLoad()
+        
+        nameTextField.delegate = self
+        nameTextField.returnKeyType = .done
+        
+        descriptionTextView.delegate = self
+        descriptionTextView.returnKeyType = .done
+        
+        websiteTextField.delegate = self
+        websiteTextField.returnKeyType = .done
     }
     
     private func setupConstraints() {
@@ -124,6 +137,7 @@ extension ProfileEditViewController {
     }
 }
 
+// MARK: - ProfileEditViewProtocol
 extension ProfileEditViewController: ProfileEditViewProtocol {
     func showProfileData(_ profile: Profile) {
         nameTextField.text = profile.name
@@ -145,5 +159,26 @@ extension ProfileEditViewController: ProfileEditViewProtocol {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension ProfileEditViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension ProfileEditViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView,
+                  shouldChangeTextIn range: NSRange,
+                  replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
 }
