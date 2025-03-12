@@ -171,7 +171,7 @@ extension CartPresenter: CartPresenterProtocol {
             interactor.updateOrder(nfts: []) { [weak self] result in
                 guard let self else { return }
                 switch result {
-                case .success(_):
+                case .success:
                     getOrder()
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
@@ -223,7 +223,7 @@ extension CartPresenter: UITableViewDataSource {
         interactor.updateOrder(nfts: nftsIds) { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(_):
+            case .success:
                 getOrder()
             case .failure(let error):
                 assertionFailure(error.localizedDescription)

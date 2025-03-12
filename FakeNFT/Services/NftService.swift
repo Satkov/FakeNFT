@@ -4,14 +4,14 @@ typealias NftCompletion = (Result<Nft, Error>) -> Void
 typealias CurrencyCompletion = (Result<[Currency], Error>) -> Void
 typealias OrderCompletion = (Result<Order, Error>) -> Void
 typealias UpdateOrderCompletion = (Result<UpdateOrderResponse, Error>) -> Void
-typealias payForOrderCompletion = (Result<PayForOrderResponse, Error>) -> Void
+typealias PayForOrderCompletion = (Result<PayForOrderResponse, Error>) -> Void
 
 protocol NftService {
     func loadCart(completion: @escaping OrderCompletion)
     func getNFTById(id: String, completion: @escaping NftCompletion)
     func getCurrency(completion: @escaping CurrencyCompletion)
     func sendUpdateOrderRequest(nfts: [String], completion: @escaping UpdateOrderCompletion)
-    func setCurrencyIdAndPay(id: String, completion: @escaping payForOrderCompletion)
+    func setCurrencyIdAndPay(id: String, completion: @escaping PayForOrderCompletion)
 }
 
 final class NftServiceImpl: NftService {
@@ -84,7 +84,7 @@ final class NftServiceImpl: NftService {
 
     func setCurrencyIdAndPay(
         id: String,
-        completion: @escaping payForOrderCompletion
+        completion: @escaping PayForOrderCompletion
     ) {
         let request = NetworkRequests.setCurrencyIdAndPay(id: id)
         networkClient.send(request: request, type: PayForOrderResponse.self) { result in
