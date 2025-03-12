@@ -8,8 +8,14 @@
 import Foundation
 
 struct ProfileRequest: NetworkRequest {
+
     var endpoint: URL? {
-        URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1")
+        let urlString = "\(RequestConstants.baseURL)/api/v1/profile/1"
+        return URL(string: urlString)
     }
-    var dto: Dto?
+
+    var httpMethod: HttpMethod { .get }
+    var dto: Dto? { nil }
 }
+
+
