@@ -10,13 +10,16 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
     private var nftNameLabel: UILabel = {
         let label = UILabel()
         label.font = .sfProBold17
         label.textColor = .projectBlack
         return label
     }()
+    
     private var nftRatingView = RatingView()
+    
     private var nftAuthorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .projectBlack
@@ -24,6 +27,7 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         label.font = .sfRegular13
         return label
     }()
+    
     private var nftPriceHeaderLabel: UILabel = {
         let label = UILabel()
         label.font = .sfRegular13
@@ -31,12 +35,14 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         label.text = Localization.price
         return label
     }()
+    
     private var nftPriceLabel: UILabel = {
         let label = UILabel()
         label.font = .sfProBold17
         label.textColor = .projectBlack
         return label
     }()
+    
     private let middleStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -45,6 +51,7 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
     private let priceStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -64,6 +71,8 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     private func setupViews() {
+        selectionStyle = .none
+        
         [nftNameLabel, nftRatingView, nftAuthorLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             middleStackView.addArrangedSubview($0)
@@ -102,6 +111,7 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         nftNameLabel.text = nft.name
         nftPriceLabel.text = "\(nft.price) ETH"
         nftRatingView.rating = nft.rating
+        
         let author = "от \(nft.author)"
         let defaultAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.sfRegular13 ?? UIFont()

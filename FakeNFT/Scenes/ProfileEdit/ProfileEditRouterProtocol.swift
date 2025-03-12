@@ -22,9 +22,9 @@ final class ProfileEditRouter: ProfileEditRouterProtocol {
     
     static func createModule(servicesAssembly: ServicesAssembly, userId: String) -> UIViewController {
         let view = ProfileEditViewController()
-        let presenter = ProfileEditPresenter()
         let router = ProfileEditRouter()
         let interactor = ProfileEditInteractor(profileService: servicesAssembly.profileService)
+        let presenter = ProfileEditPresenter(interactor: interactor, router: router)
         
         view.presenter = presenter
         presenter.view = view

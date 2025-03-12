@@ -1,27 +1,21 @@
-enum SortOption {
-    case name
-    case price
-    case rating
-}
-
 protocol MyNftPresenterProtocol: AnyObject {
     var nftList: [Nft] { get }
 
     func viewDidLoad()
     func didSelectNFT(at index: Int)
     func didPullToRefresh()
-    func didChangeSortOption(_ option: SortOption)
+    func didChangeSortOption(_ option: MyNftSortOption)
     func didFetchNFTs(_ nfts: [Nft])
     func didFailToFetchNFTs(error: Error?)
 }
 
-class MyNftPresenter {
+final class MyNftPresenter {
     weak var view: MyNftViewProtocol?
     var router: MyNftRouterProtocol
     var interactor: MyNftInteractorProtocol
     
     private(set) var nftList: [Nft] = []
-    private var currentSort: SortOption = .name
+    private var currentSort: MyNftSortOption = .name
     
     init(interactor: MyNftInteractorProtocol, router: MyNftRouterProtocol) {
         self.interactor = interactor
@@ -56,7 +50,7 @@ extension MyNftPresenter: MyNftPresenterProtocol {
         interactor.fetchNFTs()
     }
     
-    func didChangeSortOption(_ option: SortOption) {
+    func didChangeSortOption(_ option: MyNftSortOption) {
         currentSort = option
         applySorting()
         view?.showNFTs(nftList)

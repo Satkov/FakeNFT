@@ -28,10 +28,12 @@ final class ProfileRouter: ProfileRouterProtocol {
         let router = ProfileRouter(servicesAssembly: servicesAssembly)
         let presenter = ProfilePresenter(userId: "1", interactor: interactor, router: router)
         let viewController = ProfileViewController()
+        
         presenter.view  = viewController
         viewController.presenter = presenter
         interactor.presenter = presenter
         router.viewController = viewController
+        
         return viewController
     }
 }

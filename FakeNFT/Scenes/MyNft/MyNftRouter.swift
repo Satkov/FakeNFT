@@ -2,10 +2,11 @@ protocol MyNftRouterProtocol {
     func routeToDetail(for nft: Nft)
 }
 
-class MyNftRouter: MyNftRouterProtocol {
+final class MyNftRouter: MyNftRouterProtocol {
     weak var viewController: MyNftViewController?
     
     func routeToDetail(for nft: Nft) {
+        // TODO: In next module
     }
     
     static func createModule() -> MyNftViewController {
@@ -13,10 +14,12 @@ class MyNftRouter: MyNftRouterProtocol {
         let router = MyNftRouter()
         let presenter = MyNftPresenter(interactor: interactor, router: router)
         let viewController = MyNftViewController()
+        
         presenter.view  = viewController
         viewController.presenter = presenter
         interactor.presenter = presenter
         router.viewController = viewController
+        
         return viewController
     }
 }

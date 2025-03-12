@@ -24,6 +24,7 @@ final class ProfileViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .sfProBold22
@@ -31,6 +32,7 @@ final class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .sfRegular13
@@ -38,6 +40,7 @@ final class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private let websiteButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = .sfRegular15
@@ -45,9 +48,13 @@ final class ProfileViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
     private let myNftButton = ListItem(title: "Мои NFT")
+    
     private let likedNftButton = ListItem(title: "Избранные NFT")
+    
     private let aboutDevButton = ListItem(title: "О разработчике")
+    
     private let avatarAndNameStack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 16
@@ -72,7 +79,7 @@ final class ProfileViewController: UIViewController {
 
 // MARK: - Private functions
 private extension ProfileViewController {
-    func initialize() {
+    private func initialize() {
         view.backgroundColor = .projectWhite
         setupNavBar()
         
@@ -93,7 +100,7 @@ private extension ProfileViewController {
     
     private func setupNavBar() {
         let editButton = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.pencil"),
+            image: UIImage(named: "Edit"),
             style: .plain,
             target: self,
             action: #selector(didTapEditButton)

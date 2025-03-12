@@ -2,7 +2,7 @@ protocol MyNftInteractorProtocol: AnyObject {
     func fetchNFTs()
 }
 
-class MyNftInteractor: MyNftInteractorProtocol {
+final class MyNftInteractor: MyNftInteractorProtocol {
     weak var presenter: MyNftPresenterProtocol?
 
     private let mockNFTs: [Nft] = [

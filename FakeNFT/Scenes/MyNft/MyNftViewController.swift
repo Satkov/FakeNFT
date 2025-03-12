@@ -6,11 +6,13 @@ protocol MyNftViewProtocol: AnyObject {
     func endRefreshing()
 }
 
-class MyNftViewController: UIViewController {
+final class MyNftViewController: UIViewController {
     var presenter: MyNftPresenterProtocol?
     
     private let tableView = UITableView()
+    
     private let refreshControl = UIRefreshControl()
+    
     private let emptyTableLabel: UILabel = {
         let label = UILabel()
         label.font = .sfProBold17
@@ -32,12 +34,13 @@ class MyNftViewController: UIViewController {
     }
     
     @objc private func didTapSortButton() {
+        // TODO: In next modules
     }
 }
 
 // MARK: - Private functions
 private extension MyNftViewController {
-    func initialize() {
+    private func initialize() {
         view.backgroundColor = .projectWhite
         navigationItem.title = Localization.myNft
         
@@ -57,7 +60,9 @@ private extension MyNftViewController {
         tableView.register(MyNftTableViewCell.self)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(tableView)
+        
         setupConstraints()
     }
     

@@ -14,8 +14,13 @@ protocol ProfileEditPresenterProtocol: AnyObject {
 
 final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     weak var view: ProfileEditViewProtocol?
-    var interactor: ProfileEditInteractorInput!
-    var router: ProfileEditRouterProtocol!
+    var interactor: ProfileEditInteractorInput
+    var router: ProfileEditRouterProtocol
+    
+    init(interactor: ProfileEditInteractorInput, router: ProfileEditRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+    }
     
     func viewDidLoad() {
         view?.showLoadingIndicator()
