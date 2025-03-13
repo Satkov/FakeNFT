@@ -63,7 +63,7 @@ final class DeleteNftFromCartViewController: UIViewController {
             guard let self else { return }
             switch result {
             case .success(let image):
-                imageView.image = image
+                self.imageView.image = image
             case .failure(let error):
                 print(error.localizedDescription)
             }

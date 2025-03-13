@@ -46,7 +46,7 @@ final class PaymentMethodCollectionViewCell: UICollectionViewCell, ReuseIdentify
             guard let self else { return }
             switch result {
             case .success(let image):
-                currencyImageView.image = image
+                self.currencyImageView.image = image
             case .failure(let error):
                 print(error.localizedDescription)
             }

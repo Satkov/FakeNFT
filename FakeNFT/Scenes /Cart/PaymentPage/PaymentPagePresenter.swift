@@ -82,10 +82,10 @@ extension PaymentPagePresenter: PaymentPagePresenterProtocol {
             switch result {
             case .success(let response):
                 if response.success {
-                    onPurchase()
-                    router.showSuccessPaymentView { [weak self] in
+                    self.onPurchase()
+                    self.router.showSuccessPaymentView { [weak self] in
                         guard let self else { return }
-                        view?.navigationController?.popViewController(animated: false)
+                        self.view?.navigationController?.popViewController(animated: false)
                     }
                 } else {
                     // TODO: show alert

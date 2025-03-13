@@ -154,12 +154,12 @@ extension CartPresenter: CartPresenterProtocol {
     func showPayment() {
         router.showPaymentPage { [weak self] in
             guard let self else { return }
-            state = .loading
-            interactor.updateOrder(nfts: []) { [weak self] result in
+            self.state = .loading
+            self.interactor.updateOrder(nfts: []) { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case .success:
-                    getOrder()
+                    self.getOrder()
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
                 }
@@ -211,7 +211,7 @@ extension CartPresenter: UITableViewDataSource {
                 guard let self else { return }
                 self.router.showDeletePage(imageUrlString: nft.images[0]) { [weak self] in
                     guard let self else { return }
-                    deleteNftFromCartAction(indexPath: indexPath)
+                    self.deleteNftFromCartAction(indexPath: indexPath)
                 }
             }
         return cell
@@ -225,7 +225,7 @@ extension CartPresenter: UITableViewDataSource {
             guard let self else { return }
             switch result {
             case .success:
-                getOrder()
+                self.getOrder()
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }

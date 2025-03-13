@@ -72,7 +72,7 @@ final class SuccessPaymentViewController: UIViewController {
     private func backToCatalogButtonPressed() {
         dismiss(animated: false) { [weak self] in
             guard let self else { return }
-            moveBackAction?()
+            self.moveBackAction?()
         }
     }
 }

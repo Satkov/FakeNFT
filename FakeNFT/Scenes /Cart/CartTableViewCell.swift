@@ -53,7 +53,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
             guard let self else { return }
             switch result {
             case .success(let image):
-                nftImageView.image = image
+                self.nftImageView.image = image
             case .failure(let error):
                 print(error.localizedDescription)
             }
