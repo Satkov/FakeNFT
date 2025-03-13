@@ -134,7 +134,6 @@ final class UserCollectionViewCell: UICollectionViewCell {
         }
     }
 
-
     private func updateRating(_ rating: Int) {
         let ratingImageName: String
         switch rating {

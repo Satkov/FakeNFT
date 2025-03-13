@@ -48,10 +48,12 @@ extension StatisticPresenter: StatisticPresenterProtocol {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "StatisticCell", for: indexPath) as? StatisticCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "StatisticCell",
+            for: indexPath
+        ) as? StatisticCell else {
             return UITableViewCell()
         }
-
         let user = users[indexPath.row]
         let firstName = user.name.components(separatedBy: " ").first ?? ""
 

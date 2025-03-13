@@ -12,7 +12,7 @@ final class UserDetailModuleBuilder {
             router: router,
             userId: userId
         )
-        
+
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view

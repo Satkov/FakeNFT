@@ -13,7 +13,7 @@ final class ImageLoader {
             return
         }
 
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, _ in
             guard let self = self, let data = data, let image = UIImage(data: data),
                   let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 DispatchQueue.main.async {

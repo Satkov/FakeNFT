@@ -46,14 +46,20 @@ class StatisticViewController: UIViewController, StatisticViewProtocol {
     private func setupNavigationBar() {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.frame.size.height = 42
 
-        let sortButton = UIBarButtonItem(image: UIImage(named: "CatalogSortButtonImage"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        let sortButton = UIBarButtonItem(
+            image: UIImage(named: "CatalogSortButtonImage"),
+            style: .plain,
+            target: self,
+            action: #selector(sortButtonTapped)
+        )
         navigationItem.rightBarButtonItem = sortButton
     }
-
 
     private func setupTableView() {
         tableView.delegate = presenter
@@ -80,7 +86,6 @@ class StatisticViewController: UIViewController, StatisticViewProtocol {
             loadingIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
     }
-
 
     func showLoadingIndicator() {
         loadingIndicator.startAnimating()

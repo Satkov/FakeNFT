@@ -12,3 +12,10 @@ struct UserDetail: Decodable {
         nfts.count
     }
 }
+
+struct UserDetails {
+    let name: String
+    let description: NSAttributedString
+    let text: String
+    let imageURL: URL?
+}

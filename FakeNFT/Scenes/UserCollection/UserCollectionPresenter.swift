@@ -16,7 +16,7 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
     private(set) var profile: Profile?
     private(set) var cart: Cart?
     private var nfts: [NFT]?
-    
+
     init(
         view: UserCollectionViewProtocol,
         interactor: UserCollectionInteractorProtocol,
@@ -28,18 +28,18 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
         self.router = router
         self.userId = userId
     }
-    
+
     func viewDidLoad() {
         view?.showLoadingIndicator()
         interactor.fetchNFTs(for: userId)
         interactor.fetchCart(for: userId)
         interactor.fetchProfile(for: userId)
     }
-    
+
     func updateCart(nfts: [String]) {
         interactor.updateCart(nfts: nfts)
     }
-    
+
     func updateProfile(likes: [String]) {
         interactor.updateProfile(likes: likes)
     }
@@ -50,29 +50,29 @@ extension UserCollectionPresenter: UserCollectionInteractorOutputProtocol {
         view?.hideLoadingIndicator()
         view?.showNFTs(nfts)
     }
-    
+
     func didFetchCart(_ cart: Cart) {
         self.cart = cart
     }
-    
+
     func didUpdateCart(_ cart: Cart) {
         self.cart = cart
         if let nfts = self.nfts {
             view?.showNFTs(nfts)
         }
     }
-    
+
     func didFetchProfile(_ profile: Profile) {
         self.profile = profile
     }
-    
+
     func didUpdateProfile(_ profile: Profile) {
         self.profile = profile
         if let nfts = self.nfts {
             view?.showNFTs(nfts)
         }
     }
-    
+
     func handleError(with error: Error) {
         view?.hideLoadingIndicator()
         view?.showError(error)

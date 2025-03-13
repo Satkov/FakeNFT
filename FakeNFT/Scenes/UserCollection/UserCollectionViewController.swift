@@ -19,7 +19,8 @@ final class UserCollectionViewController: UIViewController {
         layout.minimumLineSpacing = 28
         layout.itemSize = CGSize(width: 108, height: 172)
 
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
@@ -55,7 +56,10 @@ final class UserCollectionViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: UserCollectionViewCell.reuseIdentifier)
+        collectionView.register(
+            UserCollectionViewCell.self,
+            forCellWithReuseIdentifier: UserCollectionViewCell.reuseIdentifier
+        )
     }
 
     private func setupConstraints() {
@@ -69,12 +73,12 @@ final class UserCollectionViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
+
             loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadingIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
     }
-    
+
     private func setupNavigationBar() {
         self.title = "Коллекция NFT"
         navigationController?.navigationBar.titleTextAttributes = [
@@ -89,7 +93,10 @@ extension UserCollectionViewController: UICollectionViewDelegate, UICollectionVi
         return nfts.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: UserCollectionViewCell.reuseIdentifier,
             for: indexPath
@@ -103,7 +110,6 @@ extension UserCollectionViewController: UICollectionViewDelegate, UICollectionVi
         return cell
     }
 }
-
 
 extension UserCollectionViewController: UserCollectionViewProtocol {
     func showNFTs(_ nfts: [NFT]) {
