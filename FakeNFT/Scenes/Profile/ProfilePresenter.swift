@@ -1,3 +1,5 @@
+import Foundation
+
 protocol ProfileState {
     func handle(presenter: ProfilePresenter)
 }
@@ -56,12 +58,27 @@ final class ProfilePresenter {
         self.interactor = interactor
         self.router = router
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .profileDidChange, object: nil)
+    }
+    
+    @objc private func handleProfileDidChange(_ notification: Notification) {
+        guard let updatedProfile = notification.object as? Profile else { return }
+        view?.showProfile(updatedProfile)
+    }
 }
 
 extension ProfilePresenter: ProfilePresenterProtocol {
     func viewDidLoad() {
         state.handle(presenter: self)
         interactor.fetchProfile(userId: userId)
+        NotificationCenter.default.addObserver(
+                    self,
+                    selector: #selector(handleProfileDidChange(_:)),
+                    name: .profileDidChange,
+                    object: nil
+                )
     }
     
     func didFetchProfile(_ profile: Profile) {

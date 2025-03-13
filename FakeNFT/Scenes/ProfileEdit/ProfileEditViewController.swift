@@ -32,16 +32,7 @@ final class ProfileEditViewController: UIViewController {
         return button
     }()
     
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 35
-        imageView.layer.masksToBounds = true
-        imageView.backgroundColor = .lightGray
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let profileImageView = UserPicView()
     
     private let nameHeader = FieldHeader(text: Localization.name)
     private let nameTextField = TextField()
@@ -52,9 +43,21 @@ final class ProfileEditViewController: UIViewController {
     private let websiteHeader = FieldHeader(text: Localization.website)
     private let websiteTextField = TextField()
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter?.didTapSave(
+            ProfileSaveData(
+                name: nameTextField.text ?? "",
+                description: descriptionTextView.text ?? "",
+                website: websiteTextField.text ?? ""
+            )
+        )
     }
     
     // MARK: - Actions
@@ -87,6 +90,7 @@ extension ProfileEditViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
         profileImageView.addGestureRecognizer(tapGesture)
+        profileImageView.editable = true
         
         setupConstraints()
         
@@ -112,8 +116,6 @@ extension ProfileEditViewController {
             
             profileImageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 22),
             profileImageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 70),
-            profileImageView.heightAnchor.constraint(equalToConstant: 70),
             profileImageView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
             
             contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -143,7 +145,7 @@ extension ProfileEditViewController: ProfileEditViewProtocol {
         nameTextField.text = profile.name
         descriptionTextView.text = profile.description
         websiteTextField.text = profile.website
-        profileImageView.loadImage(urlString: profile.avatar, defaultImage: UIImage(systemName: "person.crop.circle"))
+        profileImageView.loadImage(urlString: profile.avatar, defaultImage: UIImage(named: "avatar"))
     }
     
     func showLoadingIndicator() {

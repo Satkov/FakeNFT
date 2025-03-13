@@ -30,10 +30,10 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     func didTapSave(_ profileData: ProfileSaveData) {
         view?.showLoadingIndicator()
         let updatedProfile = Profile(
-            name: "Joaquin Phoenix",
+            name: profileData.name,
             avatar: "avatar",
-            description: "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям.",
-            website: "",
+            description: profileData.description,
+            website: profileData.website,
             nfts: [],
             likes: [],
             id: "1"
