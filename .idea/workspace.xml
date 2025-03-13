@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="" />
+    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/Common/Views/UserPicView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FakeNFT/DesignSystem/Colors.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/DesignSystem/Colors.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfilePresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfilePresenter.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfileViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfileViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditPresenterProtocol.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditPresenterProtocol.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditViewController.swift" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +21,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2u974hq6iXzcL8ly1hDV2J45TFu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,7 +33,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "profile-module1",
+    "git-widget-placeholder": "profile-module2",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -52,6 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741648747599</updated>
       <workItem from="1741648749072" duration="1710000" />
+      <workItem from="1741846251882" duration="307000" />
     </task>
     <servers />
   </component>
@@ -64,6 +73,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="profile-module2-backup" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="profile-module1" />
@@ -94,7 +108,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="profile-module1" />
+                        <option value="profile-module2-backup" />
                       </list>
                     </value>
                   </entry>
