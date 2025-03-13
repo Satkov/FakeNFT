@@ -6,7 +6,7 @@
 
 
 [Скрин каст корзины](https://disk.yandex.ru/i/J_zsV41CBENtxg)
-
+[Скрин каст каталога](https://www.loom.com/share/3b49f3ec4d10448e98fa9d595edbb3a2?sid=970b814d-22bf-4ee6-9b89-687361660841)
 
 # Назначение и цели приложения
 
