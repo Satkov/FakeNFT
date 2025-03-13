@@ -1,6 +1,6 @@
 import UIKit
 
-protocol PaymentPageViewProtocol: AnyObject {
+protocol PaymentPageViewProtocol: UIViewController {
     func showCollection()
     func showLoader()
     func hideLoader()
@@ -11,7 +11,7 @@ class PaymentPageViewController: UIViewController {
     // MARK: - Public
     var presenter: PaymentPagePresenterProtocol?
 
-    private lazy var agreementAndPayView = AgreementAndPayView()
+    private let agreementAndPayView = AgreementAndPayView()
 
     private enum LayoutConstants {
         static let columns: CGFloat = 2
@@ -30,7 +30,7 @@ class PaymentPageViewController: UIViewController {
         return collectionView
     }()
 
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.hidesWhenStopped = true
         return indicator

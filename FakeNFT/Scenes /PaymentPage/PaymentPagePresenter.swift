@@ -2,6 +2,7 @@ import UIKit
 
 protocol PaymentPagePresenterProtocol: AnyObject, UICollectionViewDelegate, UICollectionViewDataSource {
     func showWebView()
+    func payButtonTapped()
 }
 
 enum PaymentViewState {
@@ -19,10 +20,16 @@ class PaymentPagePresenter: NSObject {
     }
 
     private var currencies: [Currency] = []
+    private let onPurchase: () -> Void
 
-    init(interactor: PaymentPageInteractorProtocol, router: PaymentPageRouterProtocol) {
+    init(
+        interactor: PaymentPageInteractorProtocol,
+        router: PaymentPageRouterProtocol,
+        onPurchase: @escaping () -> Void
+    ) {
         self.interactor = interactor
         self.router = router
+        self.onPurchase = onPurchase
         super.init()
     }
 
@@ -66,6 +73,28 @@ class PaymentPagePresenter: NSObject {
 extension PaymentPagePresenter: PaymentPagePresenterProtocol {
     func showWebView() {
         router.showWebView()
+    }
+
+    func payButtonTapped() {
+        guard let selectedCurrency else { return }
+        interactor.setCurrencyIdAndPay(id: selectedCurrency.id) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let response):
+                if response.success {
+                    onPurchase()
+                    router.showSuccessPaymentView { [weak self] in
+                        guard let self else { return }
+                        view?.navigationController?.popViewController(animated: false)
+                    }
+                } else {
+                    // TODO: show alert
+                }
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
+        }
+
     }
 }
 

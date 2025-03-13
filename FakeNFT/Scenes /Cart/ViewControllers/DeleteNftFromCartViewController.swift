@@ -14,7 +14,7 @@ final class DeleteNftFromCartViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = Localization.deleteNfcConfirmationLabel
+        label.text = Localization.deleteNftConfirmationLabel
         label.textColor = UIColor.projectBlack
         return label
     }()
@@ -119,6 +119,7 @@ final class DeleteNftFromCartViewController: UIViewController {
     @objc
     private func deleteButtonTapped() {
         deleteAction?()
+        dismiss(animated: true)
     }
 
     @objc

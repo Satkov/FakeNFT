@@ -1,6 +1,6 @@
 protocol CartRouterProtocol {
     func showCartFilters(filterVC: FilterViewController)
-    func showPaymentPage()
+    func showPaymentPage(onPurchase: @escaping () -> Void)
     func showDeletePage(imageUrlString: String, deleteAction: @escaping (() -> Void))
 }
 
@@ -19,13 +19,19 @@ final class CartRouter: CartRouterProtocol {
         viewController?.present(filterVC, animated: false)
     }
 
-    func showPaymentPage() {
-        let paymentVC = PaymentPageModuleFactory.build(servicesAssembly: servicesAssembly)
+    func showPaymentPage(onPurchase: @escaping () -> Void) {
+        let paymentVC = PaymentPageModuleFactory.build(
+            servicesAssembly: servicesAssembly,
+            onPurchase: onPurchase
+        )
         paymentVC.hidesBottomBarWhenPushed = true
         viewController?.navigationController?.pushViewController(paymentVC, animated: true)
     }
 
-    func showDeletePage(imageUrlString: String, deleteAction: @escaping (() -> Void)) {
+    func showDeletePage(
+        imageUrlString: String,
+        deleteAction: @escaping (() -> Void)
+    ) {
         let deleteNftVC = DeleteNftFromCartViewController()
         deleteNftVC.configure(
             imageUrlString: imageUrlString,

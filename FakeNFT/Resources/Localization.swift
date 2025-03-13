@@ -27,7 +27,7 @@ enum Localization {
     static let close = localized("Close")
 
     // MARK: - Delete NFC Confirmation
-    static let deleteNfcConfirmationLabel = localized("DeleteNfc.confirmation.label")
+    static let deleteNftConfirmationLabel = localized("DeleteNfc.confirmation.label")
     static let delete = localized("Delete")
     static let getBack = localized("GetBack")
     static let price = localized("Price")

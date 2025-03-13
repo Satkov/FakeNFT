@@ -41,13 +41,15 @@ extension UIColor {
     static let textOnSecondary = UIColor.black
 
     // Project Colors
-    static let greenUniversal = UIColor(hexString: "#1C9F00")
-    static let blueUniversal = UIColor(hexString: "#0A84FF")
-    static let redUniversal = UIColor(hexString: "#F56B6C")
-    static let lightGray = UIColor(hexString: "#F7F7F8")
-    static let projectBlack = UIColor(hexString: "#1A1B22")
+    static let filterBackground = UIColor(named: "filterBackground") ?? .projectWhite
+    static let backgroundUniversal = UIColor(named: "backgroundUniversal") ?? .projectWhite
+    static let greenUniversal = UIColor(named: "greenUniversal") ?? .green
+    static let blueUniversal = UIColor(named: "blueUniversal") ?? .blue
+    static let redUniversal = UIColor(named: "redUniversal") ?? .red
+    static let lightGray = UIColor(named: "lightGray") ?? .gray
+    static let projectBlack = UIColor(named: "projectBlack") ?? .black
+    static let projectWhite = UIColor(named: "projectWhite") ?? .white
     static let projectGray = UIColor(hexString: "#3C3C4399").withAlphaComponent(0.6)
-    static let projectWhite = UIColor(hexString: "#FFFFFF")
 
     private static let yaBlackLight = UIColor(hexString: "1A1B22")
     private static let yaBlackDark = UIColor.white

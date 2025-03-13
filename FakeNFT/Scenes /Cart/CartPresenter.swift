@@ -55,7 +55,11 @@ final class CartPresenter: NSObject {
             view?.hideLoader()
             let choice = loadLastFilterChoice()
             filterNftBy(filterChoice: choice)
-            showNfts()
+            if nftsInCart.isEmpty {
+                view?.showPlaceholder()
+            } else {
+                showNfts()
+            }
         }
     }
 
@@ -161,7 +165,19 @@ extension CartPresenter: CartPresenterProtocol {
     }
 
     func showPayment() {
-        router.showPaymentPage()
+        router.showPaymentPage { [weak self] in
+            guard let self else { return }
+            state = .loading
+            interactor.updateOrder(nfts: []) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success:
+                    getOrder()
+                case .failure(let error):
+                    assertionFailure(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
@@ -192,10 +208,26 @@ extension CartPresenter: UITableViewDataSource {
             rating: nft.rating,
             price: nft.price) { [weak self] in
                 guard let self else { return }
-                self.router.showDeletePage(
-                    imageUrlString: nft.images[0],
-                    deleteAction: { print("delete pressed") })
+                self.router.showDeletePage(imageUrlString: nft.images[0]) { [weak self] in
+                    guard let self else { return }
+                    deleteNftFromCartAction(indexPath: indexPath)
+                }
             }
         return cell
+    }
+
+    private func deleteNftFromCartAction(indexPath: IndexPath) {
+        nftsInCart.remove(at: indexPath.row)
+
+        let nftsIds = nftsInCart.map { $0.id }
+        interactor.updateOrder(nfts: nftsIds) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success:
+                getOrder()
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
+        }
     }
 }
