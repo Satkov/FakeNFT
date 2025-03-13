@@ -1,4 +1,5 @@
 "Tab.catalog" = "Каталог";
+"Tab.cart" = "Корзина";
 "Tab.statistic" = "Статистика";
 "Catalog.openNft" = "Открыть Nft";
 "Error.network" = "Произошла ошибка сети";
@@ -10,3 +11,12 @@
 "Filter.choice.rating" = "По рейтингу";
 "Filter.choice.name" = "По названию";
 "Close" = "Закрыть";
+"DeleteNfc.confirmation.label" = "Вы уверены, что хотите\nудалить объект из корзины?";
+"Delete" = "Удалить";
+"GetBack" = "Вернуться";
+"Price" = "Цена";
+"Agreement.textLabel" = "Совершая покупку, вы соглашаетесь с условиями";
+"Agreement.linkLabel" = "Пользовательского соглашения";
+"Pay" = "Оплатить";
+"PaymentPage.title" = "Выберите способ оплаты";
+
