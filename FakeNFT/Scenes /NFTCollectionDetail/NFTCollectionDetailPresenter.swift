@@ -78,8 +78,6 @@ extension NFTCollectionDetailPresenter: NFTCollectionDetailPresenterProtocol {
             case .success(let users):
                 self.users = users
                 _ = users.first(where: { $0.name == self.currentNftCollection?.author })
-                // TODO: I hardcoded link because data from server is incorrect,
-                // users list doesn't contain name nft collection's author
                 let correctAuthorWebsiteLink = "https://practicum.yandex.ru/"
                 self.authorWebsiteURL = URL(string: correctAuthorWebsiteLink)
             case .failure(let error):
