@@ -148,10 +148,6 @@ private extension PaymentPageViewController {
         layout.itemSize = CGSize(width: itemWidth, height: LayoutConstants.itemHeight)
         layout.invalidateLayout()
     }
-
-    @objc
-    func filterButtonTapped() {
-    }
 }
 
 // MARK: - PaymentPageViewProtocol
