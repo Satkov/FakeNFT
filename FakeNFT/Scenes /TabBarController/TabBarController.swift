@@ -19,14 +19,25 @@ final class TabBarController: UITabBarController {
         tag: 0
     )
 
+    private let catalogTabBarItem = UITabBarItem(
+        title: NSLocalizedString("Tab.catalog", comment: ""),
+        image: UIImage(named: "CatalogTabbarImage"),
+        tag: 1
+    )
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let cart = CartModuleFactory.build(servicesAssembly: servicesAssembly)
-        let cartNavController = UINavigationController(rootViewController: cart)
+        let cartController = CartModuleFactory.build(servicesAssembly: servicesAssembly)
+        let catalogController = NFTCollectionListModuleFactory.build(serviceAssembly: servicesAssembly)
+
+        let cartNavController = UINavigationController(rootViewController: cartController)
         cartNavController.tabBarItem = cartTabBarItem
 
-        viewControllers = [cartNavController]
+        let catalogNavController = UINavigationController(rootViewController: catalogController)
+        catalogNavController.tabBarItem = catalogTabBarItem
+
+        viewControllers = [catalogNavController, cartNavController]
 
         view.backgroundColor = .systemBackground
     }

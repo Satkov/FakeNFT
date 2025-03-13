@@ -4,6 +4,7 @@ import UIKit
 protocol CartPresenterProtocol: AnyObject, UITableViewDelegate, UITableViewDataSource {
     func showFilters()
     func showPayment()
+    func getOrder()
 }
 
 // MARK: - Enums
@@ -64,20 +65,6 @@ final class CartPresenter: NSObject {
     }
 
     // MARK: - Fetching Data
-    private func getOrder() {
-        state = .loading
-        interactor.getNFTInsideCart { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let order):
-                self.orderItems = order
-                self.getNfts()
-            case .failure(let error):
-                self.state = .failed(error)
-            }
-        }
-    }
-
     private func getNfts() {
         guard let orderItems else { return }
         let dispatchGroup = DispatchGroup()
@@ -176,6 +163,20 @@ extension CartPresenter: CartPresenterProtocol {
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
                 }
+            }
+        }
+    }
+
+    func getOrder() {
+        state = .loading
+        interactor.getNFTInsideCart { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let order):
+                self.orderItems = order
+                self.getNfts()
+            case .failure(let error):
+                self.state = .failed(error)
             }
         }
     }
