@@ -20,7 +20,7 @@ final class ProfileEditRouter: ProfileEditRouterProtocol {
         vc.present(imagePicker, animated: true, completion: nil)
     }
     
-    static func createModule(servicesAssembly: ServicesAssembly, userId: String) -> UIViewController {
+    static func createModule(servicesAssembly: ServicesAssembly, userId: String, onProfileUpdated callback: @escaping (Profile) -> Void) -> UIViewController {
         let view = ProfileEditViewController()
         let router = ProfileEditRouter()
         let interactor = ProfileEditInteractor(profileService: servicesAssembly.profileService)
@@ -30,6 +30,7 @@ final class ProfileEditRouter: ProfileEditRouterProtocol {
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router
+        presenter.onProfileUpdated = callback
         interactor.presenter = presenter
         router.viewController = view
         

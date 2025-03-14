@@ -1,11 +1,3 @@
-//
-//  UserPicView.swift
-//  FakeNFT
-//
-//  Created by Alibi Mailan on 13.03.2025.
-//
-
-
 import UIKit
 import Kingfisher
 
@@ -34,11 +26,9 @@ final class UserPicView: UIImageView {
         initialize()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
     
-    var editable: Bool = false {
+    var isEditable: Bool = false {
         didSet {
             changedEditMode()
         }
@@ -51,19 +41,14 @@ final class UserPicView: UIImageView {
     }
     
     private func changedEditMode() {
-        if editable {
-            overlayView.isHidden = false
-            changePhotoLabel.isHidden = false
-            changePhotoLabel.text = image == nil ? "Добавить\nфото" : "Сменить\nфото"
-        } else {
-            overlayView.isHidden = true
-            changePhotoLabel.isHidden = true
-        }
+        if isEditable { changePhotoLabel.text = image == nil ? "Добавить\nфото" : "Сменить\nфото" }
+        overlayView.isHidden = !isEditable
+        changePhotoLabel.isHidden = !isEditable
     }
 }
 
 extension UserPicView {
-    func initialize() {
+    private func initialize() {
         layer.cornerRadius = 35
         layer.masksToBounds = true
         backgroundColor = .lightGray
@@ -93,41 +78,3 @@ extension UserPicView {
     }
 }
 
-final class CircularActivityIndicator: Indicator {
-    private let containerView = UIView()
-    private let activityIndicator = UIActivityIndicatorView(style: .medium)
-    
-    var view: UIView {
-        return containerView
-    }
-    
-    func startAnimatingView() {
-        containerView.isHidden = false
-        activityIndicator.startAnimating()
-    }
-    
-    func stopAnimatingView() {
-        containerView.isHidden = true
-        activityIndicator.stopAnimating()
-    }
-    
-    init() {
-        containerView.frame.size = CGSize(width: 70, height: 70)
-        containerView.backgroundColor = .projectBlack.withAlphaComponent(0.6)
-        containerView.layer.cornerRadius = 35
-        containerView.clipsToBounds = true
-        
-        activityIndicator.color = .projectWhite
-        activityIndicator.hidesWhenStopped = false
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.addSubview(activityIndicator)
-        
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            activityIndicator.widthAnchor.constraint(equalToConstant: 25),
-            activityIndicator.heightAnchor.constraint(equalToConstant: 25)
-        ])
-    }
-}

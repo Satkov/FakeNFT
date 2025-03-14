@@ -1,5 +1,5 @@
 protocol ProfileRouterProtocol {
-    func openProfileEdit(withUserId userId: String)
+    func openProfileEdit(withUserId userId: String, onProfileUpdated callback: @escaping (Profile) -> Void)
     func openMyNft()
 }
 
@@ -11,9 +11,9 @@ final class ProfileRouter: ProfileRouterProtocol {
         self.servicesAssembly = servicesAssembly
     }
     
-    func openProfileEdit(withUserId userId: String) {
+    func openProfileEdit(withUserId userId: String, onProfileUpdated callback: @escaping (Profile) -> Void) {
         guard let vc = viewController else { return }
-        let profileEditVC = ProfileEditRouter.createModule(servicesAssembly: servicesAssembly, userId: userId)
+        let profileEditVC = ProfileEditRouter.createModule(servicesAssembly: servicesAssembly, userId: userId, onProfileUpdated: callback)
         vc.present(profileEditVC, animated: true, completion: nil)
     }
     
