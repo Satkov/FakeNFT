@@ -34,8 +34,6 @@ final class ProfileServiceImpl: ProfileService {
     }
     
     func updateProfile(_ profile: Profile, completion: @escaping ProfileCompletion) {
-        let oldProfile = storage.getProfile(with: profile.id)
-        update(profile: profile)
         let request = ProfileByIdRequest(id: profile.id, dto: UpdateProfileDto(profile: profile), httpMethod: .put)
         networkClient.send(request: request, type: Profile.self) { [weak self] result in
             switch result {
@@ -43,9 +41,6 @@ final class ProfileServiceImpl: ProfileService {
                 self?.update(profile: profile)
                 completion(.success(profile))
             case .failure(let error):
-                if let oldProfile = oldProfile {
-                    self?.update(profile: oldProfile)
-                }
                 completion(.failure(error))
             }
         }
@@ -53,13 +48,5 @@ final class ProfileServiceImpl: ProfileService {
     
     private func update(profile: Profile) {
         storage.saveProfile(profile)
-        NotificationCenter.default.post(
-            name: .profileDidChange,
-            object: profile
-        )
     }
-}
-
-extension Notification.Name {
-    static let profileDidChange = Notification.Name("profileDidChange")
 }

@@ -8,15 +8,14 @@ protocol ProfileEditPresenterProtocol: AnyObject {
     func didTapClose()
     func profileLoaded(_ profile: Profile)
     func profileLoadFailed(error: Error)
-    func profileSaveSucceeded()
-    func profileSaveFailed(error: Error)
 }
 
 final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     weak var view: ProfileEditViewProtocol?
     var interactor: ProfileEditInteractorInput
     var router: ProfileEditRouterProtocol
-    
+    var onProfileUpdated: ((Profile) -> Void)?
+
     init(interactor: ProfileEditInteractorInput, router: ProfileEditRouterProtocol) {
         self.interactor = interactor
         self.router = router
@@ -38,13 +37,17 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
             likes: [],
             id: "1"
         )
-        interactor.saveProfile(updatedProfile)
+        onProfileUpdated?(updatedProfile)
     }
     
     func didTapChangePhoto() {
         router.openImagePicker()
     }
-
+    
+    func didTapClose() {
+        router.closeProfileEdit()
+    }
+    
     func profileLoaded(_ profile: Profile) {
         view?.hideLoadingIndicator()
         view?.showProfileData(profile)
@@ -54,26 +57,5 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
         view?.hideLoadingIndicator()
         view?.showError("Не удалось загрузить данные профиля.")
     }
-    
-    func profileSaveSucceeded() {
-        view?.hideLoadingIndicator()
-        ProgressHUD.showSucceed("Сохранено")
-        router.closeProfileEdit()
-    }
-    
-    func profileSaveFailed(error: Error) {
-        view?.hideLoadingIndicator()
-        view?.showError("Не удалось сохранить изменения.")
-    }
-    
-    func didTapClose() {
-        router.closeProfileEdit()
-    }
 }
 
-struct ProfileSaveData {
-    var name: String
-    var description: String
-    var website: String
-    var photo: UIImage?
-}

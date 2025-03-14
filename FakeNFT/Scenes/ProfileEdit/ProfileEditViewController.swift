@@ -90,7 +90,7 @@ extension ProfileEditViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
         profileImageView.addGestureRecognizer(tapGesture)
-        profileImageView.editable = true
+        profileImageView.isEditable = true
         
         setupConstraints()
         

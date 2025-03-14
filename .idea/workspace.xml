@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/Common/Views/UserPicView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FakeNFT/DesignSystem/Colors.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/DesignSystem/Colors.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfilePresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfilePresenter.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfileViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/Profile/ProfileViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditPresenterProtocol.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditPresenterProtocol.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT/Scenes/ProfileEdit/ProfileEditViewController.swift" afterDir="false" />
-    </list>
+    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741648747599</updated>
       <workItem from="1741648749072" duration="1710000" />
-      <workItem from="1741846251882" duration="307000" />
+      <workItem from="1741846251882" duration="733000" />
     </task>
     <servers />
   </component>
