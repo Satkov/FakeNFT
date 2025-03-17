@@ -45,6 +45,7 @@ extension UIColor {
     static let linkText = blueUniversal
 
     // Project Colors
+    static let whiteUniversal = UIColor(hexString: "#FFFFFF")
     static let greenUniversal = UIColor(hexString: "#1C9F00")
     static let yellowUniversal = UIColor(hexString: "#FEEF0D")
     static let lightGray = UIColor(hexString: "#F7F7F8")

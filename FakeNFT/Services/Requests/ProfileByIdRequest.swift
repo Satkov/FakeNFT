@@ -6,4 +6,5 @@ struct ProfileByIdRequest: NetworkRequest {
         URL(string: "\(RequestConstants.baseURL)/api/v1/profile/\(id)")
     }
     var dto: Dto?
+    var httpMethod: HttpMethod = .get
 }

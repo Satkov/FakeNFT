@@ -66,9 +66,7 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         setupViews()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
     
     private func setupViews() {
         selectionStyle = .none

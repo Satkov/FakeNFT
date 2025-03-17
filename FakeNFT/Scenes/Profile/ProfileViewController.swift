@@ -14,16 +14,7 @@ final class ProfileViewController: UIViewController {
     var presenter: ProfilePresenterProtocol?
     
     // MARK: - Private
-    private let avatarImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 35
-        imageView.layer.masksToBounds = true
-        imageView.backgroundColor = UIColor.lightGray
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let avatarImage = UserPicView()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -116,9 +107,6 @@ private extension ProfileViewController {
             avatarAndNameStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             avatarAndNameStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            avatarImage.widthAnchor.constraint(equalToConstant: 70),
-            avatarImage.heightAnchor.constraint(equalToConstant: 70),
-            
             descriptionLabel.topAnchor.constraint(equalTo: avatarAndNameStack.bottomAnchor, constant: 20),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
@@ -154,7 +142,7 @@ extension ProfileViewController: ProfileViewProtocol {
     }
 
     func showProfile(_ profile: Profile) {
-        avatarImage.loadImage(urlString: profile.avatar, defaultImage: UIImage(systemName: "person.crop.circle"))
+        avatarImage.loadImage(urlString: profile.avatar, defaultImage: UIImage(named: "avatar"))
         nameLabel.text = profile.name
         descriptionLabel.text = profile.description
         websiteButton.setTitle(profile.website, for: .normal)

@@ -13,9 +13,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2u974hq6iXzcL8ly1hDV2J45TFu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,7 +25,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "profile-module1",
+    "git-widget-placeholder": "profile-module2",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -52,6 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741648747599</updated>
       <workItem from="1741648749072" duration="1710000" />
+      <workItem from="1741846251882" duration="733000" />
     </task>
     <servers />
   </component>
@@ -64,6 +65,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="profile-module2-backup" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="profile-module1" />
@@ -94,7 +100,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="profile-module1" />
+                        <option value="profile-module2-backup" />
                       </list>
                     </value>
                   </entry>
