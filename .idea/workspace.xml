@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="" />
+    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftInteractor.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftPresenter.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftRouter.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +31,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "profile-module2",
+    "git-widget-placeholder": "profile-module3-backup",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -52,7 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741648747599</updated>
       <workItem from="1741648749072" duration="1710000" />
-      <workItem from="1741846251882" duration="733000" />
+      <workItem from="1741846251882" duration="1325000" />
     </task>
     <servers />
   </component>

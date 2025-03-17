@@ -43,6 +43,7 @@ protocol ProfilePresenterProtocol: AnyObject {
     func didFailFetchingProfile(error: Error)
     func didTapEditButton()
     func didTapMyNftButton()
+    func didTapLikedNftButton()
     func didFailUpdateProfile(error: Error)
 }
 
@@ -52,6 +53,7 @@ final class ProfilePresenter {
     var interactor: ProfileInteractorProtocol
     
     private let userId: String
+    private var profile: Profile? = nil
     private var state: ProfileState = LoadingState()
     
     init(userId: String, interactor: ProfileInteractorProtocol, router: ProfileRouterProtocol) {
@@ -68,6 +70,7 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     }
     
     func didFetchProfile(_ profile: Profile) {
+        self.profile = profile
         state = LoadedState(profile: profile)
         state.handle(presenter: self)
     }
@@ -95,5 +98,10 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     
     func didTapMyNftButton() {
         router.openMyNft()
+    }
+    
+    func didTapLikedNftButton() {
+        guard let profile else { return }
+        router.openFavouriteNft(profile)
     }
 }

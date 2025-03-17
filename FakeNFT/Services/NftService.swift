@@ -9,9 +9,13 @@ typealias PayForOrderCompletion = (Result<PayForOrderResponse, Error>) -> Void
 protocol NftService {
     func loadCart(completion: @escaping OrderCompletion)
     func sendUpdateOrderRequest(nfts: [String], completion: @escaping UpdateOrderCompletion)
+<<<<<<< HEAD
     func getNFTById(id: String, completion: @escaping NftCompletion)
     func getCurrency(completion: @escaping CurrencyCompletion)
     func setCurrencyIdAndPay(id: String, completion: @escaping PayForOrderCompletion)
+=======
+    func loadNft(id: String, completion: @escaping NftDetailCompletion)
+>>>>>>> a9ff982 (profile-module3 favourite nft collection)
 }
 
 final class NftServiceImpl: NftService {
@@ -68,6 +72,7 @@ final class NftServiceImpl: NftService {
             }
         }
     }
+<<<<<<< HEAD
 
     func getCurrency(completion: @escaping CurrencyCompletion) {
         let request = NetworkRequests.getCurrencies()
@@ -90,6 +95,15 @@ final class NftServiceImpl: NftService {
             switch result {
             case .success(let response):
                 completion(.success(response))
+=======
+    
+    func loadNft(id: String, completion: @escaping NftDetailCompletion) {
+        let request = NFTDetailRequest(id: id)
+        networkClient.send(request: request, type: Nft.self) { result in
+            switch result {
+            case .success(let nft):
+                completion(.success(nft))
+>>>>>>> a9ff982 (profile-module3 favourite nft collection)
             case .failure(let error):
                 completion(.failure(error))
             }
