@@ -1,6 +1,7 @@
 protocol ProfileRouterProtocol {
     func openProfileEdit(withUserId userId: String, onProfileUpdated callback: @escaping (Profile) -> Void)
     func openMyNft()
+    func openFavouriteNft(_ profile: Profile)
 }
 
 final class ProfileRouter: ProfileRouterProtocol {
@@ -21,6 +22,12 @@ final class ProfileRouter: ProfileRouterProtocol {
         guard let vc = viewController else { return }
         let myNftVC = MyNftRouter.createModule()
         vc.navigationController?.pushViewController(myNftVC, animated: true)
+    }
+    
+    func openFavouriteNft(_ profile: Profile) {
+        guard let vc = viewController else { return }
+        let favouriteNftVC = FavouriteNftRouter.createModule(ofProfile: profile, servicesAssembly: servicesAssembly)
+        vc.navigationController?.pushViewController(favouriteNftVC, animated: true)
     }
     
     static func createModule(servicesAssembly: ServicesAssembly) -> ProfileViewController {

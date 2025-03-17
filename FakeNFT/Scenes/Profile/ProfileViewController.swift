@@ -86,6 +86,7 @@ private extension ProfileViewController {
         
         setupConstraints()
         myNftButton.addTarget(self, action: #selector(didTapMyNftButton), for: .touchUpInside)
+        likedNftButton.addTarget(self, action: #selector(didTapLikedNftButton), for: .touchUpInside)
         presenter?.viewDidLoad()
     }
     
@@ -129,6 +130,10 @@ private extension ProfileViewController {
     @objc private func didTapMyNftButton() {
         presenter?.didTapMyNftButton()
     }
+    
+    @objc private func didTapLikedNftButton() {
+        presenter?.didTapLikedNftButton()
+    }
 }
 
 // MARK: - ProfileViewProtocol
@@ -146,6 +151,8 @@ extension ProfileViewController: ProfileViewProtocol {
         nameLabel.text = profile.name
         descriptionLabel.text = profile.description
         websiteButton.setTitle(profile.website, for: .normal)
+        myNftButton.setTitle("Мои NFT (\(profile.nfts.count))", for: .normal)
+        likedNftButton.setTitle("Избранные NFT (\(profile.likes.count))", for: .normal)
     }
 
     func showError(_ message: String) {

@@ -6,6 +6,7 @@ typealias CartCompletion = (Result<Order, Error>) -> Void
 protocol NftService {
     func loadCart(completion: @escaping OrderCompletion)
     func sendUpdateOrderRequest(nfts: [String], completion: @escaping UpdateOrderCompletion)
+    func loadNft(id: String, completion: @escaping NftDetailCompletion)
 }
 
 final class NftServiceImpl: NftService {
@@ -40,6 +41,18 @@ final class NftServiceImpl: NftService {
             switch result {
             case .success(let putResponse):
                 completion(.success(putResponse))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func loadNft(id: String, completion: @escaping NftDetailCompletion) {
+        let request = NFTDetailRequest(id: id)
+        networkClient.send(request: request, type: Nft.self) { result in
+            switch result {
+            case .success(let nft):
+                completion(.success(nft))
             case .failure(let error):
                 completion(.failure(error))
             }
