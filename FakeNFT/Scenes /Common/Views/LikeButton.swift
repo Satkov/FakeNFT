@@ -15,10 +15,9 @@ final class LikeButton: UIButton {
     }
     
     private func initialize() {
-        setImage(UIImage(systemName: "heart"), for: .normal)
+        setImage(UIImage(systemName: "heart.fill"), for: .normal)
         tintColor = .redUniversal
         translatesAutoresizingMaskIntoConstraints = false
-        addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: 29.63),
@@ -26,13 +25,7 @@ final class LikeButton: UIButton {
         ])
     }
     
-    @objc private func toggleLike() {
-        isLiked = !isLiked
-        checkIsLiked()
-    }
-    
     private func checkIsLiked() {
-        let imageName = isLiked ? "heart.fill" : "heart"
-        setImage(UIImage(systemName: imageName), for: .normal)
+        tintColor = isLiked ? .redUniversal : .whiteUniversal
     }
 }

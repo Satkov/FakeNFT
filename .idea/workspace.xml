@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftInteractor.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftPresenter.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftRouter.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FakeNFT/Scenes/FavouriteNft/FavouriteNftViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/FakeNFT.xcodeproj/project.pbxproj" afterDir="false" />
-    </list>
+    <list default="true" id="5867935c-e37b-49bc-9315-e519e88038a7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +25,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "profile-module3-backup",
+    "git-widget-placeholder": "profile-module3",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -73,6 +67,11 @@
             <list>
               <RecentGroup>
                 <option name="FILTER_VALUES">
+                  <option value="profile-module3-backup" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
                   <option value="profile-module2-backup" />
                 </option>
               </RecentGroup>
@@ -106,7 +105,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="profile-module2-backup" />
+                        <option value="profile-module3-backup" />
                       </list>
                     </value>
                   </entry>

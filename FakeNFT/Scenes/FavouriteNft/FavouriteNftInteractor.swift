@@ -10,10 +10,12 @@ final class FavouriteNftInteractor: FavouriteNftInteractorProtocol {
     
     private let profile: Profile
     private let nftService: NftService
+    private let profileService: ProfileService
     
-    init(profile: Profile, nftService: NftService) {
+    init(profile: Profile, nftService: NftService, profileService: ProfileService) {
         self.profile = profile
         self.nftService = nftService
+        self.profileService = profileService
     }
     
     func loadFavouriteNft() {
@@ -45,6 +47,13 @@ final class FavouriteNftInteractor: FavouriteNftInteractorProtocol {
     }
     
     func removeFromFavourite(_ favouriteNft: Nft) {
-        // TODO
+        let likes = profile.likes.filter { $0 != favouriteNft.id }
+        profileService.updateLikedNft(likes) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                self?.presenter?.didFailUnlikeNft(error: error)
+            case .success(_): break
+            }
+        }
     }
 }

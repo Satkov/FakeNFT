@@ -9,8 +9,8 @@ final class MyNftRouter: MyNftRouterProtocol {
         // TODO: In next module
     }
     
-    static func createModule() -> MyNftViewController {
-        let interactor = MyNftInteractor()
+    static func createModule(ofProfile profile: Profile, servicesAssembly: ServicesAssembly) -> MyNftViewController {
+        let interactor = MyNftInteractor(profile: profile, nftService: servicesAssembly.nftService, profileService: servicesAssembly.profileService)
         let router = MyNftRouter()
         let presenter = MyNftPresenter(interactor: interactor, router: router)
         let viewController = MyNftViewController()
