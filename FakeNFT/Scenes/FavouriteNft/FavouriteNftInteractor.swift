@@ -8,7 +8,7 @@ protocol FavouriteNftInteractorProtocol: AnyObject {
 final class FavouriteNftInteractor: FavouriteNftInteractorProtocol {
     weak var presenter: FavouriteNftPresenterProtocol?
     
-    private let profile: Profile
+    private var profile: Profile
     private let nftService: NftService
     private let profileService: ProfileService
     
@@ -52,7 +52,9 @@ final class FavouriteNftInteractor: FavouriteNftInteractorProtocol {
             switch result {
             case .failure(let error):
                 self?.presenter?.didFailUnlikeNft(error: error)
-            case .success(_): break
+            case .success(let profile):
+                self?.profile = profile
+                self?.presenter?.didUpdatedFavouriteNfts()
             }
         }
     }

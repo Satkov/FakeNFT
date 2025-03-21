@@ -82,7 +82,7 @@ extension FavouriteNftViewController: FavouriteNftViewProtocol {
     }
     
     func showLoading() {
-        ProgressHUD.show("Загрузка...")
+        ProgressHUD.show("Загрузка...", interaction: false)
     }
     
     func hideLoading() {

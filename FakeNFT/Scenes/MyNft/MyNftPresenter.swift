@@ -10,15 +10,13 @@ protocol MyNftPresenterProtocol: AnyObject {
 
 final class MyNftPresenter {
     weak var view: MyNftViewProtocol?
-    var router: MyNftRouterProtocol
     var interactor: MyNftInteractorProtocol
     
     private(set) var nftList: [MyNft] = []
     private var currentSort: MyNftSortOption = .name
     
-    init(interactor: MyNftInteractorProtocol, router: MyNftRouterProtocol) {
+    init(interactor: MyNftInteractorProtocol) {
         self.interactor = interactor
-        self.router = router
     }
 }
 
