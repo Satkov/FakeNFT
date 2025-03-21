@@ -2,6 +2,10 @@ import UIKit
 import ProgressHUD
 
 protocol ProfileEditViewProtocol: AnyObject {
+    var nameText: String { get }
+    var descriptionText: String { get }
+    var websiteText: String { get }
+    
     func showProfileData(_ profile: Profile)
     func showLoadingIndicator()
     func hideLoadingIndicator()
@@ -47,26 +51,17 @@ final class ProfileEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        presenter?.viewDidLoad()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        presenter?.didTapSave(
-            ProfileSaveData(
-                name: nameTextField.text ?? "",
-                description: descriptionTextView.text ?? "",
-                website: websiteTextField.text ?? ""
-            )
-        )
+        presenter?.didTapSave()
     }
     
     // MARK: - Actions
     @objc private func didTapClose() {
         presenter?.didTapClose()
-    }
-    
-    @objc private func photoTapped() {
-        presenter?.didTapChangePhoto()
     }
 }
 
@@ -88,14 +83,12 @@ extension ProfileEditViewController {
             contentView.addArrangedSubview($0)
         }
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
-        profileImageView.addGestureRecognizer(tapGesture)
-        profileImageView.isEditable = true
-        
         setupConstraints()
         
+        profileImageView.isEditable = true
+        profileImageView.delegate = self
+        
         closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
-        presenter?.viewDidLoad()
         
         nameTextField.delegate = self
         nameTextField.returnKeyType = .done
@@ -141,6 +134,10 @@ extension ProfileEditViewController {
 
 // MARK: - ProfileEditViewProtocol
 extension ProfileEditViewController: ProfileEditViewProtocol {
+    var nameText: String { nameTextField.text ?? "" }
+    var descriptionText: String { descriptionTextView.text ?? "" }
+    var websiteText: String { websiteTextField.text ?? "" }
+    
     func showProfileData(_ profile: Profile) {
         nameTextField.text = profile.name
         descriptionTextView.text = profile.description
@@ -149,7 +146,7 @@ extension ProfileEditViewController: ProfileEditViewProtocol {
     }
     
     func showLoadingIndicator() {
-        ProgressHUD.show("Загрузка...")
+        ProgressHUD.show("Загрузка...", interaction: false)
     }
     
     func hideLoadingIndicator() {
@@ -182,5 +179,33 @@ extension ProfileEditViewController: UITextViewDelegate {
             return false
         }
         return true
+    }
+}
+
+// MARK: - UserPicViewDelegate
+extension ProfileEditViewController: UserPicViewDelegate {
+    func userPicViewDidTapChangePhoto(_ userPicView: UserPicView) {
+        let alertController = UIAlertController(title: "Изменение аватарки", message: nil, preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "URL"
+        }
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] action in
+            if let textField = alertController.textFields?.first,
+            let avatarUrl = textField.text {
+                self?.presenter?.didUpdate(avatarUrl: avatarUrl)
+            }
+        }
+        alertController.addAction(okAction)
+                
+        let removeAction = UIAlertAction(title: "Удалить", style: .destructive) { [weak self] action in
+            self?.presenter?.didRemoveAvatar()
+        }
+        alertController.addAction(removeAction)
+                
+        let cancelAction = UIAlertAction(title: "Закрыть", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+                
+        self.present(alertController, animated: true, completion: nil)
     }
 }

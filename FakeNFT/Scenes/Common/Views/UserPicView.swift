@@ -1,7 +1,13 @@
 import UIKit
 import Kingfisher
 
+protocol UserPicViewDelegate: AnyObject {
+    func userPicViewDidTapChangePhoto(_ userPicView: UserPicView)
+}
+
 final class UserPicView: UIImageView {
+    
+    weak var delegate: UserPicViewDelegate?
     
     private let overlayView: UIView = {
         let overlayView = UIView()
@@ -66,6 +72,15 @@ extension UserPicView {
         overlayView.constraintEdges(to: self)
         
         setupConstraints()
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(didClickImageView))
+        isUserInteractionEnabled = true
+        addGestureRecognizer(singleTap)
+    }
+    
+    @objc private func didClickImageView() {
+        guard isEditable else { return }
+        delegate?.userPicViewDidTapChangePhoto(self)
     }
     
     private func setupConstraints() {

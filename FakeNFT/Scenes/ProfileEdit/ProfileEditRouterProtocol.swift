@@ -2,7 +2,6 @@ import UIKit
 
 protocol ProfileEditRouterProtocol: AnyObject {
     func closeProfileEdit()
-    func openImagePicker()
 }
 
 final class ProfileEditRouter: ProfileEditRouterProtocol {
@@ -11,15 +10,7 @@ final class ProfileEditRouter: ProfileEditRouterProtocol {
     func closeProfileEdit() {
         viewController?.dismiss(animated: true)
     }
-    
-    func openImagePicker() {
-        guard let vc = viewController else { return }
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = vc as? (UIImagePickerControllerDelegate & UINavigationControllerDelegate)
-        vc.present(imagePicker, animated: true, completion: nil)
-    }
-    
+
     static func createModule(servicesAssembly: ServicesAssembly, userId: String, onProfileUpdated callback: @escaping (Profile) -> Void) -> UIViewController {
         let view = ProfileEditViewController()
         let router = ProfileEditRouter()

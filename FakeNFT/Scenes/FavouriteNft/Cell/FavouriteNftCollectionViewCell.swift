@@ -9,7 +9,6 @@ final class FavouriteNftCollectionViewCell: UICollectionViewCell, ReuseIdentifyi
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -20,22 +19,16 @@ final class FavouriteNftCollectionViewCell: UICollectionViewCell, ReuseIdentifyi
         label.font = .sfProBold17
         label.textColor = .projectBlack
         label.numberOfLines = 1
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let ratingView: RatingView = {
-        let ratingView = RatingView()
-        ratingView.translatesAutoresizingMaskIntoConstraints = false
-        return ratingView
-    }()
+    private let ratingView = RatingView()
     
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = .sfRegular15
         label.textColor = .projectBlack
         label.numberOfLines = 1
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -48,12 +41,15 @@ final class FavouriteNftCollectionViewCell: UICollectionViewCell, ReuseIdentifyi
     
     required init?(coder: NSCoder) { nil }
     
-    private func initialize() {
-        contentView.addSubview(imageView)
-        contentView.addSubview(likeButton)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(ratingView)
-        contentView.addSubview(priceLabel)
+    private func initialize() {        
+        [imageView,
+         likeButton,
+         nameLabel,
+         ratingView,
+         priceLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
     
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
