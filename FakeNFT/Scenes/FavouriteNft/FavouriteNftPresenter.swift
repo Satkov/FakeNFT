@@ -3,20 +3,19 @@ protocol FavouriteNftPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didFailUnlikeNft(error: Error)
     func didFetchFavouriteNfts(_ nfts: [Nft])
+    func didUpdatedFavouriteNfts()
     func didFailFetchFavouriteNfts(error: Error)
     func updateFavoriteStatus(favouriteNft: Nft)
 }
 
 final class FavouriteNftPresenter {
     weak var view: FavouriteNftViewProtocol?
-    var router: FavouriteNftRouterProtocol
     var interactor: FavouriteNftInteractorProtocol
 
     private(set) var favouriteNfts: [Nft] = []
     
-    init(interactor: FavouriteNftInteractorProtocol, router: FavouriteNftRouterProtocol) {
+    init(interactor: FavouriteNftInteractorProtocol) {
         self.interactor = interactor
-        self.router = router
     }
 }
 
@@ -39,8 +38,13 @@ extension FavouriteNftPresenter: FavouriteNftPresenterProtocol {
     
     func updateFavoriteStatus(favouriteNft: Nft) {
         favouriteNfts = favouriteNfts.filter { $0.id != favouriteNft.id }
-        view?.updateForNewData()
         interactor.removeFromFavourite(favouriteNft)
+        view?.showLoading()
+    }
+    
+    func didUpdatedFavouriteNfts() {
+        view?.hideLoading()
+        view?.updateForNewData()
     }
     
     func didFailUnlikeNft(error: any Error) {
