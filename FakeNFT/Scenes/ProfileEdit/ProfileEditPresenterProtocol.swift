@@ -56,12 +56,12 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     
     func profileLoadFailed(error: Error) {
         view?.hideLoadingIndicator()
-        view?.showError("Не удалось загрузить данные профиля.")
+        view?.showError(Localization.cannotLoadProfileError)
     }
     
     func didUpdate(avatarUrl: String) {
         guard let profile, let url = URL(string: avatarUrl) else {
-            view?.showError("Ошибка загрузки изображения")
+            view?.showError(Localization.imageLoadingError)
             return
         }
         
@@ -69,7 +69,7 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
             if isReachable {
                 self?.interactor.update(avatarUrl: avatarUrl, of: profile)
             } else {
-                self?.view?.showError("Ошибка загрузки изображения")
+                self?.view?.showError(Localization.imageLoadingError)
             }
         }
     }

@@ -9,7 +9,6 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -52,7 +51,6 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         stack.axis = .vertical
         stack.spacing = 4
         stack.alignment = .leading
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -61,7 +59,6 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         stack.axis = .vertical
         stack.spacing = 2
         stack.alignment = .leading
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -69,12 +66,12 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
+        initialize()
     }
     
     required init?(coder: NSCoder) { nil }
     
-    private func setupViews() {
+    private func initialize() {
         selectionStyle = .none
         
         [nftNameLabel, nftRatingView, nftAuthorLabel].forEach {
@@ -87,10 +84,13 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
             priceStackView.addArrangedSubview($0)
         }
         
-        contentView.addSubview(middleStackView)
-        contentView.addSubview(priceStackView)
-        contentView.addSubview(nftImageView)
-        contentView.addSubview(likeButton)
+        [middleStackView,
+         priceStackView,
+         nftImageView,
+         likeButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
         
         setupConstraints()
         
@@ -131,7 +131,7 @@ final class MyNftTableViewCell: UITableViewCell, ReuseIdentifying {
         nftRatingView.rating = nft.rating
         likeButton.isLiked = nft.isLiked
         
-        let author = "от \(nft.author)"
+        let author = "\(Localization.by.lowercased()) \(nft.author)"
         let defaultAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.sfRegular13 ?? UIFont()
         ]

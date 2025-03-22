@@ -17,6 +17,8 @@ enum Localization {
     static let unknownError = localized("Error.unknown")
     static let repeatAction = localized("Error.repeat")
     static let errorTitle = localized("Error.title")
+    static let imageLoadingError = localized("Error.imageLoading")
+    static let cannotLoadProfileError = localized("Error.cannotLoadProfile")
 
     // MARK: - Filters
     static let filterTableTitle = localized("Filter.table.title")
@@ -29,9 +31,16 @@ enum Localization {
     static let name = localized("Profile.Name")
     static let description = localized("Profile.Description")
     static let website = localized("Profile.Website")
+    static let favouriteNft = localized("Profile.FavouriteNft")
+    static let noFavouriteNft = localized("Profile.NoFavouriteNft")
+    static let profileMyNft = localized("Profile.MyNft")
+    static let profileFavouriteNft = localized("Profile.FavouriteNft")
+    static let profileAboutDeveloper = localized("Profile.AboutDeveloper")
     
     // MARK: - MyNft
     static let myNft = localized("MyNft.Title")
+    static let noMyNft = localized("MyNft.NoNft");
+    static let cannotLoadMyNftData = localized("MyNft.CannotLoadNftData")
     
     // MARK: - Common
     static let close = localized("Close")
@@ -52,4 +61,9 @@ enum Localization {
     static let sortByPrice = localized("Sort.Price")
     static let sortByRating = localized("Sort.Rating")
     static let sortByName = localized("Sort.Name")
+    static let by = localized("By");
+    static let loading = localized("Loading");
+    static let sort = localized("Sort");
+    static let changeAvatar = localized("ChangeAvatar");
+    static let delete = localized("Delete");
 }

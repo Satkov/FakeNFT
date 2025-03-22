@@ -5,8 +5,8 @@ import Kingfisher
 protocol ProfileViewProtocol: AnyObject {
     func showProfile(_ profile: Profile)
     func showError(_ message: String)
-    func showLoading()
-    func hideLoading()
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
 }
 
 final class ProfileViewController: UIViewController {
@@ -28,7 +28,6 @@ final class ProfileViewController: UIViewController {
         let label = UILabel()
         label.font = .sfRegular13
         label.numberOfLines = 4
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -36,31 +35,28 @@ final class ProfileViewController: UIViewController {
         let button = UIButton()
         button.titleLabel?.font = .sfRegular15
         button.setTitleColor(.systemBlue, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private let myNftButton = ListItem(title: "Мои NFT")
+    private let myNftButton = ListItem(title: Localization.profileMyNft)
     
-    private let likedNftButton = ListItem(title: "Избранные NFT")
+    private let likedNftButton = ListItem(title: Localization.profileFavouriteNft)
     
-    private let aboutDevButton = ListItem(title: "О разработчике")
+    private let aboutDevButton = ListItem(title: Localization.profileAboutDeveloper)
     
     private let avatarAndNameStack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 16
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-
+    
     private let buttonsStack: UIStackView = {
         let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
         stack.distribution = .fill
         stack.axis = .vertical
         return stack
     }()
-
+    
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,17 +76,26 @@ private extension ProfileViewController {
         view.backgroundColor = .projectWhite
         setupNavBar()
         
-        avatarAndNameStack.addArrangedSubview(avatarImage)
-        avatarAndNameStack.addArrangedSubview(nameLabel)
-        buttonsStack.addArrangedSubview(myNftButton)
-        buttonsStack.addArrangedSubview(likedNftButton)
-        buttonsStack.addArrangedSubview(aboutDevButton)
-        view.addSubview(avatarAndNameStack)
-        view.addSubview(descriptionLabel)
-        view.addSubview(websiteButton)
-        view.addSubview(buttonsStack)
+        [avatarImage,
+         nameLabel].forEach {
+            avatarAndNameStack.addArrangedSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        [myNftButton,
+         likedNftButton,
+         aboutDevButton].forEach { buttonsStack.addArrangedSubview($0) }
+        
+        [avatarAndNameStack,
+         descriptionLabel,
+         websiteButton,
+         buttonsStack].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         setupConstraints()
+        
         myNftButton.addTarget(self, action: #selector(didTapMyNftButton), for: .touchUpInside)
         likedNftButton.addTarget(self, action: #selector(didTapLikedNftButton), for: .touchUpInside)
         aboutDevButton.addTarget(self, action: #selector(didTapAboutDevButton), for: .touchUpInside)
@@ -148,28 +153,25 @@ private extension ProfileViewController {
 
 // MARK: - ProfileViewProtocol
 extension ProfileViewController: ProfileViewProtocol {
-    func showLoading() {
-        ProgressHUD.show("Загрузка...", interaction: false)
+    func showLoadingIndicator() {
+        LoaderUtil.show()
     }
-
-    func hideLoading() {
-        ProgressHUD.dismiss()
+    
+    func hideLoadingIndicator() {
+        LoaderUtil.hide()
     }
-
+    
     func showProfile(_ profile: Profile) {
         avatarImage.loadImage(urlString: profile.avatar, defaultImage: UIImage(named: "avatar"))
         nameLabel.text = profile.name
         descriptionLabel.text = profile.description
         websiteButton.setTitle(profile.website, for: .normal)
-        myNftButton.setTitle("Мои NFT (\(profile.nfts.count))", for: .normal)
-        likedNftButton.setTitle("Избранные NFT (\(profile.likes.count))", for: .normal)
+        myNftButton.setTitle("\(Localization.profileMyNft) (\(profile.nfts.count))", for: .normal)
+        likedNftButton.setTitle("\(Localization.profileFavouriteNft) (\(profile.likes.count))", for: .normal)
     }
-
-    func showError(_ message: String) {
-        ProgressHUD.dismiss()
     
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    func showError(_ message: String) {
+        LoaderUtil.hide()
+        AlertUtil.show(error: message, in: self)
     }
 }

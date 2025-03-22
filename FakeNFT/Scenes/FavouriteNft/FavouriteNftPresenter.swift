@@ -21,34 +21,34 @@ final class FavouriteNftPresenter {
 
 extension FavouriteNftPresenter: FavouriteNftPresenterProtocol {
     func viewDidLoad() {
-        view?.showLoading()
+        view?.showLoadingIndicator()
         interactor.loadFavouriteNft()
     }
     
     func didFetchFavouriteNfts(_ nfts: [Nft]) {
         self.favouriteNfts = nfts
-        view?.hideLoading()
+        view?.hideLoadingIndicator()
         view?.updateForNewData()
     }
     
     func didFailFetchFavouriteNfts(error: any Error) {
-        view?.hideLoading()
+        view?.hideLoadingIndicator()
         view?.showError(error.localizedDescription)
     }
     
     func updateFavoriteStatus(favouriteNft: Nft) {
         favouriteNfts = favouriteNfts.filter { $0.id != favouriteNft.id }
         interactor.removeFromFavourite(favouriteNft)
-        view?.showLoading()
+        view?.showLoadingIndicator()
     }
     
     func didUpdatedFavouriteNfts() {
-        view?.hideLoading()
+        view?.hideLoadingIndicator()
         view?.updateForNewData()
     }
     
     func didFailUnlikeNft(error: any Error) {
-        view?.hideLoading()
+        view?.hideLoadingIndicator()
         view?.showError(error.localizedDescription)
     }
 }
