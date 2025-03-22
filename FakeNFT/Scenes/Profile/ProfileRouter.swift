@@ -1,6 +1,10 @@
+import SafariServices
+
 protocol ProfileRouterProtocol {
     func openProfileEdit(withUserId userId: String, onProfileUpdated callback: @escaping (Profile) -> Void)
-    func openMyNft()
+    func openMyNft(_ profile: Profile)
+    func openFavouriteNft(_ profile: Profile)
+    func openAboutDeveloper()
 }
 
 final class ProfileRouter: ProfileRouterProtocol {
@@ -17,10 +21,22 @@ final class ProfileRouter: ProfileRouterProtocol {
         vc.present(profileEditVC, animated: true, completion: nil)
     }
     
-    func openMyNft() {
+    func openMyNft(_ profile: Profile) {
         guard let vc = viewController else { return }
-        let myNftVC = MyNftRouter.createModule()
+        let myNftVC = MyNftRouter.createModule(ofProfile: profile, servicesAssembly: servicesAssembly)
         vc.navigationController?.pushViewController(myNftVC, animated: true)
+    }
+    
+    func openFavouriteNft(_ profile: Profile) {
+        guard let vc = viewController else { return }
+        let favouriteNftVC = FavouriteNftRouter.createModule(ofProfile: profile, servicesAssembly: servicesAssembly)
+        vc.navigationController?.pushViewController(favouriteNftVC, animated: true)
+    }
+    
+    func openAboutDeveloper() {
+        guard let url = URL(string: "https://practicum.yandex.kz") else { return }
+        let safariVC = SFSafariViewController(url: url)
+        viewController?.present(safariVC, animated: true)
     }
     
     static func createModule(servicesAssembly: ServicesAssembly) -> ProfileViewController {

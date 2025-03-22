@@ -122,7 +122,7 @@ final class NFTCollectionDetailInteractor: NFTCollectionDetailInteractorProtocol
     }
 
     func updateProfile(profile: Profile, completion: @escaping ProfileCompletion) {
-        let dto = UpdateProfileDto(profile: profile)
+        let dto = ProfileEditingDto(avatar: profile.avatar, name: profile.name, description: profile.description, website: profile.website)
         let request = NetworkRequests.putProfile1(dto: dto)
         networkClient.send(request: request, type: Profile.self) { result in
             switch result {

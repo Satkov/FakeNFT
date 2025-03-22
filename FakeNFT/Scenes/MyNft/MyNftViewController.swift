@@ -1,17 +1,17 @@
 import UIKit
+import ProgressHUD
 
 protocol MyNftViewProtocol: AnyObject {
-    func showNFTs(_ nfts: [Nft])
+    func showNFTs(_ nfts: [MyNft])
     func showError(_ message: String)
-    func endRefreshing()
+    func showLoading()
+    func hideLoading()
 }
 
 final class MyNftViewController: UIViewController {
     var presenter: MyNftPresenterProtocol?
     
     private let tableView = UITableView()
-    
-    private let refreshControl = UIRefreshControl()
     
     private let emptyTableLabel: UILabel = {
         let label = UILabel()
@@ -22,19 +22,26 @@ final class MyNftViewController: UIViewController {
         return label
     }()
     private var sortButton: UIBarButtonItem?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
     
     // MARK: - User Actions
-    @objc private func didPullToRefresh() {
-        presenter?.didPullToRefresh()
-    }
-    
     @objc private func didTapSortButton() {
-        // TODO: In next modules
+        let alertController = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+        
+        for sortOption in MyNftSortOption.allCases {
+            let action = UIAlertAction(title: sortOption.title, style: .default) { [weak self] _ in
+                self?.presenter?.didChangeSortOption(sortOption)
+            }
+            alertController.addAction(action)
+        }
+        let cancelAction = UIAlertAction(title: "Закрыть", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
 }
 
@@ -47,16 +54,12 @@ private extension MyNftViewController {
         setupTableView()
         setupSortControl()
         
-        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
-        
-        updateBackgroundViewIfNeeded()
         presenter?.viewDidLoad()
     }
     
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.refreshControl = refreshControl
         tableView.register(MyNftTableViewCell.self)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +87,7 @@ private extension MyNftViewController {
         )
         navigationController?.navigationBar.tintColor = .projectBlack
     }
-
+    
     private func updateBackgroundViewIfNeeded() {
         if presenter?.nftList.isEmpty ?? true {
             tableView.backgroundView = emptyTableLabel
@@ -98,21 +101,24 @@ private extension MyNftViewController {
 
 // MARK: - MyNftViewProtocol
 extension MyNftViewController: MyNftViewProtocol {
-    func showNFTs(_ nfts: [Nft]) {
+    func showNFTs(_ nfts: [MyNft]) {
         updateBackgroundViewIfNeeded()
         tableView.reloadData()
-        refreshControl.endRefreshing()
     }
     
     func showError(_ message: String) {
+        ProgressHUD.dismiss()
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
-        refreshControl.endRefreshing()
     }
     
-    func endRefreshing() {
-        refreshControl.endRefreshing()
+    func showLoading() {
+        ProgressHUD.show("Загрузка...", interaction: false)
+    }
+    
+    func hideLoading() {
+        ProgressHUD.dismiss()
     }
 }
 
@@ -126,13 +132,11 @@ extension MyNftViewController: UITableViewDataSource, UITableViewDelegate {
         let cell: MyNftTableViewCell = tableView.dequeueReusableCell()
         if let nftPresenter = presenter {
             let nft = nftPresenter.nftList[indexPath.row]
+            cell.onLikeButtonTapped = { [weak self] nft in
+                self?.presenter?.didToggleLike(at: indexPath.row)
+            }
             cell.configure(with: nft)
         }
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        presenter?.didSelectNFT(at: indexPath.row)
     }
 }

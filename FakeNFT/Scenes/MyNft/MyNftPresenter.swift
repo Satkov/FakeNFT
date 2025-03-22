@@ -1,55 +1,58 @@
 protocol MyNftPresenterProtocol: AnyObject {
-    var nftList: [Nft] { get }
+    var nftList: [MyNft] { get }
 
     func viewDidLoad()
-    func didSelectNFT(at index: Int)
-    func didPullToRefresh()
+    func didToggleLike(at index: Int)
     func didChangeSortOption(_ option: MyNftSortOption)
-    func didFetchNFTs(_ nfts: [Nft])
-    func didFailToFetchNFTs(error: Error?)
+    func didFetchNFTs(_ nfts: [MyNft])
+    func didFailWith(error: Error?)
 }
 
 final class MyNftPresenter {
     weak var view: MyNftViewProtocol?
-    var router: MyNftRouterProtocol
     var interactor: MyNftInteractorProtocol
     
-    private(set) var nftList: [Nft] = []
+    private(set) var nftList: [MyNft] = []
     private var currentSort: MyNftSortOption = .name
     
-    init(interactor: MyNftInteractorProtocol, router: MyNftRouterProtocol) {
+    init(interactor: MyNftInteractorProtocol) {
         self.interactor = interactor
-        self.router = router
     }
 }
 
 extension MyNftPresenter: MyNftPresenterProtocol {
     
     func viewDidLoad() {
+        view?.showLoading()
         interactor.fetchNFTs()
     }
     
-    func didFetchNFTs(_ nfts: [Nft]) {
+    func didFetchNFTs(_ nfts: [MyNft]) {
         self.nftList = nfts
         applySorting()
+        view?.hideLoading()
         view?.showNFTs(nftList)
     }
     
-    func didFailToFetchNFTs(error: Error?) {
+    func didFailWith(error: Error?) {
+        view?.hideLoading()
         let message = error?.localizedDescription ?? "Не удалось загрузить данные NFT."
         view?.showError(message)
     }
     
-    func didSelectNFT(at index: Int) {
+    func didToggleLike(at index: Int) {
         guard index < nftList.count else { return }
-        let selectedNFT = nftList[index]
-        router.routeToDetail(for: selectedNFT)
+        var selectedNFT = nftList[index]
+        if selectedNFT.isLiked {
+            interactor.removeFromFavourite(selectedNFT)
+        } else {
+            interactor.addToFavourite(selectedNFT)
+        }
+        selectedNFT.isLiked = !selectedNFT.isLiked
+        nftList[index] = selectedNFT
+        view?.showNFTs(nftList)
     }
-    
-    func didPullToRefresh() {
-        interactor.fetchNFTs()
-    }
-    
+
     func didChangeSortOption(_ option: MyNftSortOption) {
         currentSort = option
         applySorting()

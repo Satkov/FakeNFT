@@ -1,13 +1,15 @@
 import UIKit
 import ProgressHUD
+import Foundation
 
 protocol ProfileEditPresenterProtocol: AnyObject {
     func viewDidLoad()
-    func didTapSave(_ profileData: ProfileSaveData)
-    func didTapChangePhoto()
+    func didTapSave()
     func didTapClose()
     func profileLoaded(_ profile: Profile)
     func profileLoadFailed(error: Error)
+    func didUpdate(avatarUrl: String)
+    func didRemoveAvatar()
 }
 
 final class ProfileEditPresenter: ProfileEditPresenterProtocol {
@@ -15,6 +17,8 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     var interactor: ProfileEditInteractorInput
     var router: ProfileEditRouterProtocol
     var onProfileUpdated: ((Profile) -> Void)?
+    
+    private var profile: Profile?
 
     init(interactor: ProfileEditInteractorInput, router: ProfileEditRouterProtocol) {
         self.interactor = interactor
@@ -26,22 +30,18 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
         interactor.loadProfile()
     }
     
-    func didTapSave(_ profileData: ProfileSaveData) {
+    func didTapSave() {
         view?.showLoadingIndicator()
         let updatedProfile = Profile(
-            name: profileData.name,
-            avatar: "avatar",
-            description: profileData.description,
-            website: profileData.website,
-            nfts: [],
-            likes: [],
+            name: view?.nameText ?? "",
+            avatar: profile?.avatar ?? "",
+            description: view?.descriptionText ?? "",
+            website: view?.websiteText ?? "",
+            nfts: profile?.nfts ?? [],
+            likes: profile?.likes ?? [],
             id: "1"
         )
         onProfileUpdated?(updatedProfile)
-    }
-    
-    func didTapChangePhoto() {
-        router.openImagePicker()
     }
     
     func didTapClose() {
@@ -49,6 +49,7 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     }
     
     func profileLoaded(_ profile: Profile) {
+        self.profile = profile
         view?.hideLoadingIndicator()
         view?.showProfileData(profile)
     }
@@ -56,6 +57,26 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     func profileLoadFailed(error: Error) {
         view?.hideLoadingIndicator()
         view?.showError("Не удалось загрузить данные профиля.")
+    }
+    
+    func didUpdate(avatarUrl: String) {
+        guard let profile, let url = URL(string: avatarUrl) else {
+            view?.showError("Ошибка загрузки изображения")
+            return
+        }
+        
+        url.isReachable { [weak self] isReachable in
+            if isReachable {
+                self?.interactor.update(avatarUrl: avatarUrl, of: profile)
+            } else {
+                self?.view?.showError("Ошибка загрузки изображения")
+            }
+        }
+    }
+    
+    func didRemoveAvatar() {
+        guard let profile else { return }
+        interactor.update(avatarUrl: "", of: profile)
     }
 }
 

@@ -65,6 +65,12 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        presenter?.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.viewDidApear()
     }
 }
 
@@ -86,7 +92,8 @@ private extension ProfileViewController {
         
         setupConstraints()
         myNftButton.addTarget(self, action: #selector(didTapMyNftButton), for: .touchUpInside)
-        presenter?.viewDidLoad()
+        likedNftButton.addTarget(self, action: #selector(didTapLikedNftButton), for: .touchUpInside)
+        aboutDevButton.addTarget(self, action: #selector(didTapAboutDevButton), for: .touchUpInside)
     }
     
     private func setupNavBar() {
@@ -129,12 +136,20 @@ private extension ProfileViewController {
     @objc private func didTapMyNftButton() {
         presenter?.didTapMyNftButton()
     }
+    
+    @objc private func didTapLikedNftButton() {
+        presenter?.didTapLikedNftButton()
+    }
+    
+    @objc private func didTapAboutDevButton() {
+        presenter?.didTapAboutDevButton()
+    }
 }
 
 // MARK: - ProfileViewProtocol
 extension ProfileViewController: ProfileViewProtocol {
     func showLoading() {
-        ProgressHUD.show("Загрузка...")
+        ProgressHUD.show("Загрузка...", interaction: false)
     }
 
     func hideLoading() {
@@ -146,6 +161,8 @@ extension ProfileViewController: ProfileViewProtocol {
         nameLabel.text = profile.name
         descriptionLabel.text = profile.description
         websiteButton.setTitle(profile.website, for: .normal)
+        myNftButton.setTitle("Мои NFT (\(profile.nfts.count))", for: .normal)
+        likedNftButton.setTitle("Избранные NFT (\(profile.likes.count))", for: .normal)
     }
 
     func showError(_ message: String) {
