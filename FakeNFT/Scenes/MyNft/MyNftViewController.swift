@@ -4,8 +4,8 @@ import ProgressHUD
 protocol MyNftViewProtocol: AnyObject {
     func showNFTs(_ nfts: [MyNft])
     func showError(_ message: String)
-    func showLoading()
-    func hideLoading()
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
 }
 
 final class MyNftViewController: UIViewController {
@@ -18,7 +18,7 @@ final class MyNftViewController: UIViewController {
         label.font = .sfProBold17
         label.textColor = .projectBlack
         label.textAlignment = .center
-        label.text = "У Вас ещё нет NFT"
+        label.text = Localization.noMyNft
         return label
     }()
     private var sortButton: UIBarButtonItem?
@@ -26,11 +26,12 @@ final class MyNftViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        presenter?.viewDidLoad()
     }
     
     // MARK: - User Actions
     @objc private func didTapSortButton() {
-        let alertController = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: Localization.sort, message: nil, preferredStyle: .actionSheet)
         
         for sortOption in MyNftSortOption.allCases {
             let action = UIAlertAction(title: sortOption.title, style: .default) { [weak self] _ in
@@ -38,7 +39,7 @@ final class MyNftViewController: UIViewController {
             }
             alertController.addAction(action)
         }
-        let cancelAction = UIAlertAction(title: "Закрыть", style: .cancel)
+        let cancelAction = UIAlertAction(title: Localization.close, style: .cancel)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
@@ -53,8 +54,6 @@ private extension MyNftViewController {
         
         setupTableView()
         setupSortControl()
-        
-        presenter?.viewDidLoad()
     }
     
     private func setupTableView() {
@@ -107,18 +106,16 @@ extension MyNftViewController: MyNftViewProtocol {
     }
     
     func showError(_ message: String) {
-        ProgressHUD.dismiss()
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        LoaderUtil.hide()
+        AlertUtil.show(error: message, in: self)
     }
     
-    func showLoading() {
-        ProgressHUD.show("Загрузка...", interaction: false)
+    func showLoadingIndicator() {
+        LoaderUtil.show()
     }
     
-    func hideLoading() {
-        ProgressHUD.dismiss()
+    func hideLoadingIndicator() {
+        LoaderUtil.hide()
     }
 }
 

@@ -23,20 +23,20 @@ final class MyNftPresenter {
 extension MyNftPresenter: MyNftPresenterProtocol {
     
     func viewDidLoad() {
-        view?.showLoading()
+        view?.showLoadingIndicator()
         interactor.fetchNFTs()
     }
     
     func didFetchNFTs(_ nfts: [MyNft]) {
         self.nftList = nfts
         applySorting()
-        view?.hideLoading()
+        view?.hideLoadingIndicator()
         view?.showNFTs(nftList)
     }
     
     func didFailWith(error: Error?) {
-        view?.hideLoading()
-        let message = error?.localizedDescription ?? "Не удалось загрузить данные NFT."
+        view?.hideLoadingIndicator()
+        let message = error?.localizedDescription ?? Localization.cannotLoadMyNftData
         view?.showError(message)
     }
     

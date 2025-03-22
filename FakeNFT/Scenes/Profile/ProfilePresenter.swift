@@ -6,7 +6,7 @@ protocol ProfileState {
 
 final class LoadingState: ProfileState {
     func handle(presenter: ProfilePresenter) {
-        presenter.view?.showLoading()
+        presenter.view?.showLoadingIndicator()
     }
 }
 
@@ -18,7 +18,7 @@ final class LoadedState: ProfileState {
     }
     
     func handle(presenter: ProfilePresenter) {
-        presenter.view?.hideLoading()
+        presenter.view?.hideLoadingIndicator()
         presenter.view?.showProfile(profile)
     }
 }
@@ -31,7 +31,7 @@ final class ErrorState: ProfileState {
     }
     
     func handle(presenter: ProfilePresenter) {
-        presenter.view?.hideLoading()
+        presenter.view?.hideLoadingIndicator()
         presenter.view?.showError(error.localizedDescription)
     }
 }

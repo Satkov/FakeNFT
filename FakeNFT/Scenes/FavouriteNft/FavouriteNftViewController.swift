@@ -1,11 +1,10 @@
 import UIKit
-import ProgressHUD
 
 protocol FavouriteNftViewProtocol: AnyObject {
     func updateForNewData()
     func showError(_ message: String)
-    func showLoading()
-    func hideLoading()
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
 }
 
 final class FavouriteNftViewController: UICollectionViewController {
@@ -14,7 +13,7 @@ final class FavouriteNftViewController: UICollectionViewController {
 
     private let emptyCollectionLabel: UILabel = {
         let label = UILabel()
-        label.text = "У Вас ещё нет избранных NFT"
+        label.text = Localization.noFavouriteNft
         label.textAlignment = .center
         label.font = .sfProBold17
         label.textColor = .projectBlack
@@ -48,7 +47,7 @@ final class FavouriteNftViewController: UICollectionViewController {
 // MARK: - Private functions
 private extension FavouriteNftViewController {
     func initialize() {
-        title = "Избранные NFT"
+        title = Localization.favouriteNft
         collectionView.backgroundColor = .projectWhite
         collectionView.register(FavouriteNftCollectionViewCell.self)
     }
@@ -71,22 +70,16 @@ extension FavouriteNftViewController: FavouriteNftViewProtocol {
     }
     
     func showError(_ message: String) {
-        ProgressHUD.dismiss()
-        let alert = UIAlertController(
-            title: "Ошибка",
-            message: message,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        LoaderUtil.hide()
+        AlertUtil.show(error: message, in: self)
     }
     
-    func showLoading() {
-        ProgressHUD.show("Загрузка...", interaction: false)
+    func showLoadingIndicator() {
+        LoaderUtil.show()
     }
     
-    func hideLoading() {
-        ProgressHUD.dismiss()
+    func hideLoadingIndicator() {
+        LoaderUtil.hide()
     }
 }
 

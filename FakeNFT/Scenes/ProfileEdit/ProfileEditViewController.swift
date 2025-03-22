@@ -68,7 +68,6 @@ final class ProfileEditViewController: UIViewController {
 extension ProfileEditViewController {
     private func initialize() {
         view.backgroundColor = .projectWhite
-        headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(closeButton)
         headerView.addSubview(profileImageView)
         
@@ -146,18 +145,16 @@ extension ProfileEditViewController: ProfileEditViewProtocol {
     }
     
     func showLoadingIndicator() {
-        ProgressHUD.show("Загрузка...", interaction: false)
+        LoaderUtil.show()
     }
     
     func hideLoadingIndicator() {
-        ProgressHUD.dismiss()
+        LoaderUtil.hide()
     }
     
     func showError(_ message: String) {
         hideLoadingIndicator()
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        AlertUtil.show(error: message, in: self)
     }
 }
 
@@ -185,7 +182,7 @@ extension ProfileEditViewController: UITextViewDelegate {
 // MARK: - UserPicViewDelegate
 extension ProfileEditViewController: UserPicViewDelegate {
     func userPicViewDidTapChangePhoto(_ userPicView: UserPicView) {
-        let alertController = UIAlertController(title: "Изменение аватарки", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: Localization.changeAvatar, message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "URL"
         }
@@ -198,12 +195,12 @@ extension ProfileEditViewController: UserPicViewDelegate {
         }
         alertController.addAction(okAction)
                 
-        let removeAction = UIAlertAction(title: "Удалить", style: .destructive) { [weak self] action in
+        let removeAction = UIAlertAction(title: Localization.delete, style: .destructive) { [weak self] action in
             self?.presenter?.didRemoveAvatar()
         }
         alertController.addAction(removeAction)
                 
-        let cancelAction = UIAlertAction(title: "Закрыть", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: Localization.close, style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
                 
         self.present(alertController, animated: true, completion: nil)

@@ -5,6 +5,7 @@
 "Error.unknown" = "Произошла неизвестная ошибка";
 "Error.repeat" = "Повторить";
 "Error.title" = "Ошибка";
+"Error.imageLoading" = "Ошибка загрузки изображения";
 "Filter.table.title" = "Сортировка";
 "Filter.choice.price" = "По цене";
 "Filter.choice.rating" = "По рейтингу";
@@ -12,10 +13,21 @@
 "Profile.Name" = "Имя";
 "Profile.Description" = "Описание";
 "Profile.Website" = "Сайт";
+"Profile.NoFavouriteNft" = "У Вас ещё нет избранных NFT";
+"Profile.FavouriteNft" = "Избранные NFT";
+"Profile.MyNft" = "Мои NFT";
+"Profile.FavouriteNft" = "Избранные NFT";
+"Profile.AboutDeveloper" = "О разработчике";
 "MyNft.Title" = "Мои NFT";
+"MyNft.CannotLoadNftData" = "Не удалось загрузить данные NFT";
+"MyNft.NoNft" = "У Вас ещё нет NFT";
 "Close" = "Закрыть";
 "Price" = "Цена";
+"By" = "От";
+"Loading" = "Загрузка";
 "Sort.Price" = "По цене";
 "Sort.Rating" = "По рейтингу";
 "Sort.Name" = "По названию";
-
+"Sort" = "Сортировка";
+"ChangeAvatar" = "Изменить аватар";
+"Delete" = "Удалить";

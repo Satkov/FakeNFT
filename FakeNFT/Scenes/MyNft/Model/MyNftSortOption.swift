@@ -5,9 +5,9 @@ enum MyNftSortOption: CaseIterable {
     
     var title: String {
         switch self {
-        case .price: return "По цене"
-        case .rating: return "По рейтингу"
-        case .name: return "По названию"
+        case .price: return Localization.sortByPrice
+        case .rating: return Localization.sortByRating
+        case .name: return Localization.sortByName
         }
     }
 }
