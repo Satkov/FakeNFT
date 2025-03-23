@@ -12,7 +12,6 @@ protocol NftService {
     func getNFTById(id: String, completion: @escaping NftCompletion)
     func getCurrency(completion: @escaping CurrencyCompletion)
     func setCurrencyIdAndPay(id: String, completion: @escaping PayForOrderCompletion)
-    func loadNft(id: String, completion: @escaping NftDetailCompletion)
 }
 
 final class NftServiceImpl: NftService {
@@ -91,18 +90,6 @@ final class NftServiceImpl: NftService {
             switch result {
             case .success(let response):
                 completion(.success(response))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func loadNft(id: String, completion: @escaping NftDetailCompletion) {
-        let request = NFTDetailRequest(id: id)
-        networkClient.send(request: request, type: Nft.self) { result in
-            switch result {
-            case .success(let nft):
-                completion(.success(nft))
             case .failure(let error):
                 completion(.failure(error))
             }

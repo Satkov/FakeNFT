@@ -2,16 +2,12 @@ import UIKit
 
 extension UIFont {
 
-    static let sfProRegularFontName = "SF Pro Regular"
-    static let sfProMediumFontName = "SF Pro Medium"
-    static let sfProSemiboldFontName = "SF Pro Semibold"
-    static let sfProBoldFontName = "SF Pro Bold"
-    static let sfRegular13 = UIFont(name: sfProRegularFontName, size: 13)
-    static let sfRegular15 = UIFont(name: sfProRegularFontName, size: 15)
-    static let sfRegular17 = UIFont(name: sfProRegularFontName, size: 17)
-    static let sfRegular20 = UIFont(name: sfProRegularFontName, size: 20)
-    static let sfProMedium10 = UIFont(name: sfProMediumFontName, size: 10)
-    static let sfProSemibold20 = UIFont(name: sfProSemiboldFontName, size: 20)
-    static let sfProBold22 = UIFont(name: sfProBoldFontName, size: 22)
-    static let sfProBold17 = UIFont(name: sfProBoldFontName, size: 17)
+    static let sfRegular13 = UIFont.systemFont(ofSize: 13, weight: .regular)
+    static let sfRegular15 = UIFont.systemFont(ofSize: 15, weight: .regular)
+    static let sfRegular17 = UIFont.systemFont(ofSize: 17, weight: .regular)
+    static let sfRegular20 = UIFont.systemFont(ofSize: 20, weight: .regular)
+    static let sfProMedium10 = UIFont.systemFont(ofSize: 10, weight: .medium)
+    static let sfProSemibold20 = UIFont.systemFont(ofSize: 20, weight: .semibold)
+    static let sfProBold22 = UIFont.systemFont(ofSize: 22, weight: .bold)
+    static let sfProBold17 = UIFont.systemFont(ofSize: 17, weight: .bold)
 }

@@ -26,7 +26,7 @@ final class FavouriteNftInteractor: FavouriteNftInteractorProtocol {
         
         for nftId in favouriteNftIds {
             dispatchGroup.enter()
-            nftService.loadNft(id: nftId) { result in
+            nftService.getNFTById(id: nftId) { result in
                 switch result {
                 case .success(let nft):
                     nfts.append(nft)
