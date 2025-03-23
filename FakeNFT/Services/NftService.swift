@@ -68,7 +68,7 @@ final class NftServiceImpl: NftService {
             }
         }
     }
-
+    
     func getCurrency(completion: @escaping CurrencyCompletion) {
         let request = NetworkRequests.getCurrencies()
         networkClient.send(request: request, type: [Currency].self) { result in
