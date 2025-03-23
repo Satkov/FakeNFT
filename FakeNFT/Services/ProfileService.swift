@@ -42,9 +42,12 @@ final class ProfileServiceImpl: ProfileService {
     }
     
     func updateProfile(_ profile: Profile, completion: @escaping ProfileCompletion) {
+        updateProfileTask?.cancel()
+        
         let dto = ProfileEditingDto(avatar: profile.avatar, name: profile.name, description: profile.description, website: profile.website)
         let request = ProfileByIdRequest(httpMethod: .put, dto: dto)
-        networkClient.send(request: request, type: Profile.self) { [weak self] result in
+        updateProfileTask = networkClient.send(request: request, type: Profile.self) { [weak self] result in
+            self?.updateProfileTask = nil
             switch result {
             case .success(_):
                 self?.storage.saveProfile(profile)
@@ -64,6 +67,7 @@ final class ProfileServiceImpl: ProfileService {
             self?.updateFavouritesTask = nil
             switch result {
             case .success(let profile):
+                self?.storage.saveProfile(profile)
                 completion(.success(profile))
             case .failure(let error):
                 completion(.failure(error))
