@@ -52,16 +52,8 @@ extension UIColor {
     static let projectBlack = UIColor(named: "projectBlack") ?? .black
     static let projectWhite = UIColor(named: "projectWhite") ?? .white
     static let whiteUniversal = UIColor(hexString: "#FFFFFF")
-    static let greenUniversal = UIColor(hexString: "#1C9F00")
     static let yellowUniversal = UIColor(hexString: "#FEEF0D")
     static let projectGray = UIColor(hexString: "#3C3C4399").withAlphaComponent(0.6)
-<<<<<<< HEAD
-=======
-    static let projectWhite = UIColor(hexString: "#FFFFFF")
-    static let blueUniversal = UIColor(hexString: "#0A84FF")
-    static let redUniversal = UIColor(hexString: "#F56B6C")
->>>>>>> a9ff982 (profile-module3 favourite nft collection)
-
     static let filterMenuBorder = UIColor(hexString: "#3C3C43").withAlphaComponent(0.36)
     static let navigationBarButton = yaBlackLight
 

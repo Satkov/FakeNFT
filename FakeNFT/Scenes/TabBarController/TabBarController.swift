@@ -1,13 +1,40 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
-
-    var servicesAssembly: ServicesAssembly!
-
+    
+    // MARK: - Properties
+    
+    private let servicesAssembly: ServicesAssembly
+    
+    // MARK: - Init
+    
+    init(servicesAssembly: ServicesAssembly) {
+        self.servicesAssembly = servicesAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Tab Bar Items
+    
+    private let cartTabBarItem = UITabBarItem(
+        title: NSLocalizedString("Tab.cart", comment: ""),
+        image: UIImage(named: "cartTabBarIcon"),
+        tag: 2
+    )
+    
     private let catalogTabBarItem = UITabBarItem(
         title: NSLocalizedString("Tab.catalog", comment: ""),
-        image: UIImage(systemName: "square.stack.3d.up.fill"),
+        image: UIImage(named: "CatalogTabbarImage"),
         tag: 0
+    )
+    
+    private let statisticTabBarItem = UITabBarItem(
+        title: NSLocalizedString("Tab.statistic", comment: ""),
+        image: UIImage(named: "statisticTab"),
+        tag: 1
     )
     
     private let profileTabBarItem = UITabBarItem(
@@ -15,23 +42,55 @@ final class TabBarController: UITabBarController {
         image: UIImage(systemName: "person.crop.circle.fill"),
         tag: 1
     )
-
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        servicesAssembly.nftService.loadCart { result in
-            switch result {
-            case .success(let result):
-                print(result)
-            case .failure(let error):
-                assertionFailure(error.localizedDescription)
-            }
-        }
-
-        let profileContoller = ProfileRouter.createModule(servicesAssembly: servicesAssembly)
-        profileContoller.tabBarItem = profileTabBarItem
-
-        viewControllers = [UINavigationController(rootViewController: profileContoller)]
-
+        setupTabBar()
+    }
+    
+    // MARK: - Setup Methods
+    
+    private func setupTabBar() {
+        let catalogNavController = createNavController(
+            rootViewController: NFTCollectionListModuleFactory.build(serviceAssembly: servicesAssembly),
+            tabBarItem: catalogTabBarItem
+        )
+        
+        let statisticNavController = createNavController(
+            rootViewController: StatisticBuilder.build(),
+            tabBarItem: statisticTabBarItem
+        )
+        configureStatisticNavigationBar(statisticNavController)
+        
+        let cartNavController = createNavController(
+            rootViewController: CartModuleFactory.build(servicesAssembly: servicesAssembly),
+            tabBarItem: cartTabBarItem
+        )
+        
+        let profileNavController = createNavController(
+            rootViewController: ProfileRouter.createModule(servicesAssembly: servicesAssembly),
+            tabBarItem: profileTabBarItem
+        )
+        
+        viewControllers = [catalogNavController, cartNavController, statisticNavController, profileNavController]
         view.backgroundColor = .systemBackground
+    }
+    
+    private func createNavController(
+        rootViewController: UIViewController,
+        tabBarItem: UITabBarItem
+    ) -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        navigationController.tabBarItem = tabBarItem
+        return navigationController
+    }
+    
+    private func configureStatisticNavigationBar(_ navigationController: UINavigationController) {
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.barTintColor = .white
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.frame.size.height = 42
     }
 }

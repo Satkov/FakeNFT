@@ -65,5 +65,4 @@ enum Localization {
     static let loading = localized("Loading");
     static let sort = localized("Sort");
     static let changeAvatar = localized("ChangeAvatar");
-    static let delete = localized("Delete");
 }
