@@ -30,9 +30,7 @@ final class RatingView: UIView {
         setupUI()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
 
     // MARK: - Setup UI
 
@@ -49,7 +47,8 @@ final class RatingView: UIView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.widthAnchor.constraint(equalToConstant: 68),
-            stackView.heightAnchor.constraint(equalToConstant: 12)
+            stackView.heightAnchor.constraint(equalToConstant: 12),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 
